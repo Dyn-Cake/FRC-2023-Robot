@@ -11,8 +11,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 
 
 /** An example command that uses an example subsystem. */
-public class ExampleCommand extends CommandBase
-{
+public class ExampleCommand extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final ExampleSubsystem subsystem;
     
@@ -22,8 +21,7 @@ public class ExampleCommand extends CommandBase
      *
      * @param subsystem The subsystem used by this command.
      */
-    public ExampleCommand(ExampleSubsystem subsystem)
-    {
+    public ExampleCommand(ExampleSubsystem subsystem) {
         this.subsystem = subsystem;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
@@ -47,8 +45,7 @@ public class ExampleCommand extends CommandBase
     
     // Returns true when the command should end.
     @Override
-    public boolean isFinished()
-    {
+    public boolean isFinished() {
         return false;
     }
 }
