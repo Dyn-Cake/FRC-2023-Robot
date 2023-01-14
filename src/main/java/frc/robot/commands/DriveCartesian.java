@@ -1,19 +1,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.drivetrainsub;
+import frc.robot.subsystems.DriveTrainSub;
 import java.util.function.DoubleSupplier;
 
-public class drivecartesian extends CommandBase {
+public class DriveCartesian extends CommandBase {
     
-    private final drivetrainsub m_Drive;
+    private final DriveTrainSub drive;
     private final DoubleSupplier xSpeed;
     private final DoubleSupplier ySpeed;
     private final DoubleSupplier zRotation;
 
-    public drivecartesian (drivetrainsub subsystem, DoubleSupplier ySpeed, DoubleSupplier xSpeed, DoubleSupplier zRotation){
-        m_Drive = subsystem;
-        addRequirements(m_Drive);
+    public DriveCartesian(DriveTrainSub subsystem, DoubleSupplier ySpeed, DoubleSupplier xSpeed, DoubleSupplier zRotation){
+        drive = subsystem;
+        addRequirements(drive);
         this.ySpeed = ySpeed;
         this.xSpeed = xSpeed;
         this.zRotation = zRotation;
@@ -28,7 +28,7 @@ public void initialize(){
 // keeps repeating until the command ends
 @Override
 public void execute(){
-   m_Drive.mecanumdrive(
+   drive.mecanumDrive(
        ySpeed.getAsDouble(), 
        xSpeed.getAsDouble(), 
        zRotation.getAsDouble()

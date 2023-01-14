@@ -1,17 +1,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.drivetrainsub;
+import frc.robot.subsystems.DriveTrainSub;
 
-public class autoDrive extends CommandBase {
-    private final drivetrainsub m_Drive;
+public class AutoDrive extends CommandBase {
+    private final DriveTrainSub drive;
     private final double distance;
     private final String strafeDirection;
     //private double startTime;
     //private double duration;
 
-    public autoDrive (drivetrainsub subsystem, double distance, String strafeDirection){
-        m_Drive = subsystem;
+    public AutoDrive(DriveTrainSub subsystem, double distance, String strafeDirection){
+        drive = subsystem;
         this.distance = distance;
         this.strafeDirection = strafeDirection;
         //this.duration = duration*1000;
@@ -21,29 +21,29 @@ public class autoDrive extends CommandBase {
     // only goes once at beginning when command is called
     @Override
     public void initialize(){
-        m_Drive.resetEncoder();
+        drive.resetEncoder();
         //startTime = System.currentTimeMillis();
     }
 
     // keeps repeating until the command ends
     @Override
     public void execute(){
-        m_Drive.autoDrive(distance, strafeDirection);
-        /*m_Drive.tankdrive(Constants.autodriveleft, Constants.autodriveright);
-        addRequirements(m_Drive);*/
+        drive.autoDrive(distance, strafeDirection);
+        /*drive.tankdrive(Constants.autodriveleft, Constants.autodriveright);
+        addRequirements(drive);*/
 
     }
 
     //only goes once at end when command is finishing
     @Override
     public void end(boolean inerrupted){
-        m_Drive.mecanumdrive(0, 0, 0);
+        drive.mecanumDrive(0, 0, 0);
     }
 
     //condition for the command to end on its own
     @Override
     public boolean isFinished(){
-        if (m_Drive.getDistance()<distance) {
+        if (drive.getDistance()<distance) {
             return false;
         }
         else {
