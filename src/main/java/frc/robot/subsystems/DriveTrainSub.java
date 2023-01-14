@@ -12,8 +12,8 @@ import frc.robot.Constants;
 
 public class DriveTrainSub extends SubsystemBase {
 
-    Spark frontRight = new Spark(Constants.frontRightDrive);
-    Spark backRight = new Spark (Constants.backRightDrive);
+    //Spark frontRight = new Spark(Constants.frontRightDrive);  UNDO AFTER TEST
+    //Spark backRight = new Spark (Constants.backRightDrive);  UNDO AFTER TEST
     Spark frontLeft = new Spark (Constants.frontLeftDrive);
     Spark backLeft = new Spark (Constants.backLeftDrive);
 
@@ -24,17 +24,17 @@ public class DriveTrainSub extends SubsystemBase {
     private Encoder backLeftEncoder = new Encoder (Constants.backLeftEncoder1, Constants.backLeftEncoder2);
 
     public DriveTrainSub(){
-        frontRight.setInverted(true);
-        backRight.setInverted(true);
-        mecanumDrive.setDeadband(0.15);
-        frontRightEncoder.setDistancePerPulse(100);
-        frontLeftEncoder.setDistancePerPulse(100);
-        backRightEncoder.setDistancePerPulse(100);
-        backLeftEncoder.setDistancePerPulse(100);
+        //frontRight.setInverted(true);  UNDO AFTER TEST
+        //backRight.setInverted(true);  UNDO AFTER TEST
+        //mecanumDrive.setDeadband(0.15);  UNDO AFTER TEST
+        frontRightEncoder.setDistancePerPulse(100); //subject to change
+        frontLeftEncoder.setDistancePerPulse(100); //subject to change
+        backRightEncoder.setDistancePerPulse(100); //subject to change
+        backLeftEncoder.setDistancePerPulse(100); //subject to change
     }
     
     
-    MecanumDrive mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+    //MecanumDrive mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight); UNDO AFTER TEST
 
 
     //Spark Max instantiation and constructor for Mecanum Drive
@@ -70,7 +70,7 @@ public class DriveTrainSub extends SubsystemBase {
   //command for autodrive
 //also gradually increases break as you get closer to your destination so the robot stops exactly where you need it do
     public void autoDrive(double distance, String strafeDirection) {
-        if(strafeDirection.equals("none")){
+        if(strafeDirection.equals("forward")){
             while (getDistance()<distance){
                 double brake = 1-getDistance()/distance;
                 mecanumDrive(-Constants.autoDrive*brake, 0, 0);
@@ -82,15 +82,21 @@ public class DriveTrainSub extends SubsystemBase {
                 mecanumDrive(0, -Constants.autoDrive*brake, 0);
             }
         }
-        if(strafeDirection.equals("none")){
+        if(strafeDirection.equals("right")){
             while (getDistance()<distance){
                 double brake = 1-getDistance()/distance;
                 mecanumDrive(0, Constants.autoDrive*brake, 0);
             }
         }
+        if(strafeDirection.equals("backward")){
+            while (getDistance()<distance){
+                double brake = 1-getDistance()/distance;
+                mecanumDrive(Constants.autoDrive*brake, 0, 0);
+            }
+        }
     }
 
     public void mecanumDrive(double ySpeed, double xSpeed, double zRotation){
-        mecanumDrive.driveCartesian(-ySpeed/2, xSpeed, zRotation);
+        //mecanumDrive.driveCartesian(-ySpeed/2, xSpeed, zRotation);  UNDO AFTER TEST
     }
 }

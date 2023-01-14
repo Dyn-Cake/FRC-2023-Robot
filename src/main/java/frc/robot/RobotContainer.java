@@ -5,10 +5,7 @@
 package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj2.command.button.Button;
-//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -23,7 +20,8 @@ import edu.wpi.first.wpilibj.SPI;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveTrainSub drive = new DriveTrainSub();
-    Joystick xboxController = new Joystick(0);
+    private final ClawSub claw = new ClawSub();
+    XboxController xboxController = new XboxController(0);
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
 
@@ -46,7 +44,19 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
-    private void configureButtonBindings() {}
+    private void configureButtonBindings() {
+        
+        //When Button A is pressed
+        if(xboxController.getAButtonPressed()){
+            new ClawOpen(claw);
+        }
+        else if(xboxController.getBButtonPressed()){
+            new ClawClose(claw);
+        }
+        else{
+            new ClawStop(claw);
+        }
+    }
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
