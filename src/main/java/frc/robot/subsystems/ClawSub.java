@@ -22,7 +22,7 @@ public class ClawSub extends SubsystemBase{
      * @param outputVolts The voltage to output.
      */
 
-     public void Open(){
+     public void open(){
         clawMotorLeft.setVoltage(Constants.clawMotorLeftVolt);
         clawMotorRight.setVoltage(-Constants.clawMotorRightVolt);
     }

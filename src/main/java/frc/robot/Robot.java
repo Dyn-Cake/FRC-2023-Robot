@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -112,10 +111,10 @@ public class Robot extends TimedRobot {
             AHRS gyro = robotContainer.gyro;
             Timer.delay(0.020);		/* wait for one motor update time period (50Hz)     */
 
-            boolean zero_yaw_pressed = xboxContoller.getTrigger();
+            /*boolean zero_yaw_pressed = xboxContoller.getTrigger();
             if ( zero_yaw_pressed ) {
                 gyro.zeroYaw();
-            }
+            }*/
 
             /* Display 6-axis Processed Angle Data                                      */
             SmartDashboard.putBoolean(  "IMU_Connected",        gyro.isConnected());
