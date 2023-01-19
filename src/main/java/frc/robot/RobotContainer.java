@@ -3,13 +3,18 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.SPI;
+import frc.robot.commands.ClawClose;
+import frc.robot.commands.ClawOpen;
+import frc.robot.commands.ClawStop;
+import frc.robot.commands.DriveCartesian;
+import frc.robot.subsystems.ClawSub;
+import frc.robot.subsystems.DriveTrainSub;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,7 +27,7 @@ public class RobotContainer {
     private final DriveTrainSub drive = new DriveTrainSub();
     private final ClawSub claw = new ClawSub();
     XboxController xboxController = new XboxController(0);
-    AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+    private AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -47,13 +52,13 @@ public class RobotContainer {
     private void configureButtonBindings() {
         
         //When Button A is pressed
-        if(xboxController.getAButtonPressed()){
+        if (xboxController.getAButtonPressed()){
             new ClawOpen(claw);
         }
-        else if(xboxController.getBButtonPressed()){
+        else if (xboxController.getBButtonPressed()){
             new ClawClose(claw);
         }
-        else{
+        else {
             new ClawStop(claw);
         }
     }
@@ -68,6 +73,8 @@ public class RobotContainer {
         return null;
     }
 
-
+    public AHRS getGyro() {
+        return gyro;
+    }
 
 }

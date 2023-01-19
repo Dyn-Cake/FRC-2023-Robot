@@ -5,11 +5,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ClawSub extends SubsystemBase{
+public class ClawSub extends SubsystemBase {
     private final CANSparkMax clawMotorLeft;
     private final CANSparkMax clawMotorRight;
 
-    public ClawSub(){
+    public ClawSub() {
         clawMotorLeft = new CANSparkMax(Constants.clawMotorLeft, MotorType.kBrushless);
         clawMotorRight = new CANSparkMax(Constants.clawMotorRight, MotorType.kBrushless);
     }

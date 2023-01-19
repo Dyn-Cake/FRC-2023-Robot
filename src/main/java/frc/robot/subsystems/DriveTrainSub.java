@@ -6,12 +6,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;*/
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.*;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.StrafeDirection;
 
 public class DriveTrainSub extends SubsystemBase {
 
@@ -67,35 +64,49 @@ public class DriveTrainSub extends SubsystemBase {
 
   //tells the distance of how far youve traveled
     public double getDistance(){
-        return Math.abs((backRightEncoder.getDistance()+backLeftEncoder.getDistance()+frontRightEncoder.getDistance()+frontLeftEncoder.getDistance())/4);
+        return Math.abs(
+                (
+                    backRightEncoder.getDistance() +
+                    backLeftEncoder.getDistance() +
+                    frontRightEncoder.getDistance() +
+                    frontLeftEncoder.getDistance()
+                ) / 4
+        );
     }
 
   //command for autodrive
 //also gradually increases break as you get closer to your destination so the robot stops exactly where you need it do
-    public void autoDrive(double distance, String strafeDirection) {
-        if(strafeDirection.equals("forward")){
-            while (getDistance()<distance){
-                double brake = 1-getDistance()/distance;
-                mecanumDrive(-Constants.autoDrive*brake, 0, 0);
+    public void autoDrive(double distance, StrafeDirection strafeDirection) {
+
+        double brake = 1 - getDistance() / distance;
+        switch (strafeDirection) {
+            case FORWARD: {
+                while (getDistance()<distance) {
+                    mecanumDrive(-Constants.autoDrive*brake, 0, 0);
+                }
+                break;
             }
-        }
-        if(strafeDirection.equals("left")){
-            while (getDistance()<distance){
-                double brake = 1-getDistance()/distance;
-                mecanumDrive(0, -Constants.autoDrive*brake, 0);
+            case LEFT: {
+                while (getDistance()<distance) {
+                    mecanumDrive(0, -Constants.autoDrive*brake, 0);
+                }
+                break;
             }
-        }
-        if(strafeDirection.equals("right")){
-            while (getDistance()<distance){
-                double brake = 1-getDistance()/distance;
-                mecanumDrive(0, Constants.autoDrive*brake, 0);
+
+            case RIGHT: {
+                while (getDistance()<distance) {
+                    mecanumDrive(0, Constants.autoDrive*brake, 0);
+                }
+                break;
             }
-        }
-        if(strafeDirection.equals("backward")){
-            while (getDistance()<distance){
-                double brake = 1-getDistance()/distance;
-                mecanumDrive(Constants.autoDrive*brake, 0, 0);
+
+            case BACKWARDS: {
+                while (getDistance()<distance) {
+                    mecanumDrive(Constants.autoDrive*brake, 0, 0);
+                }
+                break;
             }
+
         }
     }
 
