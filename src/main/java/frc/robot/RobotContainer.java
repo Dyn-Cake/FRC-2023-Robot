@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,6 +23,7 @@ public class RobotContainer {
     private final DriveTrainSub drive = new DriveTrainSub();
     private final ClawSub claw = new ClawSub();
     XboxController xboxController = new XboxController(0);
+
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
 
@@ -46,16 +48,15 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         
-        //When Button A is pressed
-        if(xboxController.getAButtonPressed()){
-            new ClawOpen(claw);
-        }
-        else if(xboxController.getBButtonPressed()){
-            new ClawClose(claw);
-        }
-        else{
-            new ClawStop(claw);
-        }
+        final JoystickButton a = new JoystickButton(xboxController, 1);
+        final JoystickButton b = new JoystickButton(xboxController, 2);
+
+        a.onTrue(new ClawOpen(claw));
+
+        b.onTrue(new ClawClose(claw));
+
+        a.onFalse(new ClawStop(claw));
+        b.onFalse(new ClawStop(claw));
     }
 
     /**

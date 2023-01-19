@@ -21,8 +21,8 @@ public final class Constants {
     //public static int backRightDrive = 8;
 
     //the number is the CAN ID that the spark max is attached to :)
-    public static int clawMotorLeft = 8;
-    public static int clawMotorRight = 7;
+    public static int clawMotorLeft = 7;
+    public static int clawMotorRight = 8;
     
     //list of dio ports for sensors
     public static int frontRightEncoder1 = 0;
@@ -38,8 +38,8 @@ public final class Constants {
     //out of 12
     //change this later when figuring out the voltage for the robot
     //claw volt
-    public static double clawMotorLeftVolt = .5;
-    public static double clawMotorRightVolt = .5;
+    public static double clawMotorLeftVolt = 10;
+    public static double clawMotorRightVolt = 10;
     //drive volt
     public static double autoDrive = .3;
 
