@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClawSub;
 
 public class ClawOpen extends CommandBase{
-    private final ClawSub m_Claw;
+    private final ClawSub claw;
     
     public ClawOpen(ClawSub subsystem){
-        m_Claw = subsystem;
-        addRequirements(m_Claw);
+        claw = subsystem;
+        addRequirements(claw);
     }
 
     // only goes once at beginning when command is called
@@ -20,12 +20,12 @@ public class ClawOpen extends CommandBase{
     // keeps repeating until the command ends
     @Override
     public void execute(){
-        m_Claw.open();
+        claw.open();
     }
   
     //only goes once at end when command is finishing
     @Override
-    public void end(boolean inerrupted){
+    public void end(boolean interrupted){
     
     }
     

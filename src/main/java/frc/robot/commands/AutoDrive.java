@@ -1,16 +1,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.StrafeDirection;
 import frc.robot.subsystems.DriveTrainSub;
 
 public class AutoDrive extends CommandBase {
     private final DriveTrainSub drive;
     private final double distance;
-    private final String strafeDirection;
+    private final StrafeDirection strafeDirection;
     //private double startTime;
     //private double duration;
 
-    public AutoDrive(DriveTrainSub subsystem, double distance, String strafeDirection){
+    public AutoDrive(DriveTrainSub subsystem, double distance, StrafeDirection strafeDirection){
         drive = subsystem;
         this.distance = distance;
         this.strafeDirection = strafeDirection;
@@ -20,14 +21,14 @@ public class AutoDrive extends CommandBase {
     
     // only goes once at beginning when command is called
     @Override
-    public void initialize(){
+    public void initialize() {
         drive.resetEncoder();
         //startTime = System.currentTimeMillis();
     }
 
     // keeps repeating until the command ends
     @Override
-    public void execute(){
+    public void execute() {
         drive.autoDrive(distance, strafeDirection);
         /*drive.tankdrive(Constants.autodriveleft, Constants.autodriveright);
         addRequirements(drive);*/
@@ -36,14 +37,14 @@ public class AutoDrive extends CommandBase {
 
     //only goes once at end when command is finishing
     @Override
-    public void end(boolean inerrupted){
+    public void end(boolean interrupted) {
         drive.mecanumDrive(0, 0, 0);
     }
 
     //condition for the command to end on its own
     @Override
-    public boolean isFinished(){
-        if (drive.getDistance()<distance) {
+    public boolean isFinished() {
+        if (drive.getDistance() < distance) {
             return false;
         }
         else {
