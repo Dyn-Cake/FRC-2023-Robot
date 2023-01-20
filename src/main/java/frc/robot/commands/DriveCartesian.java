@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSub;
+
 import java.util.function.DoubleSupplier;
 
 public class DriveCartesian extends CommandBase {
@@ -21,13 +22,13 @@ public class DriveCartesian extends CommandBase {
 
 // only goes once at beginning when command is called
 @Override
-public void initialize(){
+public void initialize() {
 
 }
 
 // keeps repeating until the command ends
 @Override
-public void execute(){
+public void execute() {
    drive.mecanumDrive(
        ySpeed.getAsDouble(), 
        xSpeed.getAsDouble(), 
@@ -37,13 +38,13 @@ public void execute(){
 
 //only goes once at end when command is finishing
 @Override
-public void end(boolean inerrupted){
+public void end(boolean interrupted) {
 
 }
 
 //condition for the command to end on its own
 @Override
-public boolean isFinished(){
+public boolean isFinished() {
 
     return false;
 
