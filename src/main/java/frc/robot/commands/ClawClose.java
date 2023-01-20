@@ -25,8 +25,8 @@ public class ClawClose extends CommandBase{
   
     //only goes once at end when command is finishing
     @Override
-    public void end(boolean interrupted){
-    
+
+    public void end(boolean interrupted) {
     }
     
     //condition for the command to end on its own
