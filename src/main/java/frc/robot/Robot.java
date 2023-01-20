@@ -107,11 +107,11 @@ public class Robot extends TimedRobot {
 
     public void operatorControl() {
         while (isTeleop() && isEnabled()) {
-            XboxController xboxContoller = robotContainer.xboxController;
+            XboxController xboxController = robotContainer.xboxController;
             AHRS gyro = robotContainer.getGyro();
             Timer.delay(0.020);		/* wait for one motor update time period (50Hz)     */
 
-            /*boolean zero_yaw_pressed = xboxContoller.getTrigger();
+            /*boolean zero_yaw_pressed = xboxController.getTrigger();
             if ( zero_yaw_pressed ) {
                 gyro.zeroYaw();
             }*/

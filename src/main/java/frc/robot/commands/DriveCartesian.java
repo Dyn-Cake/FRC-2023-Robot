@@ -12,7 +12,12 @@ public class DriveCartesian extends CommandBase {
     private final DoubleSupplier ySpeed;
     private final DoubleSupplier zRotation;
 
-    public DriveCartesian(DriveTrainSub subsystem, DoubleSupplier ySpeed, DoubleSupplier xSpeed, DoubleSupplier zRotation){
+    public DriveCartesian(
+            DriveTrainSub subsystem,
+            DoubleSupplier ySpeed,
+            DoubleSupplier xSpeed,
+            DoubleSupplier zRotation
+    ) {
         drive = subsystem;
         addRequirements(drive);
         this.ySpeed = ySpeed;
@@ -20,34 +25,34 @@ public class DriveCartesian extends CommandBase {
         this.zRotation = zRotation;
     }
 
-// only goes once at beginning when command is called
-@Override
-public void initialize() {
+    // only goes once at beginning when command is called
+    @Override
+    public void initialize() {
 
-}
+    }
 
-// keeps repeating until the command ends
-@Override
-public void execute() {
-   drive.mecanumDrive(
-       ySpeed.getAsDouble(), 
-       xSpeed.getAsDouble(), 
-       zRotation.getAsDouble()
-    );
-}
+    // keeps repeating until the command ends
+    @Override
+    public void execute() {
+       drive.mecanumDrive(
+           ySpeed.getAsDouble(),
+           xSpeed.getAsDouble(),
+           zRotation.getAsDouble()
+        );
+    }
 
-//only goes once at end when command is finishing
-@Override
-public void end(boolean interrupted) {
+    //only goes once at end when command is finishing
+    @Override
+    public void end(boolean interrupted) {
 
-}
+    }
 
-//condition for the command to end on its own
-@Override
-public boolean isFinished() {
+    //condition for the command to end on its own
+    @Override
+    public boolean isFinished() {
 
-    return false;
+        return false;
 
-}
+    }
 
 }
