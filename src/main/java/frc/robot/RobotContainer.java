@@ -26,6 +26,8 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveTrainSub drive = new DriveTrainSub();
     private final ClawSub claw = new ClawSub();
+    private final ArmSub arm = new ArmSub();
+    private final TowerSub tower = new TowerSub();
     XboxController xboxController = new XboxController(0);
 
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
@@ -54,6 +56,8 @@ public class RobotContainer {
     private void configureButtonBindings() {
         final JoystickButton a = new JoystickButton(xboxController, 1);
         final JoystickButton b = new JoystickButton(xboxController, 2);
+        final JoystickButton x = new JoystickButton(xboxController, 3);
+        final JoystickButton y = new JoystickButton(xboxController, 4);
 
         a.onTrue(new ClawOpen(claw));
 
@@ -61,6 +65,12 @@ public class RobotContainer {
 
         a.onFalse(new ClawStop(claw));
         b.onFalse(new ClawStop(claw));
+
+        y.onTrue(new ExtendTower(tower));
+        y.onFalse(new StopTower(tower));
+
+        x.onTrue(new RetractTower(tower));
+        x.onFalse(new StopTower(tower));
 
     }
 
