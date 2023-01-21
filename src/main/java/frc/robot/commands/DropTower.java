@@ -3,10 +3,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TowerSub;
 
-public class RetractTower extends CommandBase{
+public class DropTower extends CommandBase{
     private final TowerSub tower;
 
-    public RetractTower(TowerSub subsystem){
+    public DropTower(TowerSub subsystem){
         tower = subsystem;
         addRequirements(tower);
     }
@@ -20,7 +20,7 @@ public class RetractTower extends CommandBase{
     // keeps repeating until the command ends
     @Override
     public void execute(){
-        tower.retract();
+        tower.drop();
     }
   
     //only goes once at end when command is finishing
