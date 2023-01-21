@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 
 public class ClawSub extends SubsystemBase {
-    private final CANSparkMax clawMotorLeft;
-    private final CANSparkMax clawMotorRight;
+    private final Spark clawMotorLeft;
+    private final Spark clawMotorRight;
 
     public ClawSub() {
-        clawMotorLeft = new CANSparkMax(Constants.clawMotorLeft, MotorType.kBrushless);
-        clawMotorRight = new CANSparkMax(Constants.clawMotorRight, MotorType.kBrushless);
+        clawMotorLeft = new Spark(Constants.clawMotorLeft);
+        clawMotorRight = new Spark(Constants.clawMotorRight);
     }
     /**
     * Sets the voltage output of the SpeedController. This is equivillant to a call to
