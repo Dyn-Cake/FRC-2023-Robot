@@ -12,11 +12,11 @@ public class TowerSub extends SubsystemBase{
         towerMotor = new PWMSparkMax(Constants.towerMotor);
     }
 
-    public void extend(){
+    public void lift(){
         towerMotor.setVoltage(Constants.towerMotorVolt);
     }
 
-    public void retract(){
+    public void drop(){
         towerMotor.setVoltage(-Constants.towerMotorVolt);
     }
     public void stop(){
