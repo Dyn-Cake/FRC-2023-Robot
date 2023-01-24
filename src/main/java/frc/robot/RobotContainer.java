@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
@@ -58,6 +57,8 @@ public class RobotContainer {
         final JoystickButton b = new JoystickButton(xboxController, 2);
         final JoystickButton x = new JoystickButton(xboxController, 3);
         final JoystickButton y = new JoystickButton(xboxController, 4);
+        final JoystickButton lb = new JoystickButton(xboxController, 5);
+        final JoystickButton rb = new JoystickButton(xboxController, 6);
 
         a.onTrue(new ClawOpen(claw));
 
@@ -66,11 +67,17 @@ public class RobotContainer {
         a.onFalse(new ClawStop(claw));
         b.onFalse(new ClawStop(claw));
 
-        y.onTrue(new ExtendTower(tower));
+        y.onTrue(new LiftTower(tower));
         y.onFalse(new StopTower(tower));
 
-        x.onTrue(new RetractTower(tower));
+        x.onTrue(new DropTower(tower));
         x.onFalse(new StopTower(tower));
+
+        lb.onTrue(new ExtendArm(arm));
+        lb.onFalse(new StopArm(arm));
+
+        rb.onTrue(new RetractArm(arm));
+        rb.onFalse(new StopArm(arm));
 
     }
 
