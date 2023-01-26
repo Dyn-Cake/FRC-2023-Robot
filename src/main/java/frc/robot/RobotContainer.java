@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,7 +28,7 @@ public class RobotContainer {
     private final ClawSub claw = new ClawSub();
     private final ArmSub arm = new ArmSub();
     private final TowerSub tower = new TowerSub();
-    XboxController xboxController = new XboxController(0);
+    Joystick flightStick = new Joystick(0);
 
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
@@ -39,9 +40,9 @@ public class RobotContainer {
         drive.setDefaultCommand(
         new DriveCartesian(
             drive,
-            ()-> xboxController.getRawAxis(1), //y speed - forwards & backwards
-            ()-> xboxController.getRawAxis(0), //x speed - strafe
-            ()-> xboxController.getRawAxis(4)  //z rotation - turning
+            ()-> flightStick.getRawAxis(1), //y speed - forwards & backwards
+            ()-> flightStick.getRawAxis(0), //x speed - strafe
+            ()-> flightStick.getRawAxis(2)  //z rotation - turning
         ));
         configureButtonBindings();
     }
@@ -53,31 +54,31 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        final JoystickButton a = new JoystickButton(xboxController, 1);
-        final JoystickButton b = new JoystickButton(xboxController, 2);
-        final JoystickButton x = new JoystickButton(xboxController, 3);
-        final JoystickButton y = new JoystickButton(xboxController, 4);
-        final JoystickButton lb = new JoystickButton(xboxController, 5);
-        final JoystickButton rb = new JoystickButton(xboxController, 6);
+        final JoystickButton trigger = new JoystickButton(flightStick, 1);
+        final JoystickButton thumbButt = new JoystickButton(flightStick, 2);
+        final JoystickButton butt3 = new JoystickButton(flightStick, 3);
+        final JoystickButton butt4 = new JoystickButton(flightStick, 4);
+        final JoystickButton butt5 = new JoystickButton(flightStick, 5);
+        final JoystickButton butt6 = new JoystickButton(flightStick, 6);
 
-        a.onTrue(new ClawOpen(claw));
+        trigger.onTrue(new ClawOpen(claw));
 
-        b.onTrue(new ClawClose(claw));
+        thumbButt.onTrue(new ClawClose(claw));
 
-        a.onFalse(new ClawStop(claw));
-        b.onFalse(new ClawStop(claw));
+        trigger.onFalse(new ClawStop(claw));
+        thumbButt.onFalse(new ClawStop(claw));
 
-        y.onTrue(new LiftTower(tower));
-        y.onFalse(new StopTower(tower));
+        butt3.onTrue(new LiftTower(tower));
+        butt3.onFalse(new StopTower(tower));
 
-        x.onTrue(new DropTower(tower));
-        x.onFalse(new StopTower(tower));
+        butt4.onTrue(new DropTower(tower));
+        butt4.onFalse(new StopTower(tower));
 
-        lb.onTrue(new ExtendArm(arm));
-        lb.onFalse(new StopArm(arm));
+        butt5.onTrue(new ExtendArm(arm));
+        butt5.onFalse(new StopArm(arm));
 
-        rb.onTrue(new RetractArm(arm));
-        rb.onFalse(new StopArm(arm));
+        butt6.onTrue(new RetractArm(arm));
+        butt6.onFalse(new StopArm(arm));
 
     }
 
