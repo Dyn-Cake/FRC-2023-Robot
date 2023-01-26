@@ -45,6 +45,8 @@ public class RobotContainer {
             ()-> flightStick.getRawAxis(2)  //z rotation - turning
         ));
         configureButtonBindings();
+
+        //claw.setDefaultCommand(new ClawControl(claw, ()->));
     }
 
     /**
@@ -60,12 +62,13 @@ public class RobotContainer {
         final JoystickButton butt4 = new JoystickButton(flightStick, 4);
         final JoystickButton butt5 = new JoystickButton(flightStick, 5);
         final JoystickButton butt6 = new JoystickButton(flightStick, 6);
+        //final JoystickButton butt6 = new JoystickButton(flightStick, 6);
+
 
         trigger.onTrue(new ClawOpen(claw));
+        trigger.onFalse(new ClawStop(claw));
 
         thumbButt.onTrue(new ClawClose(claw));
-
-        trigger.onFalse(new ClawStop(claw));
         thumbButt.onFalse(new ClawStop(claw));
 
         butt3.onTrue(new LiftTower(tower));
