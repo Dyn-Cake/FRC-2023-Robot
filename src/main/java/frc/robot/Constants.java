@@ -21,7 +21,7 @@ public final class Constants {
     public static int backRightDrive = 4; //8
     public static int clawMotorLeft = 7;
     public static int clawMotorRight = 8;
-    public static int towerMotor = 3;
+    public static int towerMotor = 1;
     public static int armMotor = 13;
 
     //the number is the CAN ID that the spark max is attached to :)
@@ -53,5 +53,8 @@ public final class Constants {
     //autodrive speed is out of 1
     public static double autodriveleft = .3;
     public static double autodriveright = .3;
+
+    //deadband -1.0 to 1.0
+    public static double deadband = 0.2;
     
 }

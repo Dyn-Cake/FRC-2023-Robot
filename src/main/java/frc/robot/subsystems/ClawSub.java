@@ -36,7 +36,9 @@ public class ClawSub extends SubsystemBase {
     }
 
     public void clawControl(double speed){
-        clawMotorLeft.setVoltage(speed);
-        clawMotorRight.setVoltage(-speed);
+        if(speed > Constants.deadband || speed < Constants.deadband){
+            clawMotorLeft.setVoltage(speed * Constants.clawMotorLeftVolt);
+            clawMotorRight.setVoltage(-speed * Constants.clawMotorRightVolt);
+        }
     }
 }

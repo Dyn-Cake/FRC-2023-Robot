@@ -22,6 +22,8 @@ public class ArmSub extends SubsystemBase{
         armMotor.setVoltage(0);
     }
     public void armControl(double speed){
-        armMotor.setVoltage(speed);
+        if(speed > Constants.deadband || speed < -Constants.deadband){
+            armMotor.setVoltage(speed * Constants.armMotorVolt);
+        }
     }
 }

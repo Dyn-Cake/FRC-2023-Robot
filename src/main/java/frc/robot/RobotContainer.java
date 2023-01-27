@@ -28,7 +28,7 @@ public class RobotContainer {
     private final ClawSub claw = new ClawSub();
     private final ArmSub arm = new ArmSub();
     private final TowerSub tower = new TowerSub();
-    Joystick flightStickDrive = new Joystick(1);
+    //Joystick flightStickDrive = new Joystick(1);
     Joystick flightStickControl = new Joystick(0);
 
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
@@ -36,18 +36,18 @@ public class RobotContainer {
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         // Configure the button bindings
-        drive.setDefaultCommand(
+        /*drive.setDefaultCommand(
         new DriveCartesian(
             drive,
             ()-> flightStickDrive.getRawAxis(1), //y speed - forwards & backwards
             ()-> flightStickDrive.getRawAxis(0), //x speed - strafe
             ()-> flightStickDrive.getRawAxis(2)  //z rotation - turning
-        ));
-        configureButtonBindings();
+        ));*/
 
-        claw.setDefaultCommand(new ClawControl(claw, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
+        /*claw.setDefaultCommand(new ClawControl(claw, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
         arm.setDefaultCommand(new ArmControl(arm, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
-        tower.setDefaultCommand(new TowerControl(tower, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn
+        tower.setDefaultCommand(new TowerControl(tower, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn*/
+        configureButtonBindings();
     }
 
     /**

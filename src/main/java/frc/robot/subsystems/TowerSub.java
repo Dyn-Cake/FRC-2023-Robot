@@ -27,6 +27,8 @@ public class TowerSub extends SubsystemBase{
         towerMotor.setVoltage(0);
     }
     public void towerControl(double speed){
-        towerMotor.setVoltage(speed);
+        if(speed > Constants.deadband || speed < -Constants.deadband){
+            towerMotor.setVoltage(speed * Constants.towerMotorVolt);
+        }
     }
 }
