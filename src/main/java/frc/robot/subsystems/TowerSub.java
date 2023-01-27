@@ -26,4 +26,7 @@ public class TowerSub extends SubsystemBase{
     public void stop(){
         towerMotor.setVoltage(0);
     }
+    public void towerControl(double speed){
+        towerMotor.setVoltage(speed);
+    }
 }

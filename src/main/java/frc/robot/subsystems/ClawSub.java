@@ -34,4 +34,9 @@ public class ClawSub extends SubsystemBase {
         clawMotorLeft.setVoltage(0);
         clawMotorRight.setVoltage(0);
     }
+
+    public void clawControl(double speed){
+        clawMotorLeft.setVoltage(speed);
+        clawMotorRight.setVoltage(-speed);
+    }
 }

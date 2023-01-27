@@ -21,4 +21,7 @@ public class ArmSub extends SubsystemBase{
     public void stop(){
         armMotor.setVoltage(0);
     }
+    public void armControl(double speed){
+        armMotor.setVoltage(speed);
+    }
 }
