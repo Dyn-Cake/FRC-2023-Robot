@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 /**
@@ -28,11 +28,10 @@ public class RobotContainer {
     private final ClawSub claw = new ClawSub();
     private final ArmSub arm = new ArmSub();
     private final TowerSub tower = new TowerSub();
-    Joystick flightStick = new Joystick(0);
+    Joystick flightStickDrive = new Joystick(1);
+    Joystick flightStickControl = new Joystick(0);
 
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
-
-
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -40,13 +39,15 @@ public class RobotContainer {
         drive.setDefaultCommand(
         new DriveCartesian(
             drive,
-            ()-> flightStick.getRawAxis(1), //y speed - forwards & backwards
-            ()-> flightStick.getRawAxis(0), //x speed - strafe
-            ()-> flightStick.getRawAxis(2)  //z rotation - turning
+            ()-> flightStickDrive.getRawAxis(1), //y speed - forwards & backwards
+            ()-> flightStickDrive.getRawAxis(0), //x speed - strafe
+            ()-> flightStickDrive.getRawAxis(2)  //z rotation - turning
         ));
         configureButtonBindings();
 
-        //claw.setDefaultCommand(new ClawControl(claw, ()->));
+        claw.setDefaultCommand(new ClawControl(claw, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
+        arm.setDefaultCommand(new ArmControl(arm, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
+        tower.setDefaultCommand(new TowerControl(tower, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn
     }
 
     /**
@@ -56,12 +57,12 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        final JoystickButton trigger = new JoystickButton(flightStick, 1);
-        final JoystickButton thumbButt = new JoystickButton(flightStick, 2);
-        final JoystickButton butt3 = new JoystickButton(flightStick, 3);
-        final JoystickButton butt4 = new JoystickButton(flightStick, 4);
-        final JoystickButton butt5 = new JoystickButton(flightStick, 5);
-        final JoystickButton butt6 = new JoystickButton(flightStick, 6);
+        /*final JoystickButton trigger = new JoystickButton(flightStickControl, 1);
+        final JoystickButton thumbButt = new JoystickButton(flightStickControl, 2);
+        final JoystickButton butt3 = new JoystickButton(flightStickControl, 3);
+        final JoystickButton butt4 = new JoystickButton(flightStickControl, 4);
+        final JoystickButton butt5 = new JoystickButton(flightStickControl, 5);
+        final JoystickButton butt6 = new JoystickButton(flightStickControl, 6);
         //final JoystickButton butt6 = new JoystickButton(flightStick, 6);
 
 
@@ -81,7 +82,7 @@ public class RobotContainer {
         butt5.onFalse(new StopArm(arm));
 
         butt6.onTrue(new RetractArm(arm));
-        butt6.onFalse(new StopArm(arm));
+        butt6.onFalse(new StopArm(arm));*/ //WONT NEED DEPENDING ON DRIVER
 
     }
 
