@@ -46,7 +46,7 @@ public final class Constants {
     //drive volt
     public static double autoDrive = .3;
     //tower volt
-    public static double towerMotorVolt = 6;
+    public static double towerMotorVolt = 2;
     //arm volt
     public static double armMotorVolt = 4;
 
