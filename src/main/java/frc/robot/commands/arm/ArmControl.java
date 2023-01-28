@@ -1,9 +1,9 @@
 package frc.robot.commands.arm;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSub;
-
-import java.util.function.DoubleSupplier;
 
 public class ArmControl extends CommandBase{
     private final ArmSub arm;
