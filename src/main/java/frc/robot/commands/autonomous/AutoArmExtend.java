@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSub;
 
-public class AutoArmRetract extends CommandBase{
+public class AutoArmExtend extends CommandBase{
     private final ArmSub arm;
     private double startTime;
     private double duration;
 
-    public AutoArmRetract(ArmSub subsystem){
+    public AutoArmExtend(ArmSub subsystem){
         arm = subsystem;
         duration = 1000;
     }
@@ -22,7 +22,7 @@ public void initialize() {
 // keeps repeating until the command ends
 @Override
 public void execute() {
-    arm.retract();
+    arm.extend();
 }
 
 //only goes once at end when command is finishing

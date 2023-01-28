@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
-
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.ArmSub;
+import frc.robot.subsystems.ClawSub;
+import frc.robot.subsystems.DriveTrainSub;
+import frc.robot.subsystems.TowerSub;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 

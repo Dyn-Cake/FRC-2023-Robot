@@ -1,17 +1,17 @@
-package frc.robot.commands;
+package frc.robot.commands.claw;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ClawSub;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ArmSub;
-
-public class ArmControl extends CommandBase{
-    private final ArmSub arm;
+public class ClawControl extends CommandBase{
+    private final ClawSub claw;
     private DoubleSupplier speed;
 
-    public ArmControl(ArmSub subsystem, DoubleSupplier speed){
-        arm = subsystem;
-        addRequirements(arm);
+    public ClawControl(ClawSub subsystem, DoubleSupplier speed){
+        claw = subsystem;
+        addRequirements(claw);
         this.speed = speed;
     }
 
@@ -24,8 +24,7 @@ public class ArmControl extends CommandBase{
     // keeps repeating until the command ends
     @Override
     public void execute() {
-
-        arm.armControl(speed.getAsDouble());
+       claw.clawControl(speed.getAsDouble());
     }
 
     //only goes once at end when command is finishing

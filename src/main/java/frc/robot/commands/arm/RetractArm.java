@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.TowerSub;
+import frc.robot.subsystems.ArmSub;
 
-public class StopTower extends CommandBase{
-    private final TowerSub tower;
+public class RetractArm extends CommandBase{
+    private final ArmSub arm;
 
-    public StopTower(TowerSub subsystem){
-        tower = subsystem;
-        addRequirements(tower);
+    public RetractArm(ArmSub subsystem){
+        arm = subsystem;
+        addRequirements(arm);
     }
 
     // only goes once at beginning when command is called
@@ -20,7 +20,7 @@ public class StopTower extends CommandBase{
     // keeps repeating until the command ends
     @Override
     public void execute(){
-        tower.stop();
+        arm.retract();
     }
   
     //only goes once at end when command is finishing

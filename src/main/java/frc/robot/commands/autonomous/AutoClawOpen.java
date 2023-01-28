@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClawSub;
 
-public class AutoClawClose extends CommandBase{
+public class AutoClawOpen extends CommandBase{
     private final ClawSub claw;
     private double startTime;
     private double duration;
 
-    public AutoClawClose(ClawSub subsystem){
+    public AutoClawOpen(ClawSub subsystem){
         claw = subsystem;
         duration = 500;
     }
@@ -22,7 +22,7 @@ public void initialize() {
 // keeps repeating until the command ends
 @Override
 public void execute() {
-    claw.close();
+    claw.open();
 }
 
 //only goes once at end when command is finishing
