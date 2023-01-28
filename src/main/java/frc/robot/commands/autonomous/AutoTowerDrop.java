@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TowerSub;
 
-public class AutoTowerLift extends CommandBase{
+public class AutoTowerDrop extends CommandBase{
     private final TowerSub tower;
     private double startTime;
     private double duration;
 
-    public AutoTowerLift(TowerSub subsystem){
+    public AutoTowerDrop(TowerSub subsystem){
         tower = subsystem;
         duration = 1000;
     }
@@ -22,7 +22,7 @@ public void initialize() {
 // keeps repeating until the command ends
 @Override
 public void execute() {
-    tower.lift();
+    tower.drop();
 }
 
 //only goes once at end when command is finishing
@@ -41,5 +41,4 @@ public boolean isFinished() {
         return true;
     }
 }
-
 }

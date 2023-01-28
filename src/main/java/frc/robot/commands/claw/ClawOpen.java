@@ -1,12 +1,12 @@
-package frc.robot.commands;
+package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClawSub;
 
-public class ClawStop extends CommandBase{
+public class ClawOpen extends CommandBase{
     private final ClawSub claw;
     
-    public ClawStop(ClawSub subsystem){
+    public ClawOpen(ClawSub subsystem){
         claw = subsystem;
         addRequirements(claw);
     }
@@ -20,13 +20,14 @@ public class ClawStop extends CommandBase{
     // keeps repeating until the command ends
     @Override
     public void execute(){
-        claw.stop();
+        claw.open();
     }
   
     //only goes once at end when command is finishing
     @Override
-    public void end(boolean interrupted){
-    
+
+    public void end(boolean inerrupted) {
+
     }
     
     //condition for the command to end on its own
