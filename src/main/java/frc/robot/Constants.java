@@ -51,8 +51,8 @@ public final class Constants {
     public static double armMotorVolt = 4;
 
     //autodrive speed is out of 1
-    public static double autodriveleft = .3;
-    public static double autodriveright = .3;
+    public static double autoDriveLeft = .3;
+    public static double autoDriveRight = .3;
 
     //deadband -1.0 to 1.0
     public static double deadband = 0.2;

@@ -3,14 +3,16 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class TowerSub extends SubsystemBase{
     private final CANSparkMax towerMotor;
+    private RobotContainer container;
 
-    public TowerSub(){
+    public TowerSub(RobotContainer container){
+        this.container = container;
         towerMotor = new CANSparkMax(Constants.towerMotor, MotorType.kBrushless);
         towerMotor.setIdleMode(IdleMode.kBrake);
     }
@@ -27,8 +29,12 @@ public class TowerSub extends SubsystemBase{
         towerMotor.setVoltage(0);
     }
     public void towerControl(double speed){
-        if(speed > Constants.deadband || speed < -Constants.deadband){
-            towerMotor.setVoltage(speed * Constants.towerMotorVolt);
-        }
+        towerMotor.setVoltage(
+                container.deadBand(
+                        speed,
+                        Constants.deadband
+                ) * Constants.towerMotorVolt
+        );
+
     }
 }

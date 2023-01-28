@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ArmSub;
+import frc.robot.subsystems.ClawSub;
 
-public class RetractArm extends CommandBase{
-    private final ArmSub arm;
-
-    public RetractArm(ArmSub subsystem){
-        arm = subsystem;
-        addRequirements(arm);
+public class ClawStop extends CommandBase{
+    private final ClawSub claw;
+    
+    public ClawStop(ClawSub subsystem){
+        claw = subsystem;
+        addRequirements(claw);
     }
 
     // only goes once at beginning when command is called
@@ -20,7 +20,7 @@ public class RetractArm extends CommandBase{
     // keeps repeating until the command ends
     @Override
     public void execute(){
-        arm.retract();
+        claw.stop();
     }
   
     //only goes once at end when command is finishing

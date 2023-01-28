@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.tower;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClawSub;
+import frc.robot.subsystems.TowerSub;
 
-public class ClawOpen extends CommandBase{
-    private final ClawSub claw;
-    
-    public ClawOpen(ClawSub subsystem){
-        claw = subsystem;
-        addRequirements(claw);
+public class LiftTower extends CommandBase{
+    private final TowerSub tower;
+
+    public LiftTower(TowerSub subsystem){
+        tower = subsystem;
+        addRequirements(tower);
     }
 
     // only goes once at beginning when command is called
@@ -20,14 +20,13 @@ public class ClawOpen extends CommandBase{
     // keeps repeating until the command ends
     @Override
     public void execute(){
-        claw.open();
+        tower.lift();
     }
   
     //only goes once at end when command is finishing
     @Override
-
-    public void end(boolean inerrupted) {
-
+    public void end(boolean interrupted){
+    
     }
     
     //condition for the command to end on its own

@@ -11,9 +11,10 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
-
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.ArmSub;
+import frc.robot.subsystems.ClawSub;
+import frc.robot.subsystems.DriveTrainSub;
+import frc.robot.subsystems.TowerSub;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
@@ -25,10 +26,10 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    private final DriveTrainSub drive = new DriveTrainSub();
-    private final ClawSub claw = new ClawSub();
-    private final ArmSub arm = new ArmSub();
-    private final TowerSub tower = new TowerSub();
+    private final DriveTrainSub driveSub = new DriveTrainSub();
+    private final ClawSub clawSub = new ClawSub(this);
+    private final ArmSub armSub = new ArmSub(this);
+    private final TowerSub towerSub = new TowerSub(this);
     //Joystick flightStickDrive = new Joystick(1);
     Joystick flightStickControl = new Joystick(0);
 
@@ -112,7 +113,7 @@ public class RobotContainer {
         if (input > deadband || input < -deadband) {
             return input;
         } else {
-            return deadband;
+            return 0;
         }
     }
 
