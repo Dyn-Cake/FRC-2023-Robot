@@ -26,7 +26,7 @@ public class DriveTrainSub extends SubsystemBase {
 
     MecanumDrive mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
-    public DriveTrainSub(){
+    public DriveTrainSub() {
         frontRight.setInverted(true);
         backRight.setInverted(true);
         mecanumDrive.setDeadband(0.2); 

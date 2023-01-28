@@ -3,13 +3,16 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import frc.robot.RobotContainer;
 
 
 public class ClawSub extends SubsystemBase {
     private final Spark clawMotorLeft;
     private final Spark clawMotorRight;
+    private RobotContainer container;
 
-    public ClawSub() {
+    public ClawSub(RobotContainer container) {
+        this.container = container;
         clawMotorLeft = new Spark(Constants.clawMotorLeft);
         clawMotorRight = new Spark(Constants.clawMotorRight);
     }
@@ -36,9 +39,11 @@ public class ClawSub extends SubsystemBase {
     }
 
     public void clawControl(double speed){
-        if(speed > Constants.deadband || speed < Constants.deadband){
-            clawMotorLeft.setVoltage(speed * Constants.clawMotorLeftVolt);
-            clawMotorRight.setVoltage(-speed * Constants.clawMotorRightVolt);
-        }
+         double voltage = container.deadBand(
+                 speed,
+                 Constants.deadband
+         );
+        clawMotorLeft.setVoltage(voltage * Constants.clawMotorLeftVolt);
+        clawMotorRight.setVoltage(-voltage * Constants.clawMotorRightVolt);
     }
 }
