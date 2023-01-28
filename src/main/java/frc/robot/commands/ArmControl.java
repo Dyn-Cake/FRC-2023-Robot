@@ -24,6 +24,7 @@ public class ArmControl extends CommandBase{
     // keeps repeating until the command ends
     @Override
     public void execute() {
+
         arm.armControl(speed.getAsDouble());
     }
 

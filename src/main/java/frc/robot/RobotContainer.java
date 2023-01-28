@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.*;
@@ -31,18 +32,23 @@ public class RobotContainer {
     Joystick flightStickDrive = new Joystick(1);
     Joystick flightStickControl = new Joystick(0);
 
+    EventLoop loop = new EventLoop();
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         // Configure the button bindings
         drive.setDefaultCommand(
-        new DriveCartesian(
-            drive,
-            ()-> flightStickDrive.getRawAxis(1), //y speed - forwards & backwards
-            ()-> flightStickDrive.getRawAxis(0), //x speed - strafe
-            ()-> flightStickDrive.getRawAxis(2)  //z rotation - turning
+            new DriveCartesian(
+                drive,
+                ()-> flightStickDrive.getRawAxis(1), //y speed - forwards & backwards
+                ()-> flightStickDrive.getRawAxis(0), //x speed - strafe
+                ()-> flightStickDrive.getRawAxis(2)  //z rotation - turning
         ));
+
+        loop.bind(() -> {
+
+        });
         configureButtonBindings();
 
         claw.setDefaultCommand(new ClawControl(claw, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
@@ -57,6 +63,11 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+
+
+
+
+
         /*final JoystickButton trigger = new JoystickButton(flightStickControl, 1);
         final JoystickButton thumbButt = new JoystickButton(flightStickControl, 2);
         final JoystickButton butt3 = new JoystickButton(flightStickControl, 3);
@@ -98,6 +109,14 @@ public class RobotContainer {
 
     public AHRS getGyro() {
         return gyro;
+    }
+
+    public double deadBand(double input, double deadband) {
+        if (input > deadband || input < -deadband) {
+            return input;
+        } else {
+            return deadband;
+        }
     }
 
 }
