@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.DriveCartesian;
 import frc.robot.commands.autonomous.AutonomousPhase;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.commands.arm.ArmControl;
@@ -32,21 +33,21 @@ public class RobotContainer {
     private final ClawSub clawSub = new ClawSub(this);
     private final ArmSub armSub = new ArmSub(this);
     private final TowerSub towerSub = new TowerSub(this);
-    //Joystick flightStickDrive = new Joystick(1);
-    Joystick flightStickControl = new Joystick(0);
+    Joystick flightStickDrive = new Joystick(0);
+    Joystick flightStickControl = new Joystick(1);
 
     EventLoop loop = new EventLoop();
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         // Configure the button bindings
-        /*drive.setDefaultCommand(
+        driveSub.setDefaultCommand(
         new DriveCartesian(
-            drive,
+            driveSub,
             ()-> flightStickDrive.getRawAxis(1), //y speed - forwards & backwards
             ()-> flightStickDrive.getRawAxis(0), //x speed - strafe
             ()-> flightStickDrive.getRawAxis(2)  //z rotation - turning
-        ));*/
+        ));
 
 
         clawSub.setDefaultCommand(new ClawControl(clawSub, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
