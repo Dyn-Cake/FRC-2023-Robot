@@ -17,10 +17,10 @@ public final class Constants {
     //the number is the pwm channel that the spark is attached to :)
     public static int backLeftDrive = 9;
     public static int frontLeftDrive = 6;
-    public static int frontRightDrive = 2; //7
-    public static int backRightDrive = 4; //8
-    public static int clawMotorLeft = 7;
-    public static int clawMotorRight = 8;
+    public static int frontRightDrive = 7; //7
+    public static int backRightDrive = 8; //8
+    public static int clawMotorLeft = 2;
+    public static int clawMotorRight = 4;
     public static int towerMotor = 1;
     public static int armMotor = 13;
 
