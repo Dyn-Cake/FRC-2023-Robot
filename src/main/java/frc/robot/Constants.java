@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -56,5 +59,16 @@ public final class Constants {
 
     //deadband -1.0 to 1.0
     public static double deadband = 0.2;
-    
+
+    public static HashMap<Integer, String> motors = new HashMap<>() {{
+        put(9, "back left drive");
+        put(6, "front left drive");
+        put(2, "front right drive");
+        put(4, "back right drive");
+        put(7, "claw motor left");
+        put(8, "claw motor right");
+        put(1, "claw motor right");
+        put(13, "arm motor");
+    }};
+
 }
