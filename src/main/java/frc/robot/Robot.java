@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
-import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.UsbCamera;
 
 /**
@@ -39,7 +38,6 @@ public class Robot extends TimedRobot {
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setResolution(280, 240);
         camera.setFPS(30);
-        lastTriggered = System.currentTimeMillis();
     }
 
     /**
@@ -114,8 +112,4 @@ public class Robot extends TimedRobot {
     /** This function is called periodically whilst in simulation. */
     @Override
     public void simulationPeriodic() {}
-
-    public void smartDashboardUpdate() {
-
-    }
 }
