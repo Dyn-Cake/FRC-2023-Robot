@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 
+import frc.robot.commands.autonomous.AutonomousPhase;
+import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.subsystems.*;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -33,7 +35,6 @@ public class RobotContainer {
 
     EventLoop loop = new EventLoop();
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
-
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         // Configure the button bindings
@@ -98,9 +99,8 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return null;
+    public Command getAutonomousCommand(AutonomousPhaseType chosen) {
+        return new AutonomousPhase(driveSub, chosen);
     }
 
     public AHRS getGyro() {
