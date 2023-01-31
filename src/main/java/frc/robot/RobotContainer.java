@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
-
 import frc.robot.commands.autonomous.AutonomousPhase;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
+import frc.robot.commands.arm.ArmControl;
+import frc.robot.commands.claw.ClawControl;
+import frc.robot.commands.tower.TowerControl;
 import frc.robot.subsystems.*;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -47,9 +49,9 @@ public class RobotContainer {
         ));*/
 
 
-        /*claw.setDefaultCommand(new ClawControl(claw, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
-        arm.setDefaultCommand(new ArmControl(arm, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
-        tower.setDefaultCommand(new TowerControl(tower, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn*/
+        clawSub.setDefaultCommand(new ClawControl(clawSub, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
+        armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
+        towerSub.setDefaultCommand(new TowerControl(towerSub, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn
         configureButtonBindings();
     }
 
