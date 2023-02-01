@@ -66,12 +66,12 @@ public final class Constants {
     public static HashMap<Integer, String> motors = new HashMap<>() {{
         put(9, "back left drive");
         put(6, "front left drive");
-        put(2, "front right drive");
-        put(4, "back right drive");
+        //put(2, "front right drive");
+        //put(4, "back right drive");
         put(7, "claw motor left");
         put(8, "claw motor right");
-        put(1, "claw motor right");
-        put(13, "arm motor");
+        //put(1, "claw motor right");
+        //put(13, "arm motor");
     }};
 
 

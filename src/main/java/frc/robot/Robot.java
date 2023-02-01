@@ -22,7 +22,7 @@ import edu.wpi.first.cscore.UsbCamera;
 public class Robot extends TimedRobot {
     private Command autonomousCommand;
     private RobotContainer robotContainer;
-    public SmartDashboardUpdater smartDashboardUpdater;
+    //public SmartDashboardUpdater smartDashboardUpdater;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        smartDashboardUpdater = new SmartDashboardUpdater(Constants.motors);
+        //smartDashboardUpdater = new SmartDashboardUpdater(Constants.motors);
         robotContainer = new RobotContainer();
         CameraServer.startAutomaticCapture();
         UsbCamera camera = CameraServer.startAutomaticCapture();
@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
-        smartDashboardUpdater.update();
+        //smartDashboardUpdater.update();
     }
 
     /** This function is called once each time the robot enters Disabled mode. */
@@ -67,9 +67,9 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
-        AutonomousPhaseType chosen = smartDashboardUpdater.getChosen();
-        autonomousCommand = robotContainer.getAutonomousCommand(chosen);
-        System.out.println("Selected Auto: " + chosen);
+        //AutonomousPhaseType chosen = smartDashboardUpdater.getChosen();
+        //autonomousCommand = robotContainer.getAutonomousCommand(chosen);
+        //System.out.println("Selected Auto: " + chosen);
       // schedule the autonomous command (example)
         if (autonomousCommand != null) {
           autonomousCommand.schedule();

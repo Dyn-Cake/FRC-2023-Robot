@@ -9,18 +9,18 @@ import frc.robot.commands.autonomous.AutonomousPhaseType;
 import java.io.StringReader;
 import java.util.HashMap;
 
-public class SmartDashboardUpdater {
+/*public class SmartDashboardUpdater {
     private long lastTriggered;
     private HashMap<Spark, String> motors = new HashMap<Spark,String>();
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
 
-    public SmartDashboardUpdater(HashMap<Integer, String> motors) {
+    public SmartDashboardUpdater(HashMap<Spark, String> motors) {
         //Variables init only
         lastTriggered = System.currentTimeMillis();
 
         //TODO think of better solution
         HashMap<Spark, String> sparkMotors = new HashMap<>();
-        for (Integer port : motors.keySet()) {
+        for (Spark port : motors.keySet()) {
             sparkMotors.put(new Spark(port), motors.get(port));
         }
         this.motors = sparkMotors;
@@ -67,3 +67,4 @@ public class SmartDashboardUpdater {
     }
 
 }
+ */
