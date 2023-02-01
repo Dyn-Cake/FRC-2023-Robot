@@ -9,14 +9,15 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.SparkMotorManager;
 import frc.robot.StrafeDirection;
 
 public class DriveTrainSub extends SubsystemBase {
 
-    Spark frontRight = new Spark(Constants.frontRightDrive);
-    Spark backRight = new Spark (Constants.backRightDrive);
-    Spark frontLeft = new Spark (Constants.frontLeftDrive);
-    Spark backLeft = new Spark (Constants.backLeftDrive);
+    private final Spark frontRight;
+    private final Spark backRight;
+    private final Spark frontLeft;
+    private final Spark backLeft;
 
       //encoders for drive
     private Encoder frontRightEncoder = new Encoder (Constants.frontRightEncoder1, Constants.frontRightEncoder2);
@@ -24,16 +25,27 @@ public class DriveTrainSub extends SubsystemBase {
     private Encoder backRightEncoder = new Encoder (Constants.backRightEncoder1, Constants.backRightEncoder2);
     private Encoder backLeftEncoder = new Encoder (Constants.backLeftEncoder1, Constants.backLeftEncoder2);
 
-    MecanumDrive mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+    private final MecanumDrive mecanumDrive;
 
     public DriveTrainSub() {
+        SparkMotorManager motorManager = SparkMotorManager.getInstance();
+
+        frontRight = motorManager.getMotor(Constants.frontRightDrive);
         frontRight.setInverted(true);
+
+        backRight = motorManager.getMotor(Constants.backRightDrive);
         backRight.setInverted(true);
-        mecanumDrive.setDeadband(0.2); 
+
+        frontLeft = motorManager.getMotor(Constants.frontLeftDrive);
+        backLeft = motorManager.getMotor(Constants.backLeftDrive);
+
         frontRightEncoder.setDistancePerPulse(100); //subject to change
         frontLeftEncoder.setDistancePerPulse(100); //subject to change
         backRightEncoder.setDistancePerPulse(100); //subject to change
         backLeftEncoder.setDistancePerPulse(100); //subject to change
+
+        mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+        mecanumDrive.setDeadband(0.2);
     }
 
 

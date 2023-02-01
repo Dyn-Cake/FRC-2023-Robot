@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.RobotContainer;
+import frc.robot.SparkMotorManager;
 
 
 public class ClawSub extends SubsystemBase {
@@ -12,9 +13,10 @@ public class ClawSub extends SubsystemBase {
     private RobotContainer container;
 
     public ClawSub(RobotContainer container) {
+        SparkMotorManager sparkMotorManager = SparkMotorManager.getInstance();
         this.container = container;
-        clawMotorLeft = new Spark(Constants.clawMotorLeft);
-        clawMotorRight = new Spark(Constants.clawMotorRight);
+        clawMotorLeft = sparkMotorManager.getMotor(Constants.clawMotorLeft);
+        clawMotorRight = sparkMotorManager.getMotor(Constants.clawMotorRight);
     }
     /**
     * Sets the voltage output of the SpeedController. This is equivillant to a call to
