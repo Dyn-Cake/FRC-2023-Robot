@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class SmartDashboardUpdater {
     private long lastTriggered;
-    private HashMap<Spark, String> motors;
+    private HashMap<Spark, String> motors = new HashMap<Spark,String>();
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
 
     public SmartDashboardUpdater(HashMap<Integer, String> motors) {

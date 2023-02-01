@@ -62,7 +62,7 @@ public class DriveTrainSub extends SubsystemBase {
         backLeftEncoder.reset();
   }
 
-  //tells the distance of how far youve traveled
+  //tells the distance of how far you've traveled
     public double getDistance(){
         return Math.abs(
                 (
@@ -111,6 +111,6 @@ public class DriveTrainSub extends SubsystemBase {
     }
 
     public void mecanumDrive(double ySpeed, double xSpeed, double zRotation){
-        mecanumDrive.driveCartesian(-ySpeed/2, xSpeed, zRotation);
+        mecanumDrive.driveCartesian(-ySpeed/1.3, xSpeed, zRotation/1.7);
     }
 }

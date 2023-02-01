@@ -24,10 +24,10 @@ public final class Constants {
 
     public static int backLeftDrive = 9;
     public static int frontLeftDrive = 6;
-    public static int frontRightDrive = 2; //7
-    public static int backRightDrive = 4; //8
-    public static int clawMotorLeft = 7;
-    public static int clawMotorRight = 8;
+    public static int frontRightDrive = 7; //7
+    public static int backRightDrive = 8; //8
+    public static int clawMotorLeft = 2;
+    public static int clawMotorRight = 4;
     public static int towerMotor = 1;
     public static int armMotor = 13;
 
@@ -74,6 +74,7 @@ public final class Constants {
         put(13, "arm motor");
     }};
 
+
     static {
 
         //TODO look for pointers or references in java if possible, try create a hashmap<name, pointer>
@@ -86,3 +87,4 @@ public final class Constants {
     }
 
 }
+
