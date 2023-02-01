@@ -1,6 +1,6 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Preferences;
+/*import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,7 +9,7 @@ import frc.robot.commands.autonomous.AutonomousPhaseType;
 import java.io.StringReader;
 import java.util.HashMap;
 
-/*public class SmartDashboardUpdater {
+public class SmartDashboardUpdater {
     private long lastTriggered;
     private HashMap<Spark, String> motors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();

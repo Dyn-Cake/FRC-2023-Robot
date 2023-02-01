@@ -62,10 +62,6 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
 
-
-
-
-
         /*final JoystickButton trigger = new JoystickButton(flightStickControl, 1);
         final JoystickButton thumbButt = new JoystickButton(flightStickControl, 2);
         final JoystickButton butt3 = new JoystickButton(flightStickControl, 3);
