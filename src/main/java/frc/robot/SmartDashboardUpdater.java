@@ -11,17 +11,18 @@ import java.util.HashMap;
 
 public class SmartDashboardUpdater {
     private long lastTriggered;
-    private HashMap<Spark, String> motors = new HashMap<Spark,String>();
+    private HashMap<Spark, String> motors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
 
     public SmartDashboardUpdater(HashMap<Spark, String> motors) {
         //Variables init only
         lastTriggered = System.currentTimeMillis();
 
-        //TODO think of better solution
+        SparkMotorManager sparkMotorManager = SparkMotorManager.getInstance();
+
         HashMap<Spark, String> sparkMotors = new HashMap<>();
-        for (Spark port : motors.keySet()) {
-            sparkMotors.put(new Spark(port), motors.get(port));
+        for (Integer port : motors.keySet()) {
+            sparkMotors.put(sparkMotorManager.getMotor(port), motors.get(port));
         }
         this.motors = sparkMotors;
 
