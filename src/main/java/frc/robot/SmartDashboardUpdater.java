@@ -9,7 +9,7 @@ import frc.robot.commands.autonomous.AutonomousPhaseType;
 import java.io.StringReader;
 import java.util.HashMap;
 
-/*public class SmartDashboardUpdater {
+public class SmartDashboardUpdater {
     private long lastTriggered;
     private HashMap<Spark, String> motors = new HashMap<Spark,String>();
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
@@ -67,4 +67,3 @@ import java.util.HashMap;
     }
 
 }
- */
