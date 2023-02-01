@@ -33,7 +33,7 @@ public class RobotContainer {
     private final TowerSub towerSub = new TowerSub(this);
     Joystick flightStickDrive = new Joystick(0);
     Joystick flightStickControl = new Joystick(1);
-    AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+    AHRS gyro;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -45,7 +45,8 @@ public class RobotContainer {
             ()-> flightStickDrive.getRawAxis(0), //x speed - strafe
             ()-> flightStickDrive.getRawAxis(2)  //z rotation - turning
         ));
-
+        
+        gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
         clawSub.setDefaultCommand(new ClawControl(clawSub, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
         armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
@@ -60,10 +61,6 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-
-
-
-
 
         /*final JoystickButton trigger = new JoystickButton(flightStickControl, 1);
         final JoystickButton thumbButt = new JoystickButton(flightStickControl, 2);
