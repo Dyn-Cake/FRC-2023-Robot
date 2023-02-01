@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCartesian;
 import frc.robot.commands.autonomous.AutonomousPhase;
@@ -18,7 +17,6 @@ import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.claw.ClawControl;
 import frc.robot.commands.tower.TowerControl;
 import frc.robot.subsystems.*;
-//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 /**
@@ -35,9 +33,8 @@ public class RobotContainer {
     private final TowerSub towerSub = new TowerSub(this);
     Joystick flightStickDrive = new Joystick(0);
     Joystick flightStickControl = new Joystick(1);
-
-    EventLoop loop = new EventLoop();
     AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         // Configure the button bindings
