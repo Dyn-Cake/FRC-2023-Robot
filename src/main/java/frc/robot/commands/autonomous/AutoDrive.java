@@ -44,13 +44,8 @@ public class AutoDrive extends CommandBase {
     //condition for the command to end on its own
     @Override
     public boolean isFinished() {
-        if (drive.getDistance() < distance) {
-            return false;
-        }
-        else {
-            return true;
-        }
-        
+        return !( drive.getDistance() < distance );
+
         /*
         if (System.currentTimeMillis()-startTime<duration){
             return false;
