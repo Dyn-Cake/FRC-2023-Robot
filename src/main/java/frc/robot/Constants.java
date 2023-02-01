@@ -4,8 +4,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -18,6 +21,7 @@ import java.util.Map;
 public final class Constants {
 
     //the number is the pwm channel that the spark is attached to :)
+
     public static int backLeftDrive = 9;
     public static int frontLeftDrive = 6;
     public static int frontRightDrive = 2; //7
@@ -29,8 +33,8 @@ public final class Constants {
 
     //the number is the CAN ID that the spark max is attached to :)
     //public static int towerExtension = 7;
-    
     //list of dio ports for sensors
+
     public static int frontRightEncoder1 = 0;
     public static int frontRightEncoder2 = 1;
     public static int frontLeftEncoder1 = 8;
@@ -39,11 +43,11 @@ public final class Constants {
     public static int backRightEncoder2 = 3;
     public static int backLeftEncoder1 = 6;
     public static int backLeftEncoder2 = 7;
-
     //setting the voltage (power) for the motors
     //out of 12
     //change this later when figuring out the voltage for the robot
     //claw volt
+
     public static double clawMotorLeftVolt = 7;
     public static double clawMotorRightVolt = 7;
     //drive volt
@@ -52,14 +56,13 @@ public final class Constants {
     public static double towerMotorVolt = 2;
     //arm volt
     public static double armMotorVolt = 4;
-
     //autodrive speed is out of 1
+
     public static double autoDriveLeft = .3;
     public static double autoDriveRight = .3;
-
     //deadband -1.0 to 1.0
-    public static double deadband = 0.2;
 
+    public static double deadband = 0.2;
     public static HashMap<Integer, String> motors = new HashMap<>() {{
         put(9, "back left drive");
         put(6, "front left drive");
@@ -70,5 +73,16 @@ public final class Constants {
         put(1, "claw motor right");
         put(13, "arm motor");
     }};
+
+    static {
+
+        //TODO look for pointers or references in java if possible, try create a hashmap<name, pointer>
+        Preferences.setDouble("deadband", deadband);
+
+    }
+
+    public static void update() {
+        deadband = Preferences.getDouble("deadband", deadband);
+    }
 
 }

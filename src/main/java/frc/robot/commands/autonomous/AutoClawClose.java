@@ -34,11 +34,9 @@ public void end(boolean interrupted) {
 //condition for the command to end on its own
 @Override
 public boolean isFinished() {
-    if (System.currentTimeMillis()-startTime<duration){
-        return false;
-    }
-    else {
-        return true;
-    }
+    return !(
+            System.currentTimeMillis()
+                    - startTime < duration
+    );
 }
 }

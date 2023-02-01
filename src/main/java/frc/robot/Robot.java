@@ -39,7 +39,6 @@ public class Robot extends TimedRobot {
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setResolution(280, 240);
         camera.setFPS(30);
-        lastTriggered = System.currentTimeMillis();
     }
 
     /**
