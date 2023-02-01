@@ -4,15 +4,16 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.SparkMotorManager;
 
 public class ArmSub extends SubsystemBase {
     private final Spark armMotor;
     private RobotContainer container;
 
     public ArmSub(RobotContainer container){
+        SparkMotorManager sparkMotorManager = SparkMotorManager.getInstance();
         this.container = container;
-        armMotor = new Spark(Constants.armMotor);
-
+        armMotor = sparkMotorManager.getMotor(Constants.armMotor);
     }
 
     public void extend(){
