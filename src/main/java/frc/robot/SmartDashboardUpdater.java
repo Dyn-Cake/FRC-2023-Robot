@@ -1,12 +1,12 @@
 package frc.robot;
 
-/*import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 
-import java.io.StringReader;
 import java.util.HashMap;
 
 public class SmartDashboardUpdater {
@@ -14,7 +14,7 @@ public class SmartDashboardUpdater {
     private HashMap<Spark, String> motors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
 
-    public SmartDashboardUpdater(HashMap<Spark, String> motors) {
+    public SmartDashboardUpdater(HashMap<Integer, String> motors) {
         //Variables init only
         lastTriggered = System.currentTimeMillis();
 
@@ -32,6 +32,11 @@ public class SmartDashboardUpdater {
 
     public void init() {
 
+        Shuffleboard.getTab("SmartDashboard")
+        .add("front left voltage", 1)
+        .withWidget(BuiltInWidgets.kMecanumDrive)
+        .getEntry();
+        
         for (AutonomousPhaseType type : AutonomousPhaseType.values()) {
             //TODO un-hardcode this
             if (type == AutonomousPhaseType.DEFAULT) {
@@ -51,7 +56,7 @@ public class SmartDashboardUpdater {
     private void updateMotors() {
         for (Spark motor : motors.keySet()) {
             SmartDashboard.putNumber(
-                    motors.get(motor) + " motor voltage",
+                    motors.get(motor) + " voltage",
                     motor.get()
             );
         }
@@ -68,4 +73,3 @@ public class SmartDashboardUpdater {
     }
 
 }
-*/
