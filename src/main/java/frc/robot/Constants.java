@@ -61,15 +61,18 @@ public final class Constants {
     //deadband -1.0 to 1.0
 
     public static double deadband = 0.2;
-    public static HashMap<Integer, String> motors = new HashMap<>() {{
-        put(9, "back left drive");
-        put(6, "front left drive");
-        //put(2, "front right drive");
-        //put(4, "back right drive");
-        put(7, "claw motor left");
-        put(8, "claw motor right");
-        //put(1, "claw motor right");
-        //put(13, "arm motor");
+    public static HashMap<Integer, String> extraMotors = new HashMap<>() {{
+        put(clawMotorLeft, "claw motor left");
+        put(clawMotorRight, "claw motor right");
+        //put(towerMotor, "tower motor");
+        //put(armMotor, "arm motor");
+    }};
+
+    public static HashMap<Integer, String> driveMotors = new HashMap<>() {{
+        put(backLeftDrive, "back left drive");
+        put(frontLeftDrive, "front left drive");
+        //put(frontRightDrive, "front right drive");
+        //put(backRightDrive, "back right drive");
     }};
 
 

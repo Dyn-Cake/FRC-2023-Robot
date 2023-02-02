@@ -32,10 +32,10 @@ public class SmartDashboardUpdater {
 
     public void init() {
 
-        Shuffleboard.getTab("SmartDashboard")
+        /*Shuffleboard.getTab("SmartDashboard")
         .add("front left voltage", 1)
         .withWidget(BuiltInWidgets.kMecanumDrive)
-        .getEntry();
+        .getEntry();*/
         
         for (AutonomousPhaseType type : AutonomousPhaseType.values()) {
             //TODO un-hardcode this
