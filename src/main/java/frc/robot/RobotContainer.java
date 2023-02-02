@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCartesian;
 import frc.robot.commands.autonomous.AutonomousPhase;
@@ -33,7 +35,7 @@ public class RobotContainer {
     private final TowerSub towerSub = new TowerSub(this);
     Joystick flightStickDrive = new Joystick(0);
     Joystick flightStickControl = new Joystick(1);
-    //AHRS gyro;
+    AHRS gyro;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -45,8 +47,16 @@ public class RobotContainer {
             ()-> flightStickDrive.getRawAxis(0), //x speed - strafe
             ()-> flightStickDrive.getRawAxis(2)  //z rotation - turning
         ));
+
+
         
-        //gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+        gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+        Shuffleboard.getTab("SmartDashboard")
+        .add(gyro)
+        .withWidget(BuiltInWidgets.kGyro);
+
+        Shuffleboard.getTab("SmartDashboard")
+        .add("gyroPitch", gyro.getPitch());
 
         clawSub.setDefaultCommand(new ClawControl(clawSub, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
         armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
@@ -100,9 +110,9 @@ public class RobotContainer {
         return new AutonomousPhase(driveSub, chosen);
     }
 
-    /*public AHRS getGyro() {
+    public AHRS getGyro() {
         return gyro;
-    }*/
+    }
 
     public double deadBand(double input, double deadband) {
         if (input > deadband || input < -deadband) {
