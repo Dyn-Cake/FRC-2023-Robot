@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -30,13 +32,16 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        smartDashboardUpdater = new SmartDashboardUpdater(Constants.driveMotors);
-        smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors);
+        smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors, Constants.driveMotors);
         robotContainer = new RobotContainer();
         CameraServer.startAutomaticCapture();
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setResolution(280, 240);
         camera.setFPS(30);
+        Shuffleboard.getTab("SmartDashboard")
+        .add(camera)
+        .withWidget(BuiltInWidgets.kCameraStream)
+        .withSize(4, 3);
     }
 
     /**
