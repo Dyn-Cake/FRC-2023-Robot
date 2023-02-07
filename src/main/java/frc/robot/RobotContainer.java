@@ -15,8 +15,8 @@ import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.claw.ClawControl;
 import frc.robot.commands.tower.TowerControl;
 import frc.robot.subsystems.*;
-import frc.robot.utils.LimelightHelpers;
-import frc.robot.utils.LimelightResults;
+//import frc.robot.utils.LimelightHelpers;
+//import frc.robot.utils.LimelightResults;
 
 
 /**
@@ -31,8 +31,8 @@ public class RobotContainer {
     private final ClawSub clawSub = new ClawSub(this);
     private final ArmSub armSub = new ArmSub(this);
     private final TowerSub towerSub = new TowerSub(this);
-    Joystick flightStickDrive = new Joystick(0);
-    Joystick flightStickControl = new Joystick(1);
+    Joystick flightStickDrive = new Joystick(1);
+    Joystick flightStickControl = new Joystick(0);
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -50,8 +50,8 @@ public class RobotContainer {
         towerSub.setDefaultCommand(new TowerControl(towerSub, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn
         configureButtonBindings();
 
-        LimelightResults llresults = LimelightHelpers.getLatestResults("");
-        int numAprilTags = llresults.getResults().getTargets_Fiducials().length;
+        //LimelightResults llresults = LimelightHelpers.getLatestResults("");
+        //int numAprilTags = llresults.getResults().getTargets_Fiducials().length;
     }
 
     /**

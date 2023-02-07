@@ -81,16 +81,4 @@ public class Results {
     @JsonProperty("Barcode")
     private LimelightTargetBarcode[] targets_Barcode;
 
-    public Results() {
-        botpose = new double[6];
-        botpose_wpired = new double[6];
-        botpose_wpiblue = new double[6];
-        targets_Retro = new LimelightTargetRetro[0];
-        targets_Fiducials = new LimelightTargetFiducial[0];
-        targets_Classifier = new LimelightTargetClassifier[0];
-        targets_Detector = new LimelightTargetDetector[0];
-        targets_Barcode = new LimelightTargetBarcode[0];
-
-    }
-
 }
