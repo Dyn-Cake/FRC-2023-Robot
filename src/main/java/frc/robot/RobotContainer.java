@@ -4,10 +4,8 @@
 
 package frc.robot;
 
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCartesian;
@@ -17,6 +15,8 @@ import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.claw.ClawControl;
 import frc.robot.commands.tower.TowerControl;
 import frc.robot.subsystems.*;
+import frc.robot.utils.LimelightHelpers;
+import frc.robot.utils.LimelightResults;
 
 
 /**
@@ -33,7 +33,6 @@ public class RobotContainer {
     private final TowerSub towerSub = new TowerSub(this);
     Joystick flightStickDrive = new Joystick(0);
     Joystick flightStickControl = new Joystick(1);
-    //AHRS gyro;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -45,13 +44,14 @@ public class RobotContainer {
             ()-> flightStickDrive.getRawAxis(0), //x speed - strafe
             ()-> flightStickDrive.getRawAxis(2)  //z rotation - turning
         ));
-        
-        //gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
         clawSub.setDefaultCommand(new ClawControl(clawSub, ()->flightStickControl.getRawAxis(1))); //y axis - forwards & backwards
         armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
         towerSub.setDefaultCommand(new TowerControl(towerSub, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn
         configureButtonBindings();
+
+        LimelightResults llresults = LimelightHelpers.getLatestResults("");
+        int numAprilTags = llresults.getResults().targets_Fiducials.length;
     }
 
     /**
@@ -99,10 +99,6 @@ public class RobotContainer {
     public Command getAutonomousCommand(AutonomousPhaseType chosen) {
         return new AutonomousPhase(driveSub, chosen);
     }
-
-    /*public AHRS getGyro() {
-        return gyro;
-    }*/
 
     public double deadBand(double input, double deadband) {
         if (input > deadband || input < -deadband) {
