@@ -1,62 +1,96 @@
 package frc.robot.utils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Results {
 
+    @Getter
+    @Setter
     @JsonProperty("pID")
-    public double pipelineID;
+    private double pipelineID;
 
+    @Getter
+    @Setter
     @JsonProperty("tl")
-    public double latency_pipeline;
+    private double latency_pipeline;
 
+    @Getter
+    @Setter
     @JsonProperty("tl_cap")
-    public double latency_capture;
+    private double latency_capture;
 
-    public double latency_jsonParse;
+    @Getter
+    @Setter
+    private double latency_jsonParse;
 
+    @Getter
+    @Setter
     @JsonProperty("ts")
-    public double timestamp_LIMELIGHT_publish;
+    private double timestamp_LIMELIGHT_publish;
 
+    @Getter
+    @Setter
     @JsonProperty("ts_rio")
-    public double timestamp_RIOFPGA_capture;
+    private double timestamp_RIOFPGA_capture;
 
+    @Getter
+    @Setter
     @JsonProperty("v")
-    public double valid;
+    private double valid;
 
+    @Getter
+    @Setter
     @JsonProperty("botpose")
-    public double[] botpose;
+    private double[] botpose;
 
+    @Getter
+    @Setter
     @JsonProperty("botpose_wpired")
-    public double[] botpose_wpired;
+    private double[] botpose_wpired;
 
+    @Getter
+    @Setter
     @JsonProperty("botpose_wpiblue")
-    public double[] botpose_wpiblue;
+    private double[] botpose_wpiblue;
 
+    @Getter
+    @Setter
     @JsonProperty("Retro")
-    public LimelightTarget_Retro[] targets_Retro;
+    private LimelightTargetRetro[] targets_Retro;
 
+    @Getter
+    @Setter
     @JsonProperty("Fiducial")
-    public LimelightTarget_Fiducial[] targets_Fiducials;
+    private LimelightTargetFiducial[] targets_Fiducials;
 
+
+    @Getter
+    @Setter
     @JsonProperty("Classifier")
-    public LimelightTarget_Classifier[] targets_Classifier;
+    private LimelightTargetClassifier[] targets_Classifier;
 
+    @Getter
+    @Setter
     @JsonProperty("Detector")
-    public LimelightTarget_Detector[] targets_Detector;
+    private LimelightTargetDetector[] targets_Detector;
 
+    @Getter
+    @Setter
     @JsonProperty("Barcode")
-    public LimelightTarget_Barcode[] targets_Barcode;
+    private LimelightTargetBarcode[] targets_Barcode;
 
     public Results() {
         botpose = new double[6];
         botpose_wpired = new double[6];
         botpose_wpiblue = new double[6];
-        targets_Retro = new LimelightTarget_Retro[0];
-        targets_Fiducials = new LimelightTarget_Fiducial[0];
-        targets_Classifier = new LimelightTarget_Classifier[0];
-        targets_Detector = new LimelightTarget_Detector[0];
-        targets_Barcode = new LimelightTarget_Barcode[0];
+        targets_Retro = new LimelightTargetRetro[0];
+        targets_Fiducials = new LimelightTargetFiducial[0];
+        targets_Classifier = new LimelightTargetClassifier[0];
+        targets_Detector = new LimelightTargetDetector[0];
+        targets_Barcode = new LimelightTargetBarcode[0];
 
     }
+
 }
