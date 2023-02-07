@@ -3,9 +3,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.SPI;
 
 import java.util.HashMap;
@@ -19,6 +23,8 @@ public class SmartDashboardUpdater {
     private HashMap<Spark, String> driveMotors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
     AHRS gyro;
+    private ShuffleboardTab tab = Shuffleboard.getTab("Shuffleboard");
+    private GenericEntry gyroPitch;
 
     public SmartDashboardUpdater(HashMap<Integer, String> motors, HashMap<Integer, String> driveMotors) {
         //Variables init only
@@ -40,6 +46,13 @@ public class SmartDashboardUpdater {
         this.driveMotors = driveSparkMotors;
 
         gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+
+        //adding widgets to shuffleboard
+        gyroPitch = tab.add("gyroPitch", gyro.getPitch())
+        .withWidget(BuiltInWidgets.kTextView)
+        .getEntry();
+        tab.add(gyro)
+        .withWidget(BuiltInWidgets.kGyro);
 
         //logic
         init();
@@ -84,7 +97,8 @@ public class SmartDashboardUpdater {
             Shuffleboard.getTab("SmartDashboard")
             .add(motors.get(motor) + " voltage", motor.get())
             .withWidget(BuiltInWidgets.kMecanumDrive)
-            .withProperties(Map.of("min", -1, "max", 1));
+            .withProperties(Map.of("min", -1, "max", 1))
+            .getEntry();
             /*SmartDashboard.putNumber(
                     motors.get(motor) + " voltage",
                     motor.get()
@@ -93,11 +107,7 @@ public class SmartDashboardUpdater {
     }
 
     private void updateGyro(){
-        Shuffleboard.getTab("SmartDashboard")
-        .add("gyroPitch", gyro.getPitch());
-        Shuffleboard.getTab("SmartDashboard")
-        .add(gyro)
-        .withWidget(BuiltInWidgets.kGyro);
+        gyroPitch.setFloat(gyro.getPitch());
     }
 
     private void updateDebug() {
