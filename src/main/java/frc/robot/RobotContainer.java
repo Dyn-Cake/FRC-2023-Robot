@@ -51,7 +51,7 @@ public class RobotContainer {
         configureButtonBindings();
 
         LimelightResults llresults = LimelightHelpers.getLatestResults("");
-        int numAprilTags = llresults.getResults().targets_Fiducials.length;
+        int numAprilTags = llresults.getResults().getTargets_Fiducials().length;
     }
 
     /**

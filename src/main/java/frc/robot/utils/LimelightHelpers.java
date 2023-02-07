@@ -10,171 +10,13 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-class LimelightTarget_Retro {
-
-    @JsonProperty("t6c_ts")
-    double[] cameraPose_TargetSpace;
-
-    @JsonProperty("t6r_fs")
-    double[] robotPose_FieldSpace;
-
-    @JsonProperty("t6r_ts")
-    double[] robotPose_TargetSpace;
-
-    @JsonProperty("t6t_cs")
-    double[] targetPose_CameraSpace;
-
-    @JsonProperty("t6t_rs")
-    double[] targetPose_RobotSpace;
-
-    @JsonProperty("ta")
-    double ta;
-
-    @JsonProperty("tx")
-    double tx;
-
-    @JsonProperty("txp")
-    double tx_pixels;
-
-    @JsonProperty("ty")
-    double ty;
-
-    @JsonProperty("typ")
-    double ty_pixels;
-
-    @JsonProperty("ts")
-    double ts;
-
-    LimelightTarget_Retro() {
-        cameraPose_TargetSpace = new double[6];
-        robotPose_FieldSpace = new double[6];
-        robotPose_TargetSpace = new double[6];
-        targetPose_CameraSpace = new double[6];
-        targetPose_RobotSpace = new double[6];
-    }
-
-}
-
-class LimelightTarget_Fiducial {
-
-    @JsonProperty("fID")
-    double fiducialID;
-
-    @JsonProperty("fam")
-    String fiducialFamily;
-
-    @JsonProperty("t6c_ts")
-    double[] cameraPose_TargetSpace;
-
-    @JsonProperty("t6r_fs")
-    double[] robotPose_FieldSpace;
-
-    @JsonProperty("t6r_ts")
-    double[] robotPose_TargetSpace;
-
-    @JsonProperty("t6t_cs")
-    double[] targetPose_CameraSpace;
-
-    @JsonProperty("t6t_rs")
-    double[] targetPose_RobotSpace;
-
-    @JsonProperty("ta")
-    double ta;
-
-    @JsonProperty("tx")
-    double tx;
-
-    @JsonProperty("txp")
-    double tx_pixels;
-
-    @JsonProperty("ty")
-    double ty;
-
-    @JsonProperty("typ")
-    double ty_pixels;
-
-    @JsonProperty("ts")
-    double ts;
-
-    LimelightTarget_Fiducial() {
-        cameraPose_TargetSpace = new double[6];
-        robotPose_FieldSpace = new double[6];
-        robotPose_TargetSpace = new double[6];
-        targetPose_CameraSpace = new double[6];
-        targetPose_RobotSpace = new double[6];
-    }
-}
-
-class LimelightTarget_Barcode {
-
-}
-
-class LimelightTarget_Classifier {
-
-    @JsonProperty("class")
-    String className;
-
-    @JsonProperty("classID")
-    double classID;
-
-    @JsonProperty("conf")
-    double confidence;
-
-    @JsonProperty("zone")
-    double zone;
-
-    @JsonProperty("tx")
-    double tx;
-
-    @JsonProperty("txp")
-    double tx_pixels;
-
-    @JsonProperty("ty")
-    double ty;
-
-    @JsonProperty("typ")
-    double ty_pixels;
-
-    LimelightTarget_Classifier() {
-    }
-}
-
-class LimelightTarget_Detector {
-
-    @JsonProperty("class")
-    String className;
-
-    @JsonProperty("classID")
-    double classID;
-
-    @JsonProperty("conf")
-    double confidence;
-
-    @JsonProperty("ta")
-    double ta;
-
-    @JsonProperty("tx")
-    double tx;
-
-    @JsonProperty("txp")
-    double tx_pixels;
-
-    @JsonProperty("ty")
-    double ty;
-
-    @JsonProperty("typ")
-    double ty_pixels;
-
-    LimelightTarget_Detector() {
-    }
-}
 
 public class LimelightHelpers {
 
@@ -185,8 +27,8 @@ public class LimelightHelpers {
      */
     static boolean profileJSON = false;
 
-    static final String sanitizeName(String name) {
-        if (name == "" || name == null) {
+    static String sanitizeName(String name) {
+        if (Objects.equals(name, "") || name == null) {
             return "limelight";
         }
         return name;
@@ -419,7 +261,8 @@ public class LimelightHelpers {
 
         long end = System.nanoTime();
         double millis = (end - start) * .000001;
-        results.getResults().latency_jsonParse = millis;
+
+        results.getResults().setLatency_jsonParse(millis);
         if (profileJSON) {
             System.out.printf("lljson: %.2f\r\n", millis);
         }
