@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -262,7 +261,7 @@ public class LimelightHelpers {
         long end = System.nanoTime();
         double millis = (end - start) * .000001;
 
-        results.getResults().setLatency_jsonParse(millis);
+        //results.getResults().setLatency_jsonParse(millis);
         if (profileJSON) {
             System.out.printf("lljson: %.2f\r\n", millis);
         }
