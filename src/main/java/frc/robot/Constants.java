@@ -24,10 +24,10 @@ public final class Constants {
     public static int frontLeftDrive = 4; //6
     public static int frontRightDrive = 7; //7
     public static int backRightDrive = 8; //8
-    public static int clawMotorLeft = 6;
+    public static int clawMotorLeft = 3;
     public static int clawMotorRight = 9;
     public static int towerMotor = 1;
-    public static int armMotor = 13;
+    public static int armMotor = 6;
 
     //the number is the CAN ID that the spark max is attached to :)
     //public static int towerExtension = 7;
@@ -46,14 +46,16 @@ public final class Constants {
     //change this later when figuring out the voltage for the robot
     //claw volt
 
-    public static double clawMotorLeftVolt = 2;
-    public static double clawMotorRightVolt = 2;
+    private static double clawMotorVolt = 8;
+
+    public static double clawMotorLeftVolt = clawMotorVolt;
+    public static double clawMotorRightVolt = clawMotorVolt;
     //drive volt
     public static double autoDrive = .3;
     //tower volt
     public static double towerMotorVolt = 2;
     //arm volt
-    public static double armMotorVolt = 4;
+    public static double armMotorVolt = 6;
     //autodrive speed is out of 1
 
     public static double autoDriveLeft = .3;
