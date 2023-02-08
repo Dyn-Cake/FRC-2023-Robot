@@ -1,8 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -12,14 +9,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
-import lombok.val;
 
 public class SmartDashboardUpdater {
     private long lastTriggered;
@@ -27,7 +25,7 @@ public class SmartDashboardUpdater {
     private HashMap<Spark, String> driveMotors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
     AHRS gyro;
-    private ShuffleboardTab tab = Shuffleboard.getTab("Shuffleboard");
+    private ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard");
     private GenericEntry gyroPitch;
 
     public SmartDashboardUpdater(HashMap<Integer, String> motors, HashMap<Integer, String> driveMotors) {
@@ -77,7 +75,6 @@ public class SmartDashboardUpdater {
             }
             chooser.addOption(type.name(), type);
         }
-
         NetworkTableInstance instance = NetworkTableInstance.getDefault();
         NetworkTable table = instance.getTable("Shuffleboard").getSubTable("MecanumDrive");
 // set the values for the Mecanum Drive widget
@@ -86,6 +83,7 @@ public class SmartDashboardUpdater {
         table.getEntry("frontRightSpeed").setDouble(0.2);
         table.getEntry("rearLeftSpeed").setDouble(0.3);
         table.getEntry("rearRightSpeed").setDouble(0.4);
+        
     }
 
     public void update() {
@@ -95,7 +93,7 @@ public class SmartDashboardUpdater {
     }
 
     private void updateMotors() {
-        for (Spark motor : motors.keySet()) {
+        /*for (Spark motor : motors.keySet()) {
             Shuffleboard.getTab("SmartDashboard")
             .add(motors.get(motor) + " voltage", motor.get())
             .withWidget(BuiltInWidgets.kVoltageView)
@@ -103,22 +101,20 @@ public class SmartDashboardUpdater {
             /*SmartDashboard.putNumber(
                     motors.get(motor) + " voltage",
                     motor.get()
-            );*/
-        }
+            );
+        }*/
         
-
-        /*
-        for (Spark motor : driveMotors.keySet()) {
+        /*for (Spark motor : driveMotors.keySet()) {
             Shuffleboard.getTab("SmartDashboard")
             .add(motors.get(motor) + " voltage", motor.get())
             .withWidget(BuiltInWidgets.kMecanumDrive)
-            //.withProperties(Map.of("min", -1, "max", 1))
+            .withProperties(Map.of("min", -1, "max", 1))
             .getEntry();
             /*SmartDashboard.putNumber(
                     motors.get(motor) + " voltage",
                     motor.get()
             );
-         }*/
+        }*/
     }
 
     private void updateGyro(){
