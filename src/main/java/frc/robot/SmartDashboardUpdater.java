@@ -3,14 +3,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
+import edu.wpi.first.math.Pair;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -21,7 +20,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 public class SmartDashboardUpdater {
     private long lastTriggered;
-    private HashMap<Spark, String> motors;
+    private HashMap<Spark, Pair<GenericEntry, String>> motors;
     private HashMap<Spark, String> driveMotors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
     AHRS gyro;
@@ -35,9 +34,9 @@ public class SmartDashboardUpdater {
         SparkMotorManager sparkMotorManager = SparkMotorManager.getInstance();
         SparkMotorManager driveSparkMotorManager = SparkMotorManager.getInstance();
 
-        HashMap<Spark, String> sparkMotors = new HashMap<>();
+        HashMap<Spark, Pair<GenericEntry, String>> sparkMotors = new HashMap<>();
         for (Integer port : motors.keySet()) {
-            sparkMotors.put(sparkMotorManager.getMotor(port), motors.get(port));
+            sparkMotors.put(sparkMotorManager.getMotor(port), Pair.<GenericEntry, String>of(null, motors.get(port)));
         }
         this.motors = sparkMotors;
 
@@ -49,18 +48,27 @@ public class SmartDashboardUpdater {
 
         gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
+        //logic
+        init();
+    }
+
+    public void init() {
+
         //adding widgets to shuffleboard
         gyroPitch = tab.add("gyroPitch", gyro.getPitch())
         .withWidget(BuiltInWidgets.kTextView)
         .getEntry();
         tab.add(gyro)
         .withWidget(BuiltInWidgets.kGyro);
+        for (Spark motor : motors.keySet()) {
+            GenericEntry extraMotor = tab.add(motors.get(motor).getSecond() + " voltage", motor.get())
+            .withWidget(BuiltInWidgets.kVoltageView)
+            .withProperties(Map.of("min", -12, "max", 12))
+            .getEntry();
 
-        //logic
-        init();
-    }
-
-    public void init() {
+            motors.replace(motor, new Pair(extraMotor, motors.get(motor).getSecond()));
+        }
+        
 
         /*Shuffleboard.getTab("SmartDashboard")
         .add("front left voltage", 1)
@@ -93,6 +101,12 @@ public class SmartDashboardUpdater {
     }
 
     private void updateMotors() {
+
+        for(Spark motor : motors.keySet()) {
+            motors.get(motor).getFirst().setDouble(motor.get());
+        }
+
+
         /*for (Spark motor : motors.keySet()) {
             Shuffleboard.getTab("SmartDashboard")
             .add(motors.get(motor) + " voltage", motor.get())

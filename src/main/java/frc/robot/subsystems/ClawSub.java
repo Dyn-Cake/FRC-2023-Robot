@@ -46,6 +46,6 @@ public class ClawSub extends SubsystemBase {
                  Constants.deadband
          );
         clawMotorLeft.setVoltage(voltage * Constants.clawMotorLeftVolt);
-        clawMotorRight.setVoltage(-voltage * Constants.clawMotorRightVolt);
+        clawMotorRight.setVoltage(voltage * Constants.clawMotorRightVolt);
     }
 }
