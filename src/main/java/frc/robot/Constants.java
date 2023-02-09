@@ -24,8 +24,8 @@ public final class Constants {
     public static int frontLeftDrive = 4; //6
     public static int frontRightDrive = 7; //7
     public static int backRightDrive = 8; //8
-    public static int clawMotorLeft = 3;
-    public static int clawMotorRight = 9;
+    public static int clawMotorLeft = 7;
+    public static int clawMotorRight = 8;
     public static int towerMotor = 1;
     public static int armMotor = 6;
 
@@ -46,7 +46,7 @@ public final class Constants {
     //change this later when figuring out the voltage for the robot
     //claw volt
 
-    private static double clawMotorVolt = 8;
+    private static double clawMotorVolt = 3;
 
     public static double clawMotorLeftVolt = clawMotorVolt;
     public static double clawMotorRightVolt = clawMotorVolt;
