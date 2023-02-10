@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -17,11 +18,6 @@ import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.claw.ClawControl;
 import frc.robot.commands.tower.TowerControl;
 import frc.robot.subsystems.*;
-import frc.robot.utils.Limelight;
-import frc.robot.utils.LimelightHelpers;
-import frc.robot.utils.LimelightResults;
-import frc.robot.utils.Limelight.CameraMode;
-import frc.robot.utils.Limelight.LightMode;
 
 
 /**
@@ -54,13 +50,6 @@ public class RobotContainer {
         armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
         towerSub.setDefaultCommand(new TowerControl(towerSub, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn
         configureButtonBindings();
-
-        /*LimelightResults llresults = LimelightHelpers.getLatestResults("");
-        int numAprilTags = llresults.getResults().getTargets_Fiducials().length;
-        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-        Limelight limelight = new Limelight();
-        Limelight.setCameraMode(CameraMode.eVision);
-        Limelight.setLedMode(LightMode.eOn);*/
     }
 
     /**
