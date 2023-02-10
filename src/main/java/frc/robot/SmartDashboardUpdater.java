@@ -54,6 +54,8 @@ public class SmartDashboardUpdater {
 
     public void init() {
 
+        gyro.reset();
+
         //adding widgets to shuffleboard
         gyroPitch = tab.add("gyroPitch", gyro.getPitch())
         .withWidget(BuiltInWidgets.kTextView)
