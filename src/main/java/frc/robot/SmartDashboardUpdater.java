@@ -10,6 +10,7 @@ import frc.robot.commands.autonomous.AutonomousPhaseType;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -26,6 +27,10 @@ public class SmartDashboardUpdater {
     AHRS gyro;
     private ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard");
     private GenericEntry gyroPitch;
+    /*private NetworkTable limelight;
+    private NetworkTableEntry tx;
+    private NetworkTableEntry ty;
+    private NetworkTableEntry ta;*/
 
     public SmartDashboardUpdater(HashMap<Integer, String> motors, HashMap<Integer, String> driveMotors) {
         //Variables init only
@@ -47,6 +52,8 @@ public class SmartDashboardUpdater {
         this.driveMotors = driveSparkMotors;
 
         gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+
+        //limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
         //logic
         init();
@@ -70,7 +77,8 @@ public class SmartDashboardUpdater {
 
             motors.replace(motor, new Pair(extraMotor, motors.get(motor).getSecond()));
         }
-        
+        //ledMode = limelight.setEntry(2);
+
 
         /*Shuffleboard.getTab("SmartDashboard")
         .add("front left voltage", 1)
@@ -100,6 +108,7 @@ public class SmartDashboardUpdater {
         updateMotors();
         updateDebug();
         updateGyro();
+        //updateLimelight();
     }
 
     private void updateMotors() {
@@ -142,6 +151,12 @@ public class SmartDashboardUpdater {
         SmartDashboard.putNumber("TriggerDelay", lastTriggered - System.currentTimeMillis());
         lastTriggered = System.currentTimeMillis();
     }
+
+    /*private void updateLimelight(){
+        ta = limelight.getEntry("ta");
+        tx = limelight.getEntry("tx");
+        ty = limelight.getEntry("ty");
+    }*/
 
     public AutonomousPhaseType getChosen() {
         return chooser.getSelected();
