@@ -20,6 +20,9 @@ public final class Constants {
 
     //the number is the pwm channel that the spark is attached to :)
 
+
+
+    public static String shuffleboardTabName = "SmartDashboard";
     public static int backLeftDrive = 2; //9
     public static int frontLeftDrive = 4; //6
     public static int frontRightDrive = 7; //7

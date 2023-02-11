@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.Pair;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -12,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import edu.wpi.first.cscore.UsbCamera;
+import io.github.oblarg.oblog.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,16 +34,20 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors, Constants.driveMotors);
+        smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors);
         robotContainer = new RobotContainer();
         CameraServer.startAutomaticCapture();
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setResolution(280, 240);
         camera.setFPS(30);
-        Shuffleboard.getTab("SmartDashboard")
+        Shuffleboard.getTab(Constants.shuffleboardTabName)
         .add(camera)
         .withWidget(BuiltInWidgets.kCameraStream)
         .withSize(4, 3);
+        Logger.configureLoggingAndConfig(this, false);
+        Pair<String, String> of = Pair.<String, String>of("a", "b");
+        of.getFirst();
+        of.getSecond();
     }
 
     /**

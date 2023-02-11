@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -19,19 +20,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
+import io.github.oblarg.oblog.Logger;
+import io.github.oblarg.oblog.annotations.Log;
 import lombok.val;
 
 public class SmartDashboardUpdater {
     private long lastTriggered;
     private HashMap<Spark, String> motors;
-    private HashMap<Spark, String> driveMotors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
-    AHRS gyro;
+    private final AHRS gyro;
     private ShuffleboardTab tab = Shuffleboard.getTab("Shuffleboard");
-    private GenericEntry gyroPitch;
+    private final GenericEntry gyroPitch;
+    //private final MecanumDrive mecanumDrive;
 
-    public SmartDashboardUpdater(HashMap<Integer, String> motors, HashMap<Integer, String> driveMotors) {
+    public SmartDashboardUpdater(HashMap<Integer, String> motors) {
         //Variables init only
+        //this.mecanumDrive = mecanumDrive;
         lastTriggered = System.currentTimeMillis();
 
         SparkMotorManager sparkMotorManager = SparkMotorManager.getInstance();
@@ -43,14 +47,7 @@ public class SmartDashboardUpdater {
         }
         this.motors = sparkMotors;
 
-        HashMap<Spark, String> driveSparkMotors = new HashMap<>();
-        for (Integer port : driveMotors.keySet()) {
-            driveSparkMotors.put(driveSparkMotorManager.getMotor(port), motors.get(port));
-        }
-        this.driveMotors = driveSparkMotors;
-
         gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
-
         //adding widgets to shuffleboard
         gyroPitch = tab.add("gyroPitch", gyro.getPitch())
         .withWidget(BuiltInWidgets.kTextView)
@@ -64,10 +61,10 @@ public class SmartDashboardUpdater {
 
     public void init() {
 
-        /*Shuffleboard.getTab("SmartDashboard")
+        /*Shuffleboard.getTab(Constants.shuffleboardTabName)
         .add("front left voltage", 1)
         .withWidget(BuiltInWidgets.kMecanumDrive)
-        .getEntry();*/
+        .getEntry();
         
         for (AutonomousPhaseType type : AutonomousPhaseType.values()) {
             //TODO un-hardcode this
@@ -80,45 +77,33 @@ public class SmartDashboardUpdater {
 
         NetworkTableInstance instance = NetworkTableInstance.getDefault();
         NetworkTable table = instance.getTable("Shuffleboard").getSubTable("MecanumDrive");
-// set the values for the Mecanum Drive widget
+        // set the values for the Mecanum Drive widget
         //Chat GPT test
         table.getEntry("frontLeftSpeed").setDouble(0.1);
         table.getEntry("frontRightSpeed").setDouble(0.2);
         table.getEntry("rearLeftSpeed").setDouble(0.3);
-        table.getEntry("rearRightSpeed").setDouble(0.4);
+        table.getEntry("rearRightSpeed").setDouble(0.4);*/
     }
 
     public void update() {
-        updateMotors();
+        //updateMotors();
         updateDebug();
-        updateGyro();
+        //updateGyro();
+        Logger.updateEntries();
     }
 
     private void updateMotors() {
         for (Spark motor : motors.keySet()) {
-            Shuffleboard.getTab("SmartDashboard")
-            .add(motors.get(motor) + " voltage", motor.get())
-            .withWidget(BuiltInWidgets.kVoltageView)
-            .withProperties(Map.of("min", -1, "max", 1));
+            Shuffleboard.getTab(Constants.shuffleboardTabName)
+                    .add(motors.get(motor) + " voltage", motor.get())
+                    .withWidget(BuiltInWidgets.kVoltageView)
+                    .withProperties(Map.of("min", -1, "max", 1));
             /*SmartDashboard.putNumber(
                     motors.get(motor) + " voltage",
                     motor.get()
             );*/
         }
-        
 
-        /*
-        for (Spark motor : driveMotors.keySet()) {
-            Shuffleboard.getTab("SmartDashboard")
-            .add(motors.get(motor) + " voltage", motor.get())
-            .withWidget(BuiltInWidgets.kMecanumDrive)
-            //.withProperties(Map.of("min", -1, "max", 1))
-            .getEntry();
-            /*SmartDashboard.putNumber(
-                    motors.get(motor) + " voltage",
-                    motor.get()
-            );
-         }*/
     }
 
     private void updateGyro(){
