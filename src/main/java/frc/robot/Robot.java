@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -34,14 +36,13 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
         smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors, Constants.driveMotors);
         robotContainer = new RobotContainer();
-        /*CameraServer.startAutomaticCapture();
-        UsbCamera camera = CameraServer.startAutomaticCapture();
-        camera.setResolution(280, 240);
-        camera.setFPS(30);
+        HttpCamera limelightFeed = new HttpCamera("limelight", "http://10.24.41.148/stream.mjpg", HttpCameraKind.kMJPGStreamer);
+        CameraServer.startAutomaticCapture(limelightFeed);
+        limelightFeed.setResolution(280, 240);
+        limelightFeed.setFPS(30);
         Shuffleboard.getTab("SmartDashboard")
-        .add(camera)
-        .withWidget(BuiltInWidgets.kCameraStream)
-        .withSize(4, 3);*/
+        .add(limelightFeed)
+        .withSize(4, 3);
     }
 
     /**

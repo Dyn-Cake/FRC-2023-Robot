@@ -27,10 +27,10 @@ public class SmartDashboardUpdater {
     AHRS gyro;
     private ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard");
     private GenericEntry gyroPitch;
-    /*private NetworkTable limelight;
+    private NetworkTable limelight;
     private NetworkTableEntry tx;
     private NetworkTableEntry ty;
-    private NetworkTableEntry ta;*/
+    private NetworkTableEntry ta;
 
     public SmartDashboardUpdater(HashMap<Integer, String> motors, HashMap<Integer, String> driveMotors) {
         //Variables init only
@@ -64,7 +64,7 @@ public class SmartDashboardUpdater {
         gyro.reset();
 
         //adding widgets to shuffleboard
-        gyroPitch = tab.add("gyroPitch", gyro.getPitch())
+        gyroPitch = tab.add("gyroPitch", gyro.getRoll())
         .withWidget(BuiltInWidgets.kTextView)
         .getEntry();
         tab.add(gyro)
@@ -78,6 +78,8 @@ public class SmartDashboardUpdater {
             motors.replace(motor, new Pair(extraMotor, motors.get(motor).getSecond()));
         }
         //ledMode = limelight.setEntry(2);
+        ta = tab.add("ta", limelight.getEntry("ta"));
+
 
 
         /*Shuffleboard.getTab("SmartDashboard")
@@ -143,7 +145,7 @@ public class SmartDashboardUpdater {
     }
 
     private void updateGyro(){
-        gyroPitch.setFloat(gyro.getPitch());
+        gyroPitch.setFloat(gyro.getRoll());
     }
 
     private void updateDebug() {
@@ -152,11 +154,11 @@ public class SmartDashboardUpdater {
         lastTriggered = System.currentTimeMillis();
     }
 
-    /*private void updateLimelight(){
+    private void updateLimelight(){
         ta = limelight.getEntry("ta");
         tx = limelight.getEntry("tx");
         ty = limelight.getEntry("ty");
-    }*/
+    }
 
     public AutonomousPhaseType getChosen() {
         return chooser.getSelected();

@@ -22,8 +22,8 @@ public final class Constants {
 
     public static int backLeftDrive = 2; //9
     public static int frontLeftDrive = 4; //6
-    public static int frontRightDrive = 7; //7
-    public static int backRightDrive = 8; //8
+    public static int frontRightDrive = 3; //7
+    public static int backRightDrive = 5; //8
     public static int clawMotorLeft = 7;
     public static int clawMotorRight = 8;
     public static int towerMotor = 1;
