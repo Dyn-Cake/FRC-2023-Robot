@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.CANSparkMaxMotorManager;
+import frc.robot.shuffleboard.CANSparkMaxMotorManager;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
