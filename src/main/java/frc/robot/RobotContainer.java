@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -16,8 +19,6 @@ import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.claw.ClawControl;
 import frc.robot.commands.tower.TowerControl;
 import frc.robot.subsystems.*;
-//import frc.robot.utils.LimelightHelpers;
-//import frc.robot.utils.LimelightResults;
 
 
 /**
@@ -50,9 +51,6 @@ public class RobotContainer {
         armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStickControl.getRawAxis(0))); //x axis - left & right
         towerSub.setDefaultCommand(new TowerControl(towerSub, ()->flightStickControl.getRawAxis(2))); //z rotation - rotate/turn
         configureButtonBindings();
-
-        //LimelightResults llresults = LimelightHelpers.getLatestResults("");
-        //int numAprilTags = llresults.getResults().getTargets_Fiducials().length;
     }
 
     /**

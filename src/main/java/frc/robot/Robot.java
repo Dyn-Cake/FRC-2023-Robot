@@ -36,18 +36,14 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
         smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors);
         robotContainer = new RobotContainer();
-        CameraServer.startAutomaticCapture();
+        /*CameraServer.startAutomaticCapture();
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setResolution(280, 240);
         camera.setFPS(30);
         Shuffleboard.getTab(Constants.shuffleboardTabName)
         .add(camera)
         .withWidget(BuiltInWidgets.kCameraStream)
-        .withSize(4, 3);
-        Logger.configureLoggingAndConfig(this, false);
-        Pair<String, String> of = Pair.<String, String>of("a", "b");
-        of.getFirst();
-        of.getSecond();
+        .withSize(4, 3);*/
     }
 
     /**
