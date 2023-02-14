@@ -45,7 +45,7 @@ public class ShuffleboardUpdater {
         SparkMotorManager motorManager = SparkMotorManager.getInstance();
 
         HashMap<Integer, ShuffleboardMotor> sparkMotors = new HashMap<>();
-        for (Integer port : motors.keySet()) {
+        /*for (Integer port : motors.keySet()) {
             ShuffleboardMotor motor = this.motors.get(port);
             GenericEntry extraMotor =
                     tab.add(
@@ -58,7 +58,7 @@ public class ShuffleboardUpdater {
 
             sparkMotors.put(port, new ShuffleboardMotor(motorManager.getMotor(1), motors.get(port), extraMotor));
         }
-        this.motors = sparkMotors;
+        this.motors = sparkMotors;*/
 
         // gyro
         gyro.reset();
@@ -87,10 +87,10 @@ public class ShuffleboardUpdater {
 
     private void updateMotors() {
 
-        for(Integer port : motors.keySet()) {
+        /*for(Integer port : motors.keySet()) {
             ShuffleboardMotor motor = motors.get(port);
-            motor.getGenericEntry().setDouble(motor.getMotor().get());
-        }
+            //motor.getGenericEntry().setDouble(motor.getMotor().get());
+        }*/
 
     }
 
