@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
-import frc.robot.shuffleboard.SmartDashboardUpdater;
+import frc.robot.shuffleboard.ShuffleboardUpdater;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -19,7 +19,7 @@ import frc.robot.shuffleboard.SmartDashboardUpdater;
 public class Robot extends TimedRobot {
     private Command autonomousCommand;
     private RobotContainer robotContainer;
-    public SmartDashboardUpdater smartDashboardUpdater;
+    public ShuffleboardUpdater smartDashboardUpdater;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors);
+        smartDashboardUpdater = new ShuffleboardUpdater(Constants.extraMotors);
         robotContainer = new RobotContainer();
         /*CameraServer.startAutomaticCapture();
         UsbCamera camera = CameraServer.startAutomaticCapture();

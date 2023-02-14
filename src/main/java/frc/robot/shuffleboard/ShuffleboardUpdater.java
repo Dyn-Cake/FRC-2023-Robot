@@ -13,9 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
-import lombok.NonNull;
 
-public class SmartDashboardUpdater {
+public class ShuffleboardUpdater {
     private long lastTriggered;
     private HashMap<Integer, ShuffleboardMotor> motors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
@@ -27,7 +26,7 @@ public class SmartDashboardUpdater {
     private NetworkTableEntry ty;
     private NetworkTableEntry ta;*/
 
-    public SmartDashboardUpdater(HashMap<Integer, String> motors) {
+    public ShuffleboardUpdater(HashMap<Integer, String> motors) {
         //Variables init only
         lastTriggered = System.currentTimeMillis();
 
@@ -48,12 +47,15 @@ public class SmartDashboardUpdater {
         HashMap<Integer, ShuffleboardMotor> sparkMotors = new HashMap<>();
         for (Integer port : motors.keySet()) {
             ShuffleboardMotor motor = this.motors.get(port);
-            GenericEntry extraMotor = tab.add(
-                            motor.getName() + " voltage", motor.getMotor().get()
+            GenericEntry extraMotor =
+                    tab.add(
+                            motor.getName() + " voltage",
+                            motor.getMotor().get()
                     )
                     .withWidget(BuiltInWidgets.kVoltageView)
                     .withProperties(Map.of("min", -12, "max", 12))
                     .getEntry();
+
             sparkMotors.put(port, new ShuffleboardMotor(motorManager.getMotor(1), motors.get(port), extraMotor));
         }
         this.motors = sparkMotors;
@@ -92,7 +94,7 @@ public class SmartDashboardUpdater {
 
     }
 
-    private void updateGyro(){
+    private void updateGyro() {
         gyroPitch.setFloat(gyro.getPitch());
     }
 
