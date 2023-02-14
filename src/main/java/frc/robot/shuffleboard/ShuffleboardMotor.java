@@ -27,15 +27,5 @@ public class ShuffleboardMotor {
         this.genericEntry = null;
     }
 
-    public GenericEntry getGenericEntry() {
-        return genericEntry;
-    }
 
-    public Spark getMotor() {
-        return motor;
-    }
-
-    public String getName() {
-        return name;
-    }
 }
