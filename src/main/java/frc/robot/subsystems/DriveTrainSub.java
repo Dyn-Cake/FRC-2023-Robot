@@ -9,10 +9,12 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.SparkMotorManager;
+import frc.robot.shuffleboard.SparkMotorManager;
 import frc.robot.StrafeDirection;
-
-public class DriveTrainSub extends SubsystemBase {
+import io.github.oblarg.oblog.Loggable;
+import lombok.extern.java.Log;
+@Log
+public class DriveTrainSub extends SubsystemBase implements Loggable {
 
     private final Spark frontRight;
     private final Spark backRight;
@@ -24,10 +26,10 @@ public class DriveTrainSub extends SubsystemBase {
     private Encoder frontLeftEncoder = new Encoder (Constants.frontLeftEncoder1, Constants.frontLeftEncoder2);
     private Encoder backRightEncoder = new Encoder (Constants.backRightEncoder1, Constants.backRightEncoder2);
     private Encoder backLeftEncoder = new Encoder (Constants.backLeftEncoder1, Constants.backLeftEncoder2);
-
     private final MecanumDrive mecanumDrive;
 
     public DriveTrainSub() {
+
         SparkMotorManager motorManager = SparkMotorManager.getInstance();
 
         frontRight = motorManager.getMotor(Constants.frontRightDrive);

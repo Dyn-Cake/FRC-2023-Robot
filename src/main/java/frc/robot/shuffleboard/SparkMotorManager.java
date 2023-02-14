@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.shuffleboard;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 

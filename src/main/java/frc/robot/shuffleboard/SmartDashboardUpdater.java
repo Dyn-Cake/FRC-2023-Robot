@@ -78,7 +78,7 @@ public class SmartDashboardUpdater {
             motors.replace(motor, new Pair(extraMotor, motors.get(motor).getSecond()));
         }
         //ledMode = limelight.setEntry(2);
-        ta = tab.add("ta", limelight.getEntry("ta"));
+        //ta = tab.add("ta", limelight.getEntry("ta"));
 
 
 

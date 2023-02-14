@@ -4,16 +4,15 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import edu.wpi.first.cscore.HttpCamera;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
+import frc.robot.shuffleboard.SmartDashboardUpdater;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -34,7 +33,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors, Constants.driveMotors);
+        smartDashboardUpdater = new SmartDashboardUpdater(Constants.extraMotors);
         robotContainer = new RobotContainer();
         HttpCamera limelightFeed = new HttpCamera("limelight", "http://10.24.41.148/stream.mjpg", HttpCameraKind.kMJPGStreamer);
         CameraServer.startAutomaticCapture(limelightFeed);
