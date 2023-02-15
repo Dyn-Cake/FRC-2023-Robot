@@ -12,8 +12,6 @@ import frc.robot.Constants;
 import frc.robot.shuffleboard.SparkMotorManager;
 import frc.robot.StrafeDirection;
 import io.github.oblarg.oblog.Loggable;
-import lombok.extern.java.Log;
-@Log
 public class DriveTrainSub extends SubsystemBase implements Loggable {
 
     private final Spark frontRight;
