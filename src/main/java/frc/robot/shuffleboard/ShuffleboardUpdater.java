@@ -11,7 +11,11 @@ import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
+import frc.robot.utils.LimelightHelpers;
+import frc.robot.utils.LimelightHelpers.LimelightResults;
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SPI;
 
 import java.util.HashMap;
@@ -27,6 +31,7 @@ public class ShuffleboardUpdater {
     private final AHRS gyro;
     private final ShuffleboardTab tab;
     private GenericEntry gyroPitch;
+    private NetworkTableEntry limelight;
     /*private NetworkTable limelight;
     private NetworkTableEntry tx;
     private NetworkTableEntry ty;
@@ -49,26 +54,27 @@ public class ShuffleboardUpdater {
 
     public void init(HashMap<Integer, String> motors) {
 
+        Preferences.setString("key", "value");
 
 
         // motors
         SparkMotorManager motorManager = SparkMotorManager.getInstance();
 
-        HashMap<Integer, ShuffleboardElement<Spark>> sparkMotors = new HashMap<>();
-        for (Integer port : motors.keySet()) {
-            ShuffleboardElement<Spark> motor = this.motors.get(port);
+        HashMap<Integer, ShuffleboardMotor> sparkMotors = new HashMap<>();
+        /*for (Integer port : motors.keySet()) {
+            ShuffleboardMotor motor = this.motors.get(port);
             GenericEntry extraMotor =
                     tab.add(
-                                    motor.getName() + " voltage",
-                                    motor.getElement().get()
-                            )
-                            .withWidget(BuiltInWidgets.kVoltageView)
-                            .withProperties(Map.of("min", -12, "max", 12))
-                            .getEntry();
+                            motor.getName() + " voltage",
+                            motor.getMotor().get()
+                    )
+                    .withWidget(BuiltInWidgets.kVoltageView)
+                    .withProperties(Map.of("min", -12, "max", 12))
+                    .getEntry();
 
-            sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
-        }
-        this.motors = sparkMotors;*/
+            sparkMotors.put(port, new ShuffleboardMotor(motorManager.getMotor(1), motors.get(port), extraMotor));
+        }*/
+        this.motors = sparkMotors;
 
         // gyro
         gyro.reset();
@@ -88,6 +94,10 @@ public class ShuffleboardUpdater {
         tab.add("autonomous", chooser)
                 .withWidget(BuiltInWidgets.kSplitButtonChooser);
         // limelight
+        LimelightResults llresults = LimelightHelpers.getLatestResults("");
+        LimelightHelpers.setCropWindow("",-1,1,-1,1);
+        LimelightHelpers.setLEDMode_ForceBlink("");
+        LimelightHelpers.getLimelightURLString("limelight", "");
 
 
         //ledMode = limelight.setEntry(2);
@@ -104,10 +114,9 @@ public class ShuffleboardUpdater {
 
     private void updateMotors() {
 
-
         /*for(Integer port : motors.keySet()) {
             ShuffleboardMotor motor = motors.get(port);
-            //motor.getGenericEntry().setDouble(motor.getMotor().get());
+            motor.getGenericEntry().setDouble(motor.getMotor().get());
         }*/
 
     }
