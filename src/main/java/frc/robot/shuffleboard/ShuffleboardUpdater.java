@@ -1,8 +1,13 @@
 package frc.robot.shuffleboard;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.util.sendable.SendableBuilder;
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
@@ -15,15 +20,16 @@ import edu.wpi.first.wpilibj.SPI;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.DoubleSupplier;
 
 import com.kauailabs.navx.frc.AHRS;
 
 public class ShuffleboardUpdater {
     private long lastTriggered;
-    private HashMap<Integer, ShuffleboardMotor> motors;
+    private HashMap<Integer, ShuffleboardElement<Spark>> motors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
     private final AHRS gyro;
-    private ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard");
+    private final ShuffleboardTab tab;
     private GenericEntry gyroPitch;
     private NetworkTableEntry limelight;
     /*private NetworkTable limelight;
@@ -32,8 +38,11 @@ public class ShuffleboardUpdater {
     private NetworkTableEntry ta;*/
 
     public ShuffleboardUpdater(HashMap<Integer, String> motors) {
+        tab = Shuffleboard.getTab("Robot");
         //Variables init only
         lastTriggered = System.currentTimeMillis();
+
+
 
         gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
@@ -46,6 +55,7 @@ public class ShuffleboardUpdater {
     public void init(HashMap<Integer, String> motors) {
 
         Preferences.setString("key", "value");
+
 
         // motors
         SparkMotorManager motorManager = SparkMotorManager.getInstance();
@@ -76,6 +86,13 @@ public class ShuffleboardUpdater {
         tab.add(gyro)
         .withWidget(BuiltInWidgets.kGyro);
 
+        // Selections
+
+
+        chooser.addOption("Default", AutonomousPhaseType.DEFAULT);
+        chooser.addOption("Alt", AutonomousPhaseType.ALTERNATIVE);
+        tab.add("autonomous", chooser)
+                .withWidget(BuiltInWidgets.kSplitButtonChooser);
         // limelight
         LimelightResults llresults = LimelightHelpers.getLatestResults("");
         LimelightHelpers.setCropWindow("",-1,1,-1,1);

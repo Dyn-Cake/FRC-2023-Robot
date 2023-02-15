@@ -5,10 +5,13 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.StrafeDirection;
 import frc.robot.subsystems.DriveTrainSub;
 
+import java.io.Console;
+
 public class AutonomousPhase extends SequentialCommandGroup {
     public AutonomousPhase(DriveTrainSub driveTrainSub, AutonomousPhaseType type) {
         switch (type) {
             case DEFAULT: {
+                System.out.println("DEFAULT");
                 addCommands(
                         //number at the end is the distance the command runs for (in feet)
                         //dont delete for comment out commands, just set the time duration to 0
@@ -21,6 +24,7 @@ public class AutonomousPhase extends SequentialCommandGroup {
                 break;
             }
             case ALTERNATIVE: {
+                System.out.println("ALT");
                 addCommands(
                         //number at the end is the distance the command runs for (in feet)
                         //dont delete for comment out commands, just set the time duration to 0

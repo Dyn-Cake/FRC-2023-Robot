@@ -54,9 +54,9 @@ test {
     useJUnitPlatform()
 }
 
-repositories {
+/*repositories {
     maven { url 'https://jitpack.io' }
-}
+}*/
 
 dependencies {
     implementation wpi.java.deps.wpilib()
@@ -83,7 +83,7 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
 
     compileOnly "org.projectlombok:lombok:1.18.26"
-    implementation "com.github.Oblarg:Oblog:5.1.0"
+    //implementation "com.github.Oblarg:Oblog:5.1.0"
 }
 
 // Simulation configuration (e.g. environment variables).
