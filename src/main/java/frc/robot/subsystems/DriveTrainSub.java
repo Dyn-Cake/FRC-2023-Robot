@@ -11,10 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.shuffleboard.SparkMotorManager;
 import frc.robot.StrafeDirection;
-import io.github.oblarg.oblog.Loggable;
-import lombok.extern.java.Log;
-@Log
-public class DriveTrainSub extends SubsystemBase implements Loggable {
+public class DriveTrainSub extends SubsystemBase{
 
     private final Spark frontRight;
     private final Spark backRight;

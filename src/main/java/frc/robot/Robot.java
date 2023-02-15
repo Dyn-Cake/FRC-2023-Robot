@@ -19,6 +19,8 @@ import frc.robot.shuffleboard.ShuffleboardUpdater;
  * project.
  */
 public class Robot extends TimedRobot {
+
+    int exampleField = 5;
     private Command autonomousCommand;
     private RobotContainer robotContainer;
     public ShuffleboardUpdater smartDashboardUpdater;
@@ -29,6 +31,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        //Logger.configureLoggingAndConfig("SmartDashboard", false);
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         smartDashboardUpdater = new ShuffleboardUpdater(Constants.extraMotors);
@@ -59,6 +62,7 @@ public class Robot extends TimedRobot {
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
         smartDashboardUpdater.update();
+        //Logger.updateEntries();
     }
 
     /** This function is called once each time the robot enters Disabled mode. */
