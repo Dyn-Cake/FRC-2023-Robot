@@ -68,7 +68,7 @@ public class ShuffleboardUpdater {
 
             sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
         }
-        this.motors = sparkMotors;
+        this.motors = sparkMotors;*/
 
         // gyro
         gyro.reset();
@@ -104,10 +104,11 @@ public class ShuffleboardUpdater {
 
     private void updateMotors() {
 
-        for(Integer port : motors.keySet()) {
-            ShuffleboardElement<Spark> motor = motors.get(port);
-            motor.getGenericEntry().setDouble(motor.getElement().get());
-        }
+
+        /*for(Integer port : motors.keySet()) {
+            ShuffleboardMotor motor = motors.get(port);
+            //motor.getGenericEntry().setDouble(motor.getMotor().get());
+        }*/
 
     }
 

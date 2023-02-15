@@ -59,36 +59,7 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
-    private void configureButtonBindings() {
-
-        /*final JoystickButton trigger = new JoystickButton(flightStickControl, 1);
-        final JoystickButton thumbButt = new JoystickButton(flightStickControl, 2);
-        final JoystickButton butt3 = new JoystickButton(flightStickControl, 3);
-        final JoystickButton butt4 = new JoystickButton(flightStickControl, 4);
-        final JoystickButton butt5 = new JoystickButton(flightStickControl, 5);
-        final JoystickButton butt6 = new JoystickButton(flightStickControl, 6);
-        //final JoystickButton butt6 = new JoystickButton(flightStick, 6);
-
-
-        trigger.onTrue(new ClawOpen(claw));
-        trigger.onFalse(new ClawStop(claw));
-
-        thumbButt.onTrue(new ClawClose(claw));
-        thumbButt.onFalse(new ClawStop(claw));
-
-        butt3.onTrue(new LiftTower(tower));
-        butt3.onFalse(new StopTower(tower));
-
-        butt4.onTrue(new DropTower(tower));
-        butt4.onFalse(new StopTower(tower));
-
-        butt5.onTrue(new ExtendArm(arm));
-        butt5.onFalse(new StopArm(arm));
-
-        butt6.onTrue(new RetractArm(arm));
-        butt6.onFalse(new StopArm(arm));*/ //WONT NEED DEPENDING ON DRIVER
-
-    }
+    private void configureButtonBindings() {}
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
