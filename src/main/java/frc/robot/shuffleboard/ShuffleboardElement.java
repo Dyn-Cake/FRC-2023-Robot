@@ -1,8 +1,6 @@
 package frc.robot.shuffleboard;
 
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.networktables.GenericEntry;
-import lombok.Getter;
 import lombok.NonNull;
 
 public class ShuffleboardElement<T> {

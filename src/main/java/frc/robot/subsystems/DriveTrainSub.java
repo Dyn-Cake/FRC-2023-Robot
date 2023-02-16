@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.shuffleboard.SparkMotorManager;
 import frc.robot.StrafeDirection;
+import frc.robot.shuffleboard.SparkMotorManager;
 
 public class DriveTrainSub extends SubsystemBase{
 
