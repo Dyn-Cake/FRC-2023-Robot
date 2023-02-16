@@ -1,19 +1,19 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.shuffleboard.CANSparkMaxMotorManager;
+import frc.robot.shuffleboard.SparkMotorManager;
 
 public class ArmSub extends SubsystemBase {
-    private final CANSparkMax armMotor;
+    private final Spark armMotor;
     private RobotContainer container;
 
     public ArmSub(RobotContainer container){
-        CANSparkMaxMotorManager sparkMaxMotorManager = CANSparkMaxMotorManager.getInstance();
+        SparkMotorManager sparkMotorManager = SparkMotorManager.getInstance();
         this.container = container;
-        armMotor = sparkMaxMotorManager.getMotor(Constants.armMotor);
+        armMotor = sparkMotorManager.getMotor(Constants.armMotor);
     }
 
     public void extend(){

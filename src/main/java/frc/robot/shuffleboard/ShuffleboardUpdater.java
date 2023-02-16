@@ -54,12 +54,12 @@ public class ShuffleboardUpdater {
         SparkMotorManager motorManager = SparkMotorManager.getInstance();
 
         HashMap<Integer, ShuffleboardElement<Spark>> sparkMotors = new HashMap<>();
-        for (Integer port : motors.keySet()) {
+        /*for (Integer port : motors.keySet()) {
             ShuffleboardElement<Spark> motor = this.motors.get(port);
             GenericEntry extraMotor =
                     tab.add(
-                                    motor.getName() + " voltage",
-                                    motor.getElement().get()
+                                motor.getName() + " voltage",
+                                motor.getElement().get()
                             )
                             .withWidget(BuiltInWidgets.kVoltageView)
                             .withProperties(Map.of("min", -12, "max", 12))
@@ -67,7 +67,7 @@ public class ShuffleboardUpdater {
 
             sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
         }
-        this.motors = sparkMotors;
+        this.motors = sparkMotors;*/
 
         // gyro
         gyro.reset();
