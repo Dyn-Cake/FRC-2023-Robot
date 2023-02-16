@@ -1,11 +1,10 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.shuffleboard.CANSparkMaxMotorManager;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.shuffleboard.CANSparkMaxMotorManager;
 
 public class ArmSub extends SubsystemBase {
     private final CANSparkMax armMotor;

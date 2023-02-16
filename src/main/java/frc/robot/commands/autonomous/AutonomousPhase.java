@@ -5,8 +5,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.StrafeDirection;
 import frc.robot.subsystems.DriveTrainSub;
 
-import java.io.Console;
-
 public class AutonomousPhase extends SequentialCommandGroup {
     public AutonomousPhase(DriveTrainSub driveTrainSub, AutonomousPhaseType type) {
         switch (type) {

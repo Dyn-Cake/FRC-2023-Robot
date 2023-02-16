@@ -9,12 +9,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCartesian;
+import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.autonomous.AutonomousPhase;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
-import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.claw.ClawControl;
 import frc.robot.commands.tower.TowerControl;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.ArmSub;
+import frc.robot.subsystems.ClawSub;
+import frc.robot.subsystems.DriveTrainSub;
+import frc.robot.subsystems.TowerSub;
 
 
 /**

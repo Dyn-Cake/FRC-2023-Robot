@@ -1,9 +1,9 @@
 package frc.robot.shuffleboard;
 
-import java.util.HashMap;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import java.util.HashMap;
 
 public class CANSparkMaxMotorManager {
     private HashMap<Integer, CANSparkMax> motors;
