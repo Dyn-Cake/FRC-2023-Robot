@@ -30,6 +30,10 @@ public class ShuffleboardUpdater {
     private NetworkTableEntry ty;
     private NetworkTableEntry ta;*/
 
+
+    /**
+     * @param motors A hashmap where the key is the port of the motor and the string is the name
+     */
     public ShuffleboardUpdater(HashMap<Integer, String> motors) {
         tab = Shuffleboard.getTab("Robot");
         //Variables init only
@@ -45,7 +49,7 @@ public class ShuffleboardUpdater {
         init(motors);
     }
 
-    public void init(HashMap<Integer, String> motors) {
+    private void init(HashMap<Integer, String> motors) {
 
         Preferences.setString("key", "value");
 
@@ -54,12 +58,12 @@ public class ShuffleboardUpdater {
         SparkMotorManager motorManager = SparkMotorManager.getInstance();
 
         HashMap<Integer, ShuffleboardElement<Spark>> sparkMotors = new HashMap<>();
-        /*for (Integer port : motors.keySet()) {
-            ShuffleboardElement<Spark> motor = this.motors.get(port);
+        for (Integer port : motors.keySet()) {
+
             GenericEntry extraMotor =
                     tab.add(
-                                motor.getName() + " voltage",
-                                motor.getElement().get()
+                                    motors.get(port) + " voltage",
+                                    0
                             )
                             .withWidget(BuiltInWidgets.kVoltageView)
                             .withProperties(Map.of("min", -12, "max", 12))
@@ -67,7 +71,7 @@ public class ShuffleboardUpdater {
 
             sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
         }
-        this.motors = sparkMotors;*/
+        this.motors = sparkMotors;
 
         // gyro
         gyro.reset();
@@ -94,7 +98,7 @@ public class ShuffleboardUpdater {
 
 
         //ledMode = limelight.setEntry(2);
-        
+
     }
 
     public void update() {
