@@ -65,15 +65,15 @@ public class ShuffleboardUpdater {
             ShuffleboardMotor motor = this.motors.get(port);
             GenericEntry extraMotor =
                     tab.add(
-                            motor.getName() + " voltage",
-                            motor.getMotor().get()
-                    )
-                    .withWidget(BuiltInWidgets.kVoltageView)
-                    .withProperties(Map.of("min", -12, "max", 12))
-                    .getEntry();
+                                    motor.getName() + " voltage",
+                                    motor.getElement().get()
+                            )
+                            .withWidget(BuiltInWidgets.kVoltageView)
+                            .withProperties(Map.of("min", -12, "max", 12))
+                            .getEntry();
 
-            sparkMotors.put(port, new ShuffleboardMotor(motorManager.getMotor(1), motors.get(port), extraMotor));
-        }*/
+            sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
+
         this.motors = sparkMotors;
 
         // gyro
