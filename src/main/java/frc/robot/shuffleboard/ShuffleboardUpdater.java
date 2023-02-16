@@ -68,7 +68,7 @@ public class ShuffleboardUpdater {
 
             sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
         }
-        this.motors = sparkMotors;*/
+        this.motors = sparkMotors;
 
         // gyro
         gyro.reset();
