@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         //Logger.configureLoggingAndConfig("SmartDashboard", false);
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+        robotContainer.configureButtonBindings();
         // autonomous chooser on the dashboard.
         smartDashboardUpdater = new ShuffleboardUpdater(Constants.extraMotors);
         robotContainer = new RobotContainer();
