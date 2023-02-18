@@ -111,7 +111,7 @@ public class ShuffleboardUpdater {
     private void updateMotors() {
 
         /*for(Integer port : motors.keySet()) {
-            ShuffleboardMotor motor = motors.get(port);
+            ShuffleboardElement<Spark> motor = motors.get(port);
             motor.getGenericEntry().setDouble(motor.getMotor().get());
         }*/
 
