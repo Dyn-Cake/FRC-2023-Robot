@@ -59,7 +59,7 @@ public class RobotContainer {
         /*clawSub.setDefaultCommand(new ClawControl(clawSub, ()->flightStick.getRawAxis(1))); //y axis - forwards & backwards
         armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStick.getRawAxis(0))); //x axis - left & right
         towerSub.setDefaultCommand(new TowerControl(towerSub, ()->flightStick.getRawAxis(2))); //z rotation - rotate/turn
-        configureButtonBindings();*/
+        configureButtonBindings();*/ //WONT NEED DEPENDING ON DRIVER
     }
 
     /**
@@ -69,25 +69,24 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     public void configureButtonBindings() {
-        final JoystickButton trigger = new JoystickButton(flightStick, 1);
-        final JoystickButton thumbButt = new JoystickButton(flightStick, 2);
-        final JoystickButton butt3 = new JoystickButton(flightStick, 3);
-        final JoystickButton butt4 = new JoystickButton(flightStick, 4);
-        final JoystickButton butt5 = new JoystickButton(flightStick, 5);
-        final JoystickButton butt6 = new JoystickButton(flightStick, 6);
-        //final JoystickButton butt6 = new JoystickButton(flightStick, 6);
-        trigger.onTrue(new ClawOpen(clawSub));
-        trigger.onFalse(new ClawStop(clawSub));
-        thumbButt.onTrue(new ClawClose(clawSub));
-        thumbButt.onFalse(new ClawStop(clawSub));
-        butt3.onTrue(new LiftTower(towerSub));
-        butt3.onFalse(new StopTower(towerSub));
-        butt4.onTrue(new DropTower(towerSub));
-        butt4.onFalse(new StopTower(towerSub));
-        butt5.onTrue(new ExtendArm(armSub));
-        butt5.onFalse(new StopArm(armSub));
-        butt6.onTrue(new RetractArm(armSub));
-        butt6.onFalse(new StopArm(armSub)); //WONT NEED DEPENDING ON DRIVER
+        final JoystickButton butt7 = new JoystickButton(flightStick, 7);
+        final JoystickButton butt8 = new JoystickButton(flightStick, 8);
+        final JoystickButton butt9 = new JoystickButton(flightStick, 9);
+        final JoystickButton butt10 = new JoystickButton(flightStick, 10);
+        final JoystickButton butt11 = new JoystickButton(flightStick, 11);
+        final JoystickButton butt12 = new JoystickButton(flightStick, 12);
+        butt8.onTrue(new ClawOpen(clawSub));
+        butt8.onFalse(new ClawStop(clawSub));
+        butt7.onTrue(new ClawClose(clawSub));
+        butt7.onFalse(new ClawStop(clawSub));
+        butt10.onTrue(new LiftTower(towerSub));
+        butt10.onFalse(new StopTower(towerSub));
+        butt9.onTrue(new DropTower(towerSub));
+        butt9.onFalse(new StopTower(towerSub));
+        butt12.onTrue(new ExtendArm(armSub));
+        butt12.onFalse(new StopArm(armSub));
+        butt11.onTrue(new RetractArm(armSub));
+        butt11.onFalse(new StopArm(armSub));
     }
 
     /**
