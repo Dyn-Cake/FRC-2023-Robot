@@ -9,21 +9,21 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.StrafeDirection;
+import frc.robot.commands.autonomous.StrafeDirection;
 import frc.robot.shuffleboard.SparkMotorManager;
 
-public class DriveTrainSub extends SubsystemBase{
+public class DriveTrainSub extends SubsystemBase {
 
     private final Spark frontRight;
     private final Spark backRight;
     private final Spark frontLeft;
     private final Spark backLeft;
 
-      //encoders for drive
-    private Encoder frontRightEncoder = new Encoder (Constants.frontRightEncoder1, Constants.frontRightEncoder2);
-    private Encoder frontLeftEncoder = new Encoder (Constants.frontLeftEncoder1, Constants.frontLeftEncoder2);
-    private Encoder backRightEncoder = new Encoder (Constants.backRightEncoder1, Constants.backRightEncoder2);
-    private Encoder backLeftEncoder = new Encoder (Constants.backLeftEncoder1, Constants.backLeftEncoder2);
+    //encoders for drive
+    private final Encoder frontRightEncoder = new Encoder(Constants.frontRightEncoder1, Constants.frontRightEncoder2);
+    private final Encoder frontLeftEncoder = new Encoder(Constants.frontLeftEncoder1, Constants.frontLeftEncoder2);
+    private final Encoder backRightEncoder = new Encoder(Constants.backRightEncoder1, Constants.backRightEncoder2);
+    private final Encoder backLeftEncoder = new Encoder(Constants.backLeftEncoder1, Constants.backLeftEncoder2);
     private final MecanumDrive mecanumDrive;
 
     public DriveTrainSub() {
@@ -65,56 +65,56 @@ public class DriveTrainSub extends SubsystemBase{
         
     }*/
 
-//
+    //
     //resets the encoder to 0
-    public void resetEncoder(){
+    public void resetEncoder() {
         frontRightEncoder.reset();
         frontLeftEncoder.reset();
         backRightEncoder.reset();
         backLeftEncoder.reset();
-  }
+    }
 
-  //tells the distance of how far you've traveled
-    public double getDistance(){
+    //tells the distance of how far you've traveled
+    public double getDistance() {
         return Math.abs(
                 (
-                    backRightEncoder.getDistance() +
-                    backLeftEncoder.getDistance() +
-                    frontRightEncoder.getDistance() +
-                    frontLeftEncoder.getDistance()
+                        backRightEncoder.getDistance() +
+                                backLeftEncoder.getDistance() +
+                                frontRightEncoder.getDistance() +
+                                frontLeftEncoder.getDistance()
                 ) / 4
         );
     }
 
-  //command for autodrive
-//also gradually increases break as you get closer to your destination so the robot stops exactly where you need it do
+    //command for autodrive
+    //also gradually increases break as you get closer to your destination so the robot stops exactly where you need it do
     public void autoDrive(double distance, StrafeDirection strafeDirection) {
 
         double brake = 1 - getDistance() / distance;
         switch (strafeDirection) {
             case FORWARD: {
-                while (getDistance()<distance) {
-                    mecanumDrive(-Constants.autoDrive*brake, 0, 0);
+                while (getDistance() < distance) {
+                    mecanumDrive(-Constants.autoDrive * brake, 0, 0);
                 }
                 break;
             }
             case LEFT: {
-                while (getDistance()<distance) {
-                    mecanumDrive(0, -Constants.autoDrive*brake, 0);
+                while (getDistance() < distance) {
+                    mecanumDrive(0, -Constants.autoDrive * brake, 0);
                 }
                 break;
             }
 
             case RIGHT: {
-                while (getDistance()<distance) {
-                    mecanumDrive(0, Constants.autoDrive*brake, 0);
+                while (getDistance() < distance) {
+                    mecanumDrive(0, Constants.autoDrive * brake, 0);
                 }
                 break;
             }
 
             case BACKWARDS: {
-                while (getDistance()<distance) {
-                    mecanumDrive(Constants.autoDrive*brake, 0, 0);
+                while (getDistance() < distance) {
+                    mecanumDrive(Constants.autoDrive * brake, 0, 0);
                 }
                 break;
             }
@@ -122,7 +122,7 @@ public class DriveTrainSub extends SubsystemBase{
         }
     }
 
-    public void mecanumDrive(double ySpeed, double xSpeed, double zRotation){
-        mecanumDrive.driveCartesian(-ySpeed/1.3, xSpeed, zRotation/1.7);
+    public void mecanumDrive(double ySpeed, double xSpeed, double zRotation) {
+        mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, zRotation / 1.7);
     }
 }

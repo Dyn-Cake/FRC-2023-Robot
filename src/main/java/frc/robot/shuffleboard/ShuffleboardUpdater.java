@@ -85,13 +85,13 @@ public class ShuffleboardUpdater {
 
         // Selections
 
+        AutonomousPhaseType.DEFAULT.add(chooser);
+        AutonomousPhaseType.ALTERNATIVE.add(chooser);
 
-        chooser.addOption("Default", AutonomousPhaseType.DEFAULT);
-        chooser.addOption("Alt", AutonomousPhaseType.ALTERNATIVE);
         tab.add("autonomous", chooser)
                 .withWidget(BuiltInWidgets.kSplitButtonChooser);
         // limelight
-        LimelightHelpers.LimelightResults llresults = LimelightHelpers.getLatestResults("");
+        LimelightHelpers.LimelightResults results = LimelightHelpers.getLatestResults("");
         LimelightHelpers.setCropWindow("",-1,1,-1,1);
         LimelightHelpers.setLEDMode_ForceBlink("");
         LimelightHelpers.getLimelightURLString("limelight", "");
@@ -110,10 +110,10 @@ public class ShuffleboardUpdater {
 
     private void updateMotors() {
 
-        /*for(Integer port : motors.keySet()) {
+        for(Integer port : motors.keySet()) {
             ShuffleboardElement<Spark> motor = motors.get(port);
-            motor.getGenericEntry().setDouble(motor.getMotor().get());
-        }*/
+            motor.getGenericEntry().setDouble(motor.getElement().get());
+        }
 
     }
 

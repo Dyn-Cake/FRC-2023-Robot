@@ -75,17 +75,5 @@ public final class Constants {
         //put(backRightDrive, "back right drive");
     }};
 
-
-    static {
-
-        //TODO look for pointers or references in java if possible, try create a hashmap<name, pointer>
-        Preferences.setDouble("deadband", deadband);
-
-    }
-
-    public static void update() {
-        deadband = Preferences.getDouble("deadband", deadband);
-    }
-
 }
 

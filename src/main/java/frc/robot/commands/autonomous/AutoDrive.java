@@ -1,7 +1,6 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.StrafeDirection;
 import frc.robot.subsystems.DriveTrainSub;
 
 public class AutoDrive extends CommandBase {
@@ -11,14 +10,19 @@ public class AutoDrive extends CommandBase {
     //private double startTime;
     //private double duration;
 
-    public AutoDrive(DriveTrainSub subsystem, double distance, StrafeDirection strafeDirection){
+    /**
+     * @param subsystem The subsystem that the robot uses to drive
+     * @param distance Distance to travel in feet
+     * @param strafeDirection Direction robot will move
+     */
+    public AutoDrive(DriveTrainSub subsystem, double distance, StrafeDirection strafeDirection) {
         drive = subsystem;
         this.distance = distance;
         this.strafeDirection = strafeDirection;
         //this.duration = duration*1000;
 
     }
-    
+
     // only goes once at beginning when command is called
     @Override
     public void initialize() {
@@ -44,7 +48,7 @@ public class AutoDrive extends CommandBase {
     //condition for the command to end on its own
     @Override
     public boolean isFinished() {
-        return !( drive.getDistance() < distance );
+        return !(drive.getDistance() < distance);
 
         /*
         if (System.currentTimeMillis()-startTime<duration){
