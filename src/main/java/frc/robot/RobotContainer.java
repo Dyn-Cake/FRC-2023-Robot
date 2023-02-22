@@ -39,9 +39,9 @@ import frc.robot.subsystems.TowerSub;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveTrainSub driveSub = new DriveTrainSub();
-    private final ClawSub clawSub = new ClawSub(this);
-    private final ArmSub armSub = new ArmSub(this);
-    private final TowerSub towerSub = new TowerSub(this);
+    private final ClawSub clawSub = new ClawSub();
+    private final ArmSub armSub = new ArmSub();
+    private final TowerSub towerSub = new TowerSub();
     Joystick flightStick = new Joystick(0);
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -55,11 +55,6 @@ public class RobotContainer {
             ()-> flightStick.getRawAxis(0), //x speed - strafe
             ()-> flightStick.getRawAxis(2)  //z rotation - turning
         ));
-
-        /*clawSub.setDefaultCommand(new ClawControl(clawSub, ()->flightStick.getRawAxis(1))); //y axis - forwards & backwards
-        armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStick.getRawAxis(0))); //x axis - left & right
-        towerSub.setDefaultCommand(new TowerControl(towerSub, ()->flightStick.getRawAxis(2))); //z rotation - rotate/turn
-        configureButtonBindings();*/ //WONT NEED DEPENDING ON DRIVER
     }
 
     /**
@@ -96,14 +91,6 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand(AutonomousPhaseType chosen) {
         return new AutonomousPhase(driveSub, chosen);
-    }
-
-    public double deadBand(double input, double deadband) {
-        if (input > deadband || input < -deadband) {
-            return input;
-        } else {
-            return 0;
-        }
     }
 
 }
