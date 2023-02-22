@@ -1,11 +1,9 @@
 package frc.robot.shuffleboard;
 
 import edu.wpi.first.networktables.GenericEntry;
-import lombok.NonNull;
 
 public class ShuffleboardElement<T> {
 
-    @NonNull
     private final String name;
     private final T element;
     private final GenericEntry genericEntry;

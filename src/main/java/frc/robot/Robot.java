@@ -4,9 +4,12 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.autonomous.AutoDrive;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.shuffleboard.ShuffleboardUpdater;
 
@@ -22,6 +25,8 @@ public class Robot extends TimedRobot {
     private Command autonomousCommand;
     private RobotContainer robotContainer;
     public ShuffleboardUpdater smartDashboardUpdater;
+    private AHRS gyro;
+
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -33,8 +38,11 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         robotContainer.configureButtonBindings();
         // autonomous chooser on the dashboard.
-        smartDashboardUpdater = new ShuffleboardUpdater(Constants.extraMotors);
+
+        gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
         robotContainer = new RobotContainer();
+        smartDashboardUpdater = new ShuffleboardUpdater(Constants.extraMotors, gyro);
+        gyro.reset();
         //HttpCamera limelHttpCamera = new HttpCamera("limelight", getLimelightURLString());
     }
 
@@ -58,13 +66,16 @@ public class Robot extends TimedRobot {
 
     /** This function is called once each time the robot enters Disabled mode. */
     @Override
-    public void disabledInit() {}
+    public void disabledInit() {
+        AutonomousPhaseType chosen = smartDashboardUpdater.getChosen();
+
+        if (chosen == AutonomousPhaseType.CHARGE_STATION) {
+
+        }
+    }
 
     @Override
-    public void disabledPeriodic() {
-
-        AutonomousPhaseType chosen = smartDashboardUpdater.getChosen();
-    }
+    public void disabledPeriodic() {}
 
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override

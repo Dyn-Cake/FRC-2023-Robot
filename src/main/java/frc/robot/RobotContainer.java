@@ -4,8 +4,10 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -24,6 +26,7 @@ import frc.robot.commands.tower.DropTower;
 import frc.robot.commands.tower.LiftTower;
 import frc.robot.commands.tower.StopTower;
 //import frc.robot.commands.tower.TowerControl;
+import frc.robot.shuffleboard.ShuffleboardUpdater;
 import frc.robot.subsystems.ArmSub;
 import frc.robot.subsystems.ClawSub;
 import frc.robot.subsystems.DriveTrainSub;
@@ -44,6 +47,7 @@ public class RobotContainer {
     private final TowerSub towerSub = new TowerSub(this);
     Joystick flightStick = new Joystick(0);
 
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
 
@@ -55,6 +59,7 @@ public class RobotContainer {
             ()-> flightStick.getRawAxis(0), //x speed - strafe
             ()-> flightStick.getRawAxis(2)  //z rotation - turning
         ));
+
 
         /*clawSub.setDefaultCommand(new ClawControl(clawSub, ()->flightStick.getRawAxis(1))); //y axis - forwards & backwards
         armSub.setDefaultCommand(new ArmControl(armSub, ()->flightStick.getRawAxis(0))); //x axis - left & right
@@ -98,6 +103,7 @@ public class RobotContainer {
         return new AutonomousPhase(driveSub, chosen);
     }
 
+    // Should be static :/
     public double deadBand(double input, double deadband) {
         if (input > deadband || input < -deadband) {
             return input;

@@ -10,9 +10,11 @@ import frc.robot.utils.CustomaryLengthUnit;
 public class AutonomousPhase extends SequentialCommandGroup {
     public AutonomousPhase(DriveTrainSub driveTrainSub, AutonomousPhaseType type) {
         System.out.println("AUTO START");
+        addRequirements(driveTrainSub);
         switch (type) {
             case DEFAULT: {
                 System.out.println("DEFAULT");
+
                 addCommands(
                         new AutoDrive(
                                 driveTrainSub,
@@ -47,6 +49,9 @@ public class AutonomousPhase extends SequentialCommandGroup {
                         new WaitCommand(1)
                 );
                 break;
+            }
+            case CHARGE_STATION: {
+
             }
             default: {
                 System.out.println("Bruh, none");

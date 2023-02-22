@@ -2,7 +2,7 @@ import edu.wpi.first.gradlerio.deploy.roborio.RoboRIO
 
 plugins {
     id "java"
-    id "edu.wpi.first.GradleRIO" version "2023.3.2"
+    id "edu.wpi.first.GradleRIO" version "2023.4.1"
 
 }
 
@@ -82,7 +82,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-params"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
 
-    compileOnly "org.projectlombok:lombok:1.18.26"
+    //compileOnly "org.projectlombok:lombok:1.18.26"
     //implementation "com.github.Oblarg:Oblog:5.1.0"
 }
 
