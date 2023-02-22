@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.StrafeDirection;
 import frc.robot.subsystems.DriveTrainSub;
+import frc.robot.utils.CustomaryLength;
+import frc.robot.utils.CustomaryLengthUnit;
 
 public class AutonomousPhase extends SequentialCommandGroup {
     public AutonomousPhase(DriveTrainSub driveTrainSub, AutonomousPhaseType type) {
@@ -11,28 +13,39 @@ public class AutonomousPhase extends SequentialCommandGroup {
         switch (type) {
             case DEFAULT: {
                 System.out.println("DEFAULT");
-                /*addCommands(
-                        //number at the end is the distance the command runs for (in feet)
-                        //dont delete for comment out commands, just set the time duration to 0
-                        //autoDrive(subsystem, distance(in feet))
-                        new AutoDrive(driveTrainSub, 2.6, StrafeDirection.LEFT),
+                addCommands(
+                        new AutoDrive(
+                                driveTrainSub,
+                                new CustomaryLength(2.6, CustomaryLengthUnit.FEET),
+                                StrafeDirection.LEFT
+                        ),
                         new WaitCommand(0),
-                        new AutoDrive(driveTrainSub, 4.5, StrafeDirection.FORWARD),
+                        new AutoDrive(
+                                driveTrainSub,
+                                new CustomaryLength(4.5, CustomaryLengthUnit.FEET),
+                                StrafeDirection.FORWARD
+                        ),
                         new WaitCommand(1)
-                );*/
+                );
                 break;
+
             }
             case ALTERNATIVE: {
                 System.out.println("ALT");
-                /*addCommands(
-                        //number at the end is the distance the command runs for (in feet)
-                        //dont delete for comment out commands, just set the time duration to 0
-                        //autoDrive(subsystem, distance(in feet))
-                        new AutoDrive(driveTrainSub, 2.6, StrafeDirection.RIGHT),
+                addCommands(
+                        new AutoDrive(
+                                driveTrainSub,
+                                new CustomaryLength(12, CustomaryLengthUnit.FEET),
+                                StrafeDirection.LEFT
+                        ),
                         new WaitCommand(0),
-                        new AutoDrive(driveTrainSub, 4.5, StrafeDirection.FORWARD),
+                        new AutoDrive(
+                                driveTrainSub,
+                                new CustomaryLength(4.5, CustomaryLengthUnit.FEET),
+                                StrafeDirection.FORWARD
+                        ),
                         new WaitCommand(1)
-                );*/
+                );
                 break;
             }
             default: {
