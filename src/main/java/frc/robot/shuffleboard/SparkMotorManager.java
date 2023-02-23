@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import java.util.HashMap;
 
 public class SparkMotorManager {
-    private HashMap<Integer, Spark> motors;
+    private final HashMap<Integer, Spark> motors;
     private static SparkMotorManager instance;
     public SparkMotorManager() {
         motors = new HashMap<>();
