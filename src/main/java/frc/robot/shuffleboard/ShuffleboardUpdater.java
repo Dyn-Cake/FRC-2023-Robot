@@ -2,6 +2,7 @@ package frc.robot.shuffleboard;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SPI;
@@ -24,11 +25,13 @@ public class ShuffleboardUpdater {
     private final AHRS gyro;
     private final ShuffleboardTab tab;
     private GenericEntry gyroPitch;
-    private NetworkTableEntry limelight;
-    /*private NetworkTable limelight;
+    private NetworkTable limeLight;
     private NetworkTableEntry tx;
     private NetworkTableEntry ty;
-    private NetworkTableEntry ta;*/
+    private NetworkTableEntry ta;
+    private GenericEntry txEntry;
+    private GenericEntry tyEntry;
+    private GenericEntry taEntry;
 
 
     /**
@@ -84,17 +87,29 @@ public class ShuffleboardUpdater {
         .withWidget(BuiltInWidgets.kGyro);
 
         // Selections
-
-
         chooser.addOption("Default", AutonomousPhaseType.DEFAULT);
         chooser.addOption("Alt", AutonomousPhaseType.ALTERNATIVE);
         tab.add("autonomous", chooser)
                 .withWidget(BuiltInWidgets.kSplitButtonChooser);
+
         // limelight
         LimelightHelpers.LimelightResults llresults = LimelightHelpers.getLatestResults("");
         LimelightHelpers.setCropWindow("",-1,1,-1,1);
         LimelightHelpers.setLEDMode_ForceBlink("");
         LimelightHelpers.getLimelightURLString("limelight", "");
+
+        ta = limeLight.getEntry("ta");
+        tx = limeLight.getEntry("tx");
+        ty = limeLight.getEntry("ty");
+        txEntry = tab.add("tx", tx.getDouble(0.0))
+        .withWidget(BuiltInWidgets.kTextView)
+        .getEntry();
+        tyEntry = tab.add("tx", ty.getDouble(0.0))
+        .withWidget(BuiltInWidgets.kTextView)
+        .getEntry();
+        taEntry = tab.add("tx", ta.getDouble(0.0))
+        .withWidget(BuiltInWidgets.kTextView)
+        .getEntry();
 
 
         //ledMode = limelight.setEntry(2);
@@ -105,15 +120,15 @@ public class ShuffleboardUpdater {
         updateMotors();
         updateDebug();
         updateGyro();
-        //updateLimelight();
+        updateLimelight();
     }
 
     private void updateMotors() {
 
-        /*for(Integer port : motors.keySet()) {
+        for(Integer port : motors.keySet()) {
             ShuffleboardElement<Spark> motor = motors.get(port);
-            motor.getGenericEntry().setDouble(motor.getMotor().get());
-        }*/
+            motor.getGenericEntry().setDouble(motor.getElement().get());
+        }
 
     }
 
@@ -127,11 +142,11 @@ public class ShuffleboardUpdater {
         lastTriggered = System.currentTimeMillis();
     }
 
-    /*private void updateLimelight(){
-        ta = limelight.getEntry("ta");
-        tx = limelight.getEntry("tx");
-        ty = limelight.getEntry("ty");
-    }*/
+    private void updateLimelight(){
+        txEntry.setDouble(tx.getDouble(0.0));
+        tyEntry.setDouble(ta.getDouble(0.0));
+        taEntry.setDouble(ty.getDouble(0.0));
+    }
 
     public AutonomousPhaseType getChosen() {
         return chooser.getSelected();

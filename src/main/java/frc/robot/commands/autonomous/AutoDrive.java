@@ -30,8 +30,6 @@ public class AutoDrive extends CommandBase {
     @Override
     public void execute() {
         drive.autoDrive(distance, strafeDirection);
-        /*drive.tankdrive(Constants.autodriveleft, Constants.autodriveright);
-        addRequirements(drive);*/
 
     }
 
