@@ -8,15 +8,28 @@ import java.util.function.DoubleSupplier;
 public class DriveCartesian extends CommandBase {
     
     private final DriveTrainSub drive;
-    private final DoubleSupplier xSpeed;
-    private final DoubleSupplier ySpeed;
-    private final DoubleSupplier zRotation;
+    private final double xSpeed;
+    private final double ySpeed;
+    private final double zRotation;
 
     public DriveCartesian(
             DriveTrainSub subsystem,
-            DoubleSupplier ySpeed,
             DoubleSupplier xSpeed,
+            DoubleSupplier ySpeed,
             DoubleSupplier zRotation
+    ) {
+        drive = subsystem;
+        addRequirements(drive);
+        this.ySpeed = ySpeed.getAsDouble();
+        this.xSpeed = xSpeed.getAsDouble();
+        this.zRotation = zRotation.getAsDouble();
+    }
+
+    public DriveCartesian(
+            DriveTrainSub subsystem,
+            double xSpeed,
+            double ySpeed,
+            double zRotation
     ) {
         drive = subsystem;
         addRequirements(drive);
@@ -24,6 +37,8 @@ public class DriveCartesian extends CommandBase {
         this.xSpeed = xSpeed;
         this.zRotation = zRotation;
     }
+
+
 
     // only goes once at beginning when command is called
     @Override
@@ -34,11 +49,7 @@ public class DriveCartesian extends CommandBase {
     // keeps repeating until the command ends
     @Override
     public void execute() {
-       drive.mecanumDrive(
-           ySpeed.getAsDouble(),
-           xSpeed.getAsDouble(),
-           zRotation.getAsDouble()
-        );
+       drive.mecanumDrive(ySpeed, xSpeed, zRotation);
     }
 
     //only goes once at end when command is finishing

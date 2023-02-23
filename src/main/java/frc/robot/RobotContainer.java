@@ -4,17 +4,21 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCartesian;
 //import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.arm.ExtendArm;
 import frc.robot.commands.arm.RetractArm;
 import frc.robot.commands.arm.StopArm;
-import frc.robot.commands.autonomous.AutonomousPhase;
+import frc.robot.commands.autonomous.AutoAdjustChargeStation;
+import frc.robot.commands.autonomous.AutoDrive;
+import frc.robot.commands.autonomous.commandgroup.AutonomousPhase;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.commands.claw.ClawClose;
 //import frc.robot.commands.claw.ClawControl;
@@ -28,6 +32,8 @@ import frc.robot.subsystems.ArmSub;
 import frc.robot.subsystems.ClawSub;
 import frc.robot.subsystems.DriveTrainSub;
 import frc.robot.subsystems.TowerSub;
+import frc.robot.utils.CustomaryLength;
+import frc.robot.utils.CustomaryLengthUnit;
 
 
 /**
@@ -44,8 +50,10 @@ public class RobotContainer {
     private final TowerSub towerSub = new TowerSub();
     Joystick flightStick = new Joystick(0);
 
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    public RobotContainer() {
+    public RobotContainer(AHRS gyro) {
+        this.gyro = gyro;
 
         // Configure the button bindings
         driveSub.setDefaultCommand(
@@ -90,7 +98,18 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand(AutonomousPhaseType chosen) {
-        return new AutonomousPhase(driveSub, chosen);
-    }
+        switch (chosen) {
+            case DEFAULT: {
+                return new AutonomousPhase(driveSub);
+            }
+            case CHARGE_STATION: {
+                return new AutoAdjustChargeStation(driveSub, gyro);
+            }
+            default: {
+                System.out.println("Bruh, none");
+                return null;
+            }
+        }
 
+    }
 }
