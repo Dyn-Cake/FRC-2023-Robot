@@ -18,6 +18,7 @@ import frc.robot.commands.arm.RetractArm;
 import frc.robot.commands.arm.StopArm;
 import frc.robot.commands.autonomous.AutoAdjustChargeStation;
 import frc.robot.commands.autonomous.AutoDrive;
+import frc.robot.commands.autonomous.commandgroup.AutonomousChargeStation;
 import frc.robot.commands.autonomous.commandgroup.AutonomousPhase;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.commands.claw.ClawClose;
@@ -48,11 +49,14 @@ public class RobotContainer {
     private final ClawSub clawSub = new ClawSub();
     private final ArmSub armSub = new ArmSub();
     private final TowerSub towerSub = new TowerSub();
+    private final Robot robot;
+    private final AHRS gyro;
     Joystick flightStick = new Joystick(0);
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    public RobotContainer(AHRS gyro) {
+    public RobotContainer(Robot robot, AHRS gyro) {
+        this.robot = robot;
         this.gyro = gyro;
 
         // Configure the button bindings
@@ -103,7 +107,7 @@ public class RobotContainer {
                 return new AutonomousPhase(driveSub);
             }
             case CHARGE_STATION: {
-                return new AutoAdjustChargeStation(driveSub, gyro);
+                return new AutonomousChargeStation(driveSub, gyro, robot);
             }
             default: {
                 System.out.println("Bruh, none");
