@@ -6,6 +6,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -22,10 +23,10 @@ public class ShuffleboardUpdater {
     private long lastTriggered;
     private HashMap<Integer, ShuffleboardElement<Spark>> motors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
-    private final AHRS gyro;
     private final ShuffleboardTab tab;
     private GenericEntry gyroPitch;
     private NetworkTable limeLight;
+    private final AHRS gyro;
     private NetworkTableEntry tx;
     private NetworkTableEntry ty;
     private NetworkTableEntry ta;
@@ -37,14 +38,13 @@ public class ShuffleboardUpdater {
     /**
      * @param motors A hashmap where the key is the port of the motor and the string is the name
      */
-    public ShuffleboardUpdater(HashMap<Integer, String> motors) {
+    public ShuffleboardUpdater(HashMap<Integer, String> motors, AHRS gyro) {
         tab = Shuffleboard.getTab("Robot");
         //Variables init only
         lastTriggered = System.currentTimeMillis();
+        this.gyro = gyro;
 
 
-
-        gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
         //limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
@@ -53,9 +53,6 @@ public class ShuffleboardUpdater {
     }
 
     private void init(HashMap<Integer, String> motors) {
-
-        Preferences.setString("key", "value");
-
 
         // motors
         SparkMotorManager motorManager = SparkMotorManager.getInstance();
@@ -75,9 +72,6 @@ public class ShuffleboardUpdater {
             sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
         }
         this.motors = sparkMotors;
-
-        // gyro
-        gyro.reset();
 
         //adding widgets to shuffleboard
         gyroPitch = tab.add("gyroPitch", gyro.getPitch())
