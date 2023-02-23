@@ -2,21 +2,17 @@ package frc.robot.commands.autonomous;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.StrafeDirection;
-import frc.robot.subsystems.ArmSub;
 import frc.robot.subsystems.DriveTrainSub;
-import frc.robot.utils.CustomaryLength;
-import frc.robot.utils.CustomaryLengthUnit;
 
 public class AutoAdjustChargeStation extends CommandBase {
     private final DriveTrainSub driveTrainSub;
-    private AHRS gyro;
-    private double duration;
+    private final AHRS gyro;
+    private boolean isFinished = false;
+    private static final double stopThreshold = 10;
 
     public AutoAdjustChargeStation(DriveTrainSub subsystem, AHRS gyro){
         driveTrainSub = subsystem;
         this.gyro = gyro;
-        duration = 1000;
     }
 
     // only goes once at beginning when command is called
@@ -27,31 +23,28 @@ public class AutoAdjustChargeStation extends CommandBase {
     //TODO Please fix, I doubt this will work
     @Override
     public void execute() {
-        double degrees = gyro.getAngle() % 360;
+        double degrees = gyro.getRoll();
 
-        if (degrees > 170) {
-            driveTrainSub.autoDrive(
-                    new CustomaryLength(0.1, CustomaryLengthUnit.INCHES),
-                    StrafeDirection.FORWARD
-            );
-        } else if (degrees < 190) {
-            driveTrainSub.autoDrive(
-                    new CustomaryLength(0.1, CustomaryLengthUnit.INCHES),
-                    StrafeDirection.BACKWARDS
-            );
+        if (degrees > stopThreshold) {
+            driveTrainSub.mecanumDrive(0, 1, 0);
+        } else if (degrees < -stopThreshold) {
+            driveTrainSub.mecanumDrive(0, -1, 0);
+        } else {
+            isFinished = false;
         }
     }
 
     //only goes once at end when command is finishing
     @Override
     public void end(boolean interrupted) {
+        driveTrainSub.mecanumDrive(0, 0, 0);
     }
 
     //condition for the command to end on its own
     //TODO CHANGE THIS
     @Override
     public boolean isFinished() {
-        return false;
+        return isFinished;
     }
 
 }
