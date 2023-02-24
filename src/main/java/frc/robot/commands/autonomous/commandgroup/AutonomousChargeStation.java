@@ -18,6 +18,11 @@ public class AutonomousChargeStation extends SequentialCommandGroup {
                         new CustomaryLength(13.7, CustomaryLengthUnit.FEET),
                         StrafeDirection.FORWARD
                 ),
+                new AutoDrive(
+                    driveTrainSub, 
+                    new CustomaryLength(2.5, CustomaryLengthUnit.FEET), 
+                    StrafeDirection.BACKWARDS
+                ),
                 new AutoAdjustChargeStation(driveTrainSub, gyro, robot)
 
         );

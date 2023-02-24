@@ -4,9 +4,6 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -87,7 +84,7 @@ public class ShuffleboardUpdater {
                 .withWidget(BuiltInWidgets.kSplitButtonChooser);
 
         // limelight
-        LimelightHelpers.LimelightResults llresults = LimelightHelpers.getLatestResults("");
+        //LimelightHelpers.LimelightResults llresults = LimelightHelpers.getLatestResults("");
         LimelightHelpers.setCropWindow("",-1,1,-1,1);
         LimelightHelpers.setLEDMode_ForceBlink("");
         LimelightHelpers.getLimelightURLString("limelight", "");

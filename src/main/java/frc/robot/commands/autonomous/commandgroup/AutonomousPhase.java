@@ -1,12 +1,9 @@
 package frc.robot.commands.autonomous.commandgroup;
 
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.StrafeDirection;
-import frc.robot.commands.autonomous.AutoAdjustChargeStation;
 import frc.robot.commands.autonomous.AutoDrive;
-import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.subsystems.DriveTrainSub;
 import frc.robot.utils.CustomaryLength;
 import frc.robot.utils.CustomaryLengthUnit;

@@ -9,32 +9,25 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCartesian;
-//import frc.robot.commands.arm.ArmControl;
 import frc.robot.commands.arm.ExtendArm;
 import frc.robot.commands.arm.RetractArm;
 import frc.robot.commands.arm.StopArm;
-import frc.robot.commands.autonomous.AutoAdjustChargeStation;
-import frc.robot.commands.autonomous.AutoDrive;
 import frc.robot.commands.autonomous.commandgroup.AutonomousChargeStation;
+import frc.robot.commands.autonomous.commandgroup.AutonomousLeaveCommunity;
 import frc.robot.commands.autonomous.commandgroup.AutonomousPhase;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.commands.claw.ClawClose;
-//import frc.robot.commands.claw.ClawControl;
 import frc.robot.commands.claw.ClawOpen;
 import frc.robot.commands.claw.ClawStop;
 import frc.robot.commands.tower.DropTower;
 import frc.robot.commands.tower.LiftTower;
 import frc.robot.commands.tower.StopTower;
-//import frc.robot.commands.tower.TowerControl;
 import frc.robot.subsystems.ArmSub;
 import frc.robot.subsystems.ClawSub;
 import frc.robot.subsystems.DriveTrainSub;
 import frc.robot.subsystems.TowerSub;
-import frc.robot.utils.CustomaryLength;
-import frc.robot.utils.CustomaryLengthUnit;
 
 
 /**
@@ -108,6 +101,9 @@ public class RobotContainer {
             }
             case CHARGE_STATION: {
                 return new AutonomousChargeStation(driveSub, gyro, robot);
+            }
+            case LEAVE_COMMUNITY: {
+                return new AutonomousLeaveCommunity(driveSub, gyro, robot);
             }
             default: {
                 System.out.println("Bruh, none");
