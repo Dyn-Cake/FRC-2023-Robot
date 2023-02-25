@@ -6,7 +6,7 @@ public enum AutonomousPhaseType {
 
     CHARGE_STATION("Charge Station"),
     LEAVE_COMMUNITY("Leave Community"),
-    SCORE("score");
+    SCORE("Score");
 
     private final String name;
 

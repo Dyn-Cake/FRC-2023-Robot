@@ -37,4 +37,8 @@ public class TowerSub extends SubsystemBase {
     public void stop() {
         towerMotor.setVoltage(0);
     }
+
+    public DigitalInput getLimitSwitch() {
+        return limitSwitch;
+    }
 }
