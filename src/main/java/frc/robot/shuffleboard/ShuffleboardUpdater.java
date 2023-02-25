@@ -34,13 +34,13 @@ public class ShuffleboardUpdater {
 
     /**
      * @param motors A hashmap where the key is the port of the motor and the string is the name
+     * @param gyro An instance of an AHRS gyro
      */
     public ShuffleboardUpdater(HashMap<Integer, String> motors, AHRS gyro) {
         tab = Shuffleboard.getTab("Robot");
         //Variables init only
         lastTriggered = System.currentTimeMillis();
         this.gyro = gyro;
-
 
 
         //limelight = NetworkTableInstance.getDefault().getTable("limelight");
@@ -72,10 +72,10 @@ public class ShuffleboardUpdater {
 
         //adding widgets to shuffleboard
         gyroPitch = tab.add("gyroPitch", gyro.getPitch())
-        .withWidget(BuiltInWidgets.kTextView)
-        .getEntry();
+                .withWidget(BuiltInWidgets.kTextView)
+                .getEntry();
         tab.add(gyro)
-        .withWidget(BuiltInWidgets.kGyro);
+                .withWidget(BuiltInWidgets.kGyro);
 
         // Selections
         chooser.addOption("Default", AutonomousPhaseType.DEFAULT);
@@ -85,7 +85,7 @@ public class ShuffleboardUpdater {
 
         // limelight
         //LimelightHelpers.LimelightResults llresults = LimelightHelpers.getLatestResults("");
-        LimelightHelpers.setCropWindow("",-1,1,-1,1);
+        LimelightHelpers.setCropWindow("", -1, 1, -1, 1);
         LimelightHelpers.setLEDMode_ForceBlink("");
         LimelightHelpers.getLimelightURLString("limelight", "");
 
@@ -93,14 +93,14 @@ public class ShuffleboardUpdater {
         tx = limeLight.getEntry("tx");
         ty = limeLight.getEntry("ty");
         txEntry = tab.add("tx", tx.getDouble(0.0))
-        .withWidget(BuiltInWidgets.kTextView)
-        .getEntry();
+                .withWidget(BuiltInWidgets.kTextView)
+                .getEntry();
         tyEntry = tab.add("tx", ty.getDouble(0.0))
-        .withWidget(BuiltInWidgets.kTextView)
-        .getEntry();
+                .withWidget(BuiltInWidgets.kTextView)
+                .getEntry();
         taEntry = tab.add("tx", ta.getDouble(0.0))
-        .withWidget(BuiltInWidgets.kTextView)
-        .getEntry();
+                .withWidget(BuiltInWidgets.kTextView)
+                .getEntry();
 
 
         //ledMode = limelight.setEntry(2);
@@ -116,7 +116,7 @@ public class ShuffleboardUpdater {
 
     private void updateMotors() {
 
-        for(Integer port : motors.keySet()) {
+        for (Integer port : motors.keySet()) {
             ShuffleboardElement<Spark> motor = motors.get(port);
             motor.getGenericEntry().setDouble(motor.getElement().get());
         }
@@ -133,7 +133,7 @@ public class ShuffleboardUpdater {
         lastTriggered = System.currentTimeMillis();
     }
 
-    private void updateLimelight(){
+    private void updateLimelight() {
         txEntry.setDouble(tx.getDouble(0.0));
         tyEntry.setDouble(ta.getDouble(0.0));
         taEntry.setDouble(ty.getDouble(0.0));

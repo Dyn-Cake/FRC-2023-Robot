@@ -6,7 +6,7 @@ import frc.robot.subsystems.DriveTrainSub;
 import java.util.function.DoubleSupplier;
 
 public class DriveCartesian extends CommandBase {
-    
+
     private final DriveTrainSub drive;
     private final double xSpeed;
     private final double ySpeed;
@@ -39,7 +39,6 @@ public class DriveCartesian extends CommandBase {
     }
 
 
-
     // only goes once at beginning when command is called
     @Override
     public void initialize() {
@@ -49,7 +48,7 @@ public class DriveCartesian extends CommandBase {
     // keeps repeating until the command ends
     @Override
     public void execute() {
-       drive.mecanumDrive(ySpeed, xSpeed, zRotation);
+        drive.mecanumDrive(ySpeed, xSpeed, zRotation);
     }
 
     //only goes once at end when command is finishing

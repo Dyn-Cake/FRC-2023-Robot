@@ -7,10 +7,12 @@ import java.util.HashMap;
 public class SparkMotorManager {
     private final HashMap<Integer, Spark> motors;
     private static SparkMotorManager instance;
+
     public SparkMotorManager() {
         motors = new HashMap<>();
 
     }
+
     public Spark getMotor(int port) {
         if (motors.containsKey(port))
             return motors.get(port);
@@ -28,11 +30,6 @@ public class SparkMotorManager {
 
         return instance;
     }
-
-
-
-
-
 
 
 }

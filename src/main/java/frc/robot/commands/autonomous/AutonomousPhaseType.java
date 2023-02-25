@@ -8,6 +8,7 @@ public enum AutonomousPhaseType {
     LEAVE_COMMUNITY("Leave Community"),
     SCORE("score");
 
-    AutonomousPhaseType(String name) {}
+    AutonomousPhaseType(String name) {
+    }
 
 }
