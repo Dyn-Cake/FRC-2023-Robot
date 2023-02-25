@@ -6,7 +6,6 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
-//import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -33,8 +32,6 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
 
-        //Logger.configureLoggingAndConfig("SmartDashboard", false);
-        // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         robotContainer = new RobotContainer(this, gyro);
         robotContainer.configureButtonBindings();
         // autonomous chooser on the dashboard.
@@ -53,50 +50,39 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-        // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-        // commands, running already-scheduled commands, removing finished or interrupted commands,
-        // and running subsystem periodic() methods.  This must be called from the robot's periodic
-        // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
         smartDashboardUpdater.update();
-        //Logger.updateEntries();
     }
 
-    /** This function is called once each time the robot enters Disabled mode. */
     @Override
-    public void disabledInit() {}
+    public void disabledInit() {
+    }
 
     @Override
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+    }
 
-    /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
         AutonomousPhaseType chosen = smartDashboardUpdater.getChosen();
         autonomousCommand = robotContainer.getAutonomousCommand(chosen);
         System.out.println("Selected Auto: " + chosen);
-      // schedule the autonomous command (example)
+        // schedule the autonomous command (example)
         if (autonomousCommand != null) {
-          autonomousCommand.schedule();
+            autonomousCommand.schedule();
         }
     }
 
-    /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {}
 
     @Override
     public void teleopInit() {
-      // This makes sure that the autonomous stops running when
-      // teleop starts running. If you want the autonomous to
-      // continue until interrupted by another command, remove
-      // this line or comment it out.
         if (autonomousCommand != null) {
             autonomousCommand.cancel();
         }
     }
 
-    /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {}
 
@@ -106,15 +92,24 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
     }
 
-    /** This function is called periodically during test mode. */
+    /**
+     * This function is called periodically during test mode.
+     */
     @Override
-    public void testPeriodic() {}
+    public void testPeriodic() {
+    }
 
-    /** This function is called once when the robot is first started up. */
+    /**
+     * This function is called once when the robot is first started up.
+     */
     @Override
-    public void simulationInit() {}
+    public void simulationInit() {
+    }
 
-    /** This function is called periodically whilst in simulation. */
+    /**
+     * This function is called periodically whilst in simulation.
+     */
     @Override
-    public void simulationPeriodic() {}
+    public void simulationPeriodic() {
+    }
 }

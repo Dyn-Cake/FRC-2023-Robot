@@ -9,8 +9,8 @@ import frc.robot.subsystems.DriveTrainSub;
 import frc.robot.utils.CustomaryLength;
 import frc.robot.utils.CustomaryLengthUnit;
 
-public class AutonomousLeaveCommunity extends SequentialCommandGroup{
-    public AutonomousLeaveCommunity(DriveTrainSub driveTrainSub, AHRS gyro, Robot robot) {
+public class AutonomousLeaveCommunity extends SequentialCommandGroup {
+    public AutonomousLeaveCommunity(DriveTrainSub driveTrainSub) {
         addCommands(
                 new AutoDrive(
                         driveTrainSub,

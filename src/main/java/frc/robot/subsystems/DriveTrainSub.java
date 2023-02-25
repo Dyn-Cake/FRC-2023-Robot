@@ -50,25 +50,7 @@ public class DriveTrainSub extends SubsystemBase {
         mecanumDrive.setDeadband(0.2);
     }
 
-
-    //Spark Max instantiation and constructor for Mecanum Drive
-    /*private final CANSparkMax frontRight;
-    private final CANSparkMax frontLeft;
-    private final CANSparkMax backRight;
-    private final CANSparkMax backLeft;
-    private final MecanumDrive mecanumDrive;
-
-    public drivetrainsub(){
-        frontRight = new CANSparkMax (Constants.frontRightDrive, MotorType.kBrushless);
-        frontLeft = new CANSparkMax (Constants.frontLeftDrive, MotorType.kBrushless);
-        backRight = new CANSparkMax (Constants.backRightDrive, MotorType.kBrushless);
-        backLeft = new CANSparkMax (Constants.backLeftDrive, MotorType.kBrushless);
-        mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-        
-    }*/
-
-    //
-    //resets the encoder to 0
+    //resets the encoders to 0
     public void resetEncoder() {
         frontRightEncoder.reset();
         frontLeftEncoder.reset();
@@ -89,7 +71,7 @@ public class DriveTrainSub extends SubsystemBase {
     }
 
     //command for autodrive
-//also gradually increases break as you get closer to your destination so the robot stops exactly where you need it do
+    //also gradually increases break as you get closer to your destination so the robot stops exactly where you need it do
     public void autoDrive(CustomaryLength length, StrafeDirection strafeDirection) {
         double feet = length.get(CustomaryLengthUnit.FEET);
         double brake = 1 - getDistance() / feet;

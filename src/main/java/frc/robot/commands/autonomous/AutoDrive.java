@@ -14,18 +14,18 @@ public class AutoDrive extends CommandBase {
     //private double duration;
 
     /**
-     * @param subsystem The subsystem that the robot uses to drive
-     * @param distance Distance to travel
+     * @param subsystem       The subsystem that the robot uses to drive
+     * @param distance        Distance to travel
      * @param strafeDirection Direction robot will move
      */
-    public AutoDrive(DriveTrainSub subsystem, CustomaryLength distance, StrafeDirection strafeDirection){
+    public AutoDrive(DriveTrainSub subsystem, CustomaryLength distance, StrafeDirection strafeDirection) {
         drive = subsystem;
         this.distance = distance;
         this.strafeDirection = strafeDirection;
         //this.duration = duration*1000;
 
     }
-    
+
     // only goes once at beginning when command is called
     @Override
     public void initialize() {
@@ -49,7 +49,7 @@ public class AutoDrive extends CommandBase {
     //condition for the command to end on its own
     @Override
     public boolean isFinished() {
-        return !( drive.getDistance() < distance.get(CustomaryLengthUnit.FEET) );
+        return !(drive.getDistance() < distance.get(CustomaryLengthUnit.FEET));
 
         /*
         if (System.currentTimeMillis()-startTime<duration){
