@@ -17,6 +17,7 @@ import frc.robot.commands.arm.StopArm;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.commands.autonomous.commandgroup.AutonomousChargeStation;
 import frc.robot.commands.autonomous.commandgroup.AutonomousLeaveCommunity;
+import frc.robot.commands.autonomous.commandgroup.AutonomousScore;
 import frc.robot.commands.claw.ClawClose;
 import frc.robot.commands.claw.ClawOpen;
 import frc.robot.commands.claw.ClawStop;
@@ -102,6 +103,9 @@ public class RobotContainer {
             }
             case LEAVE_COMMUNITY: {
                 return new AutonomousLeaveCommunity(driveSub);
+            }
+            case SCORE: {
+                return new AutonomousScore(towerSub, armSub, clawSub, driveSub);
             }
             default: {
                 System.out.println("Bruh, none");
