@@ -37,7 +37,6 @@ public class AutoDrive extends CommandBase {
     @Override
     public void execute() {
         drive.autoDrive(distance, strafeDirection);
-
     }
 
     //only goes once at end when command is finishing
@@ -50,14 +49,5 @@ public class AutoDrive extends CommandBase {
     @Override
     public boolean isFinished() {
         return !(drive.getDistance() < distance.get(CustomaryLengthUnit.FEET));
-
-        /*
-        if (System.currentTimeMillis()-startTime<duration){
-            return false;
-        }
-        else {
-            return true;
-        }
-        */
     }
 }

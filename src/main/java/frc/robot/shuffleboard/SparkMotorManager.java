@@ -5,12 +5,20 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import java.util.HashMap;
 
 public class SparkMotorManager {
-    private final HashMap<Integer, Spark> motors;
     private static SparkMotorManager instance;
+    private final HashMap<Integer, Spark> motors;
 
     public SparkMotorManager() {
         motors = new HashMap<>();
 
+    }
+
+    public static SparkMotorManager getInstance() {
+        if (instance == null) {
+            instance = new SparkMotorManager();
+        }
+
+        return instance;
     }
 
     public Spark getMotor(int port) {
@@ -21,14 +29,6 @@ public class SparkMotorManager {
             motors.put(port, spark);
             return spark;
         }
-    }
-
-    public static SparkMotorManager getInstance() {
-        if (instance == null) {
-            instance = new SparkMotorManager();
-        }
-
-        return instance;
     }
 
 

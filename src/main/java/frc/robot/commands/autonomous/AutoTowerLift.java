@@ -5,8 +5,8 @@ import frc.robot.subsystems.TowerSub;
 
 public class AutoTowerLift extends CommandBase {
     private final TowerSub tower;
-    private double startTime;
     private final double duration;
+    private double startTime;
 
     public AutoTowerLift(TowerSub subsystem) {
         tower = subsystem;

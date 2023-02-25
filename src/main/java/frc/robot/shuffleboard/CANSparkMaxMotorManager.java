@@ -6,12 +6,19 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import java.util.HashMap;
 
 public class CANSparkMaxMotorManager {
-    private final HashMap<Integer, CANSparkMax> motors;
     private static CANSparkMaxMotorManager instance;
+    private final HashMap<Integer, CANSparkMax> motors;
 
     public CANSparkMaxMotorManager() {
         motors = new HashMap<>();
+    }
 
+    public static CANSparkMaxMotorManager getInstance() {
+        if (instance == null) {
+            instance = new CANSparkMaxMotorManager();
+        }
+
+        return instance;
     }
 
     public CANSparkMax getMotor(int port) {
@@ -22,14 +29,6 @@ public class CANSparkMaxMotorManager {
             motors.put(port, sparkMax);
             return sparkMax;
         }
-    }
-
-    public static CANSparkMaxMotorManager getInstance() {
-        if (instance == null) {
-            instance = new CANSparkMaxMotorManager();
-        }
-
-        return instance;
     }
 }
 
