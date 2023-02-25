@@ -1,8 +1,6 @@
 package frc.robot.commands.autonomous.commandgroup;
 
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Robot;
 import frc.robot.StrafeDirection;
 import frc.robot.commands.autonomous.AutoDrive;
 import frc.robot.subsystems.DriveTrainSub;

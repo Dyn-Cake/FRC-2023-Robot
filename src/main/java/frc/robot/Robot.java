@@ -19,10 +19,10 @@ import frc.robot.shuffleboard.ShuffleboardUpdater;
  * project.
  */
 public class Robot extends TimedRobot {
+    public ShuffleboardUpdater smartDashboardUpdater;
     int exampleField = 5;
     private Command autonomousCommand;
     private RobotContainer robotContainer;
-    public ShuffleboardUpdater smartDashboardUpdater;
     private AHRS gyro;
 
     /**
@@ -74,7 +74,8 @@ public class Robot extends TimedRobot {
     }
 
     @Override
-    public void autonomousPeriodic() {}
+    public void autonomousPeriodic() {
+    }
 
     @Override
     public void teleopInit() {
@@ -84,7 +85,8 @@ public class Robot extends TimedRobot {
     }
 
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+    }
 
     @Override
     public void testInit() {

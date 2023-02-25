@@ -17,13 +17,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShuffleboardUpdater {
-    private long lastTriggered;
-    private HashMap<Integer, ShuffleboardElement<Spark>> motors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
     private final ShuffleboardTab tab;
+    private final AHRS gyro;
+    private long lastTriggered;
+    private HashMap<Integer, ShuffleboardElement<Spark>> motors;
     private GenericEntry gyroPitch;
     private NetworkTable limeLight;
-    private final AHRS gyro;
     private NetworkTableEntry tx;
     private NetworkTableEntry ty;
     private NetworkTableEntry ta;
@@ -34,7 +34,7 @@ public class ShuffleboardUpdater {
 
     /**
      * @param motors A hashmap where the key is the port of the motor and the string is the name
-     * @param gyro An instance of an AHRS gyro
+     * @param gyro   An instance of an AHRS gyro
      */
     public ShuffleboardUpdater(HashMap<Integer, String> motors, AHRS gyro) {
         tab = Shuffleboard.getTab("Robot");
@@ -78,8 +78,9 @@ public class ShuffleboardUpdater {
                 .withWidget(BuiltInWidgets.kGyro);
 
         // Selections
-        chooser.addOption("Default", AutonomousPhaseType.DEFAULT);
-        chooser.addOption("Alt", AutonomousPhaseType.ALTERNATIVE);
+        AutonomousPhaseType.LEAVE_COMMUNITY.register(chooser);
+        AutonomousPhaseType.CHARGE_STATION.register(chooser);
+
         tab.add("autonomous", chooser)
                 .withWidget(BuiltInWidgets.kSplitButtonChooser);
 

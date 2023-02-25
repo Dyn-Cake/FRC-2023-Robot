@@ -5,8 +5,8 @@ import frc.robot.subsystems.ClawSub;
 
 public class AutoClawOpen extends CommandBase {
     private final ClawSub claw;
-    private double startTime;
     private final double duration;
+    private double startTime;
 
     public AutoClawOpen(ClawSub subsystem) {
         claw = subsystem;

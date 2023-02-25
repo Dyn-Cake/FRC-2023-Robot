@@ -5,8 +5,8 @@ import frc.robot.subsystems.ArmSub;
 
 public class AutoArmExtend extends CommandBase {
     private final ArmSub arm;
-    private double startTime;
     private final double duration;
+    private double startTime;
 
     public AutoArmExtend(ArmSub subsystem) {
         arm = subsystem;
