@@ -1,25 +1,23 @@
 package frc.robot.subsystems;
 
 //imports for the Spark Maxs
-/*import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;*/
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.StrafeDirection;
-import frc.robot.shuffleboard.SparkMotorManager;
+import frc.robot.shuffleboard.CANSparkMaxMotorManager;
 import frc.robot.utils.CustomaryLength;
 import frc.robot.utils.CustomaryLengthUnit;
 
 public class DriveTrainSub extends SubsystemBase {
 
-    private final Spark frontRight;
-    private final Spark backRight;
-    private final Spark frontLeft;
-    private final Spark backLeft;
+    private final CANSparkMax frontRight;
+    private final CANSparkMax backRight;
+    private final CANSparkMax frontLeft;
+    private final CANSparkMax backLeft;
 
     //encoders for drive
     private final Encoder frontRightEncoder = new Encoder(Constants.frontRightEncoder1, Constants.frontRightEncoder2);
@@ -30,7 +28,7 @@ public class DriveTrainSub extends SubsystemBase {
 
     public DriveTrainSub() {
 
-        SparkMotorManager motorManager = SparkMotorManager.getInstance();
+        CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
 
         frontRight = motorManager.getMotor(Constants.frontRightDrive);
         frontRight.setInverted(true);
@@ -49,23 +47,6 @@ public class DriveTrainSub extends SubsystemBase {
         mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
         mecanumDrive.setDeadband(0.2);
     }
-
-
-    //Spark Max instantiation and constructor for Mecanum Drive
-    /*private final CANSparkMax frontRight;
-    private final CANSparkMax frontLeft;
-    private final CANSparkMax backRight;
-    private final CANSparkMax backLeft;
-    private final MecanumDrive mecanumDrive;
-
-    public drivetrainsub(){
-        frontRight = new CANSparkMax (Constants.frontRightDrive, MotorType.kBrushless);
-        frontLeft = new CANSparkMax (Constants.frontLeftDrive, MotorType.kBrushless);
-        backRight = new CANSparkMax (Constants.backRightDrive, MotorType.kBrushless);
-        backLeft = new CANSparkMax (Constants.backLeftDrive, MotorType.kBrushless);
-        mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-        
-    }*/
 
     //
     //resets the encoder to 0

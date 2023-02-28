@@ -19,18 +19,17 @@ import java.util.HashMap;
 public final class Constants {
 
     //the number is the pwm channel that the spark is attached to :)
-
-    public static int backLeftDrive = 2; //9
-    public static int frontLeftDrive = 4; //6
-    public static int frontRightDrive = 3; //7
-    public static int backRightDrive = 5; //8
     public static int clawMotorLeft = 7;
     public static int clawMotorRight = 6;
     public static int towerMotor = 1;
     public static int armMotor = 8;
 
     //the number is the CAN ID that the spark max is attached to :)
-    //public static int towerExtension = 7;
+    //public static int towerMotor = 6;
+    public static int backLeftDrive = 6;
+    public static int frontLeftDrive = 7;
+    public static int frontRightDrive = 3;
+    public static int backRightDrive = 2;
     //list of dio ports for sensors
 
     public static int frontRightEncoder1 = 0;
