@@ -89,18 +89,18 @@ public class ShuffleboardUpdater {
         LimelightHelpers.setLEDMode_ForceBlink("");
         LimelightHelpers.getLimelightURLString("limelight", "");
 
-        ta = limeLight.getEntry("ta");
-        tx = limeLight.getEntry("tx");
-        ty = limeLight.getEntry("ty");
-        txEntry = tab.add("tx", tx.getDouble(0.0))
-        .withWidget(BuiltInWidgets.kTextView)
-        .getEntry();
-        tyEntry = tab.add("tx", ty.getDouble(0.0))
-        .withWidget(BuiltInWidgets.kTextView)
-        .getEntry();
-        taEntry = tab.add("tx", ta.getDouble(0.0))
-        .withWidget(BuiltInWidgets.kTextView)
-        .getEntry();
+        // ta = limeLight.getEntry("ta");
+        // tx = limeLight.getEntry("tx");
+        // ty = limeLight.getEntry("ty");
+        // txEntry = tab.add("tx", tx.getDouble(0.0))
+        // .withWidget(BuiltInWidgets.kTextView)
+        // .getEntry();
+        // tyEntry = tab.add("tx", ty.getDouble(0.0))
+        // .withWidget(BuiltInWidgets.kTextView)
+        // .getEntry();
+        // taEntry = tab.add("tx", ta.getDouble(0.0))
+        // .withWidget(BuiltInWidgets.kTextView)
+        // .getEntry();
 
 
         //ledMode = limelight.setEntry(2);
@@ -111,7 +111,7 @@ public class ShuffleboardUpdater {
         updateMotors();
         updateDebug();
         updateGyro();
-        updateLimelight();
+        //updateLimelight();
     }
 
     private void updateMotors() {
@@ -133,11 +133,11 @@ public class ShuffleboardUpdater {
         lastTriggered = System.currentTimeMillis();
     }
 
-    private void updateLimelight(){
-        txEntry.setDouble(tx.getDouble(0.0));
-        tyEntry.setDouble(ta.getDouble(0.0));
-        taEntry.setDouble(ty.getDouble(0.0));
-    }
+    // private void updateLimelight(){
+    //     txEntry.setDouble(tx.getDouble(0.0));
+    //     tyEntry.setDouble(ta.getDouble(0.0));
+    //     taEntry.setDouble(ty.getDouble(0.0));
+    // }
 
     public AutonomousPhaseType getChosen() {
         return chooser.getSelected();
