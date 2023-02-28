@@ -2,7 +2,7 @@ package frc.robot.utils;
 
 public class CustomaryLength {
 
-    private double inches;
+    private final double inches;
 
     public CustomaryLength(double amount, CustomaryLengthUnit type) {
         inches = amount * type.getMultiplier();
@@ -13,5 +13,6 @@ public class CustomaryLength {
     }
 
 
-
 }
+
+

@@ -3,40 +3,40 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSub;
 
-public class AutoArmRetract extends CommandBase{
+public class AutoArmRetract extends CommandBase {
     private final ArmSub arm;
+    private final double duration;
     private double startTime;
-    private double duration;
 
-    public AutoArmRetract(ArmSub subsystem){
+    public AutoArmRetract(ArmSub subsystem) {
         arm = subsystem;
         duration = 1000;
     }
 
     // only goes once at beginning when command is called
-@Override
-public void initialize() {
-    startTime = System.currentTimeMillis();
-}
+    @Override
+    public void initialize() {
+        startTime = System.currentTimeMillis();
+    }
 
-// keeps repeating until the command ends
-@Override
-public void execute() {
-    arm.retract();
-}
+    // keeps repeating until the command ends
+    @Override
+    public void execute() {
+        arm.retract();
+    }
 
-//only goes once at end when command is finishing
-@Override
-public void end(boolean interrupted) {
-    arm.stop();
-}
+    //only goes once at end when command is finishing
+    @Override
+    public void end(boolean interrupted) {
+        arm.stop();
+    }
 
-//condition for the command to end on its own
-@Override
-public boolean isFinished() {
-    return !(
-            System.currentTimeMillis()
-                    - startTime < duration
-    );
-}
+    //condition for the command to end on its own
+    @Override
+    public boolean isFinished() {
+        return !(
+                System.currentTimeMillis()
+                        - startTime < duration
+        );
+    }
 }

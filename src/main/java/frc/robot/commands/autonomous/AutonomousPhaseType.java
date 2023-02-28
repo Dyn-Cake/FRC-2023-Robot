@@ -1,13 +1,24 @@
 package frc.robot.commands.autonomous;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
 public enum AutonomousPhaseType {
-    DEFAULT("default"),
-    ALTERNATIVE("alt"),
 
     CHARGE_STATION("Charge Station"),
     LEAVE_COMMUNITY("Leave Community"),
-    SCORE("score");
+    SCORE("Score");
 
-    AutonomousPhaseType(String name) {}
+    private final String name;
 
+    AutonomousPhaseType(String name) {
+        this.name = name;
+    }
+
+    public void register(SendableChooser<AutonomousPhaseType> chooser) {
+        chooser.addOption(this.getName(), this);
+    }
+
+    public String getName() {
+        return name;
+    }
 }

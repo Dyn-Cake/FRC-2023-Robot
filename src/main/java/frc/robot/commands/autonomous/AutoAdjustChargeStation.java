@@ -6,13 +6,12 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrainSub;
 
 public class AutoAdjustChargeStation extends CommandBase {
+    private static final double stopThreshold = 10;
     private final DriveTrainSub driveTrainSub;
     private final AHRS gyro;
     private final Robot robot;
-    private boolean isFinished = false;
-    private static final double stopThreshold = 10;
 
-    public AutoAdjustChargeStation(DriveTrainSub subsystem, AHRS gyro, Robot robot){
+    public AutoAdjustChargeStation(DriveTrainSub subsystem, AHRS gyro, Robot robot) {
         driveTrainSub = subsystem;
         this.gyro = gyro;
         this.robot = robot;
@@ -20,7 +19,8 @@ public class AutoAdjustChargeStation extends CommandBase {
 
     // only goes once at beginning when command is called
     @Override
-    public void initialize() {}
+    public void initialize() {
+    }
 
     @Override
     public void execute() {

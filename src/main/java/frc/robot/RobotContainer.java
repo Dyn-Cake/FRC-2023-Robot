@@ -14,10 +14,10 @@ import frc.robot.commands.DriveCartesian;
 import frc.robot.commands.arm.ExtendArm;
 import frc.robot.commands.arm.RetractArm;
 import frc.robot.commands.arm.StopArm;
+import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.commands.autonomous.commandgroup.AutonomousChargeStation;
 import frc.robot.commands.autonomous.commandgroup.AutonomousLeaveCommunity;
-import frc.robot.commands.autonomous.commandgroup.AutonomousPhase;
-import frc.robot.commands.autonomous.AutonomousPhaseType;
+import frc.robot.commands.autonomous.commandgroup.AutonomousScore;
 import frc.robot.commands.claw.ClawClose;
 import frc.robot.commands.claw.ClawOpen;
 import frc.robot.commands.claw.ClawStop;
@@ -47,19 +47,21 @@ public class RobotContainer {
     Joystick flightStick = new Joystick(0);
 
 
-    /** The container for the robot. Contains subsystems, OI devices, and commands. */
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
     public RobotContainer(Robot robot, AHRS gyro) {
         this.robot = robot;
         this.gyro = gyro;
 
         // Configure the button bindings
         driveSub.setDefaultCommand(
-        new DriveCartesian(
-            driveSub,
-            ()-> flightStick.getRawAxis(1), //y speed - forwards & backwards
-            ()-> flightStick.getRawAxis(0), //x speed - strafe
-            ()-> flightStick.getRawAxis(2)  //z rotation - turning
-        ));
+                new DriveCartesian(
+                        driveSub,
+                        () -> flightStick.getRawAxis(1), //y speed - forwards & backwards
+                        () -> flightStick.getRawAxis(0), //x speed - strafe
+                        () -> flightStick.getRawAxis(2)  //z rotation - turning
+                ));
     }
 
     /**
@@ -96,14 +98,14 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand(AutonomousPhaseType chosen) {
         switch (chosen) {
-            case DEFAULT: {
-                return new AutonomousPhase(driveSub);
-            }
             case CHARGE_STATION: {
                 return new AutonomousChargeStation(driveSub, gyro, robot);
             }
             case LEAVE_COMMUNITY: {
-                return new AutonomousLeaveCommunity(driveSub, gyro, robot);
+                return new AutonomousLeaveCommunity(driveSub);
+            }
+            case SCORE: {
+                return new AutonomousScore(towerSub, armSub, clawSub, driveSub);
             }
             default: {
                 System.out.println("Bruh, none");
