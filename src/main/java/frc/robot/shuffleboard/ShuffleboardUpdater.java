@@ -78,8 +78,9 @@ public class ShuffleboardUpdater {
                 .withWidget(BuiltInWidgets.kGyro);
 
         // Selections
-        AutonomousPhaseType.LEAVE_COMMUNITY.register(chooser);
-        AutonomousPhaseType.CHARGE_STATION.register(chooser);
+        for (AutonomousPhaseType phaseType : AutonomousPhaseType.values()) {
+            phaseType.register(chooser);
+        }
 
         tab.add("autonomous", chooser)
                 .withWidget(BuiltInWidgets.kSplitButtonChooser);
