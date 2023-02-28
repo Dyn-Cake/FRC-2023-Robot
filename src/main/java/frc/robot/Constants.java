@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Preferences;
-
 import java.util.HashMap;
 
 /**
@@ -19,10 +17,11 @@ import java.util.HashMap;
 public final class Constants {
 
     //the number is the pwm channel that the spark is attached to :)
-    public static int clawMotorLeft = 7;
-    public static int clawMotorRight = 6;
-    public static int towerMotor = 1;
-    public static int armMotor = 8;
+    public static final int clawMotorLeft = 7;
+    public static final int clawMotorRight = 6;
+    public static final int towerMotor = 1;
+    public static final int armMotor = 8;
+    public static final int armLimitSwitch = -666;
 
     //the number is the CAN ID that the spark max is attached to :)
     //public static int towerMotor = 6;
@@ -32,14 +31,14 @@ public final class Constants {
     public static int backRightDrive = 2;
     //list of dio ports for sensors
 
-    public static int frontRightEncoder1 = 0;
-    public static int frontRightEncoder2 = 1;
-    public static int frontLeftEncoder1 = 8;
-    public static int frontLeftEncoder2 = 9;
-    public static int backRightEncoder1 = 2;
-    public static int backRightEncoder2 = 3;
-    public static int backLeftEncoder1 = 6;
-    public static int backLeftEncoder2 = 7;
+    public static final int frontRightEncoder1 = 0;
+    public static final int frontRightEncoder2 = 1;
+    public static final int frontLeftEncoder1 = 8;
+    public static final int frontLeftEncoder2 = 9;
+    public static final int backRightEncoder1 = 2;
+    public static final int backRightEncoder2 = 3;
+    public static final int backLeftEncoder1 = 6;
+    public static final int backLeftEncoder2 = 7;
     //setting the voltage (power) for the motors
     //out of 12
     //change this later when figuring out the voltage for the robot
@@ -66,25 +65,6 @@ public final class Constants {
         //put(towerMotor, "tower motor");
         //put(armMotor, "arm motor");
     }};
-
-    public static HashMap<Integer, String> driveMotors = new HashMap<>() {{
-        put(backLeftDrive, "back left drive");
-        put(frontLeftDrive, "front left drive");
-        //put(frontRightDrive, "front right drive");
-        //put(backRightDrive, "back right drive");
-    }};
-
-
-    static {
-
-        //TODO look for pointers or references in java if possible, try create a hashmap<name, pointer>
-        Preferences.setDouble("deadband", deadband);
-
-    }
-
-    public static void update() {
-        deadband = Preferences.getDouble("deadband", deadband);
-    }
 
 }
 

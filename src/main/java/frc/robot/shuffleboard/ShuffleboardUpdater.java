@@ -17,13 +17,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShuffleboardUpdater {
-    private long lastTriggered;
-    private HashMap<Integer, ShuffleboardElement<Spark>> motors;
     private final SendableChooser<AutonomousPhaseType> chooser = new SendableChooser<>();
     private final ShuffleboardTab tab;
+    private final AHRS gyro;
+    private long lastTriggered;
+    private HashMap<Integer, ShuffleboardElement<Spark>> motors;
     private GenericEntry gyroPitch;
     private NetworkTable limeLight;
-    private final AHRS gyro;
     private NetworkTableEntry tx;
     private NetworkTableEntry ty;
     private NetworkTableEntry ta;
@@ -34,13 +34,13 @@ public class ShuffleboardUpdater {
 
     /**
      * @param motors A hashmap where the key is the port of the motor and the string is the name
+     * @param gyro   An instance of an AHRS gyro
      */
     public ShuffleboardUpdater(HashMap<Integer, String> motors, AHRS gyro) {
         tab = Shuffleboard.getTab("Robot");
         //Variables init only
         lastTriggered = System.currentTimeMillis();
         this.gyro = gyro;
-
 
 
         //limelight = NetworkTableInstance.getDefault().getTable("limelight");
@@ -72,20 +72,22 @@ public class ShuffleboardUpdater {
 
         //adding widgets to shuffleboard
         gyroPitch = tab.add("gyroPitch", gyro.getPitch())
-        .withWidget(BuiltInWidgets.kTextView)
-        .getEntry();
+                .withWidget(BuiltInWidgets.kTextView)
+                .getEntry();
         tab.add(gyro)
-        .withWidget(BuiltInWidgets.kGyro);
+                .withWidget(BuiltInWidgets.kGyro);
 
         // Selections
-        chooser.addOption("Default", AutonomousPhaseType.DEFAULT);
-        chooser.addOption("Alt", AutonomousPhaseType.ALTERNATIVE);
+        for (AutonomousPhaseType phaseType : AutonomousPhaseType.values()) {
+            phaseType.register(chooser);
+        }
+
         tab.add("autonomous", chooser)
                 .withWidget(BuiltInWidgets.kSplitButtonChooser);
 
         // limelight
         //LimelightHelpers.LimelightResults llresults = LimelightHelpers.getLatestResults("");
-        LimelightHelpers.setCropWindow("",-1,1,-1,1);
+        LimelightHelpers.setCropWindow("", -1, 1, -1, 1);
         LimelightHelpers.setLEDMode_ForceBlink("");
         LimelightHelpers.getLimelightURLString("limelight", "");
 
@@ -116,7 +118,7 @@ public class ShuffleboardUpdater {
 
     private void updateMotors() {
 
-        for(Integer port : motors.keySet()) {
+        for (Integer port : motors.keySet()) {
             ShuffleboardElement<Spark> motor = motors.get(port);
             motor.getGenericEntry().setDouble(motor.getElement().get());
         }

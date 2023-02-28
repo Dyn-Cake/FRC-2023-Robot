@@ -6,20 +6,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import java.util.HashMap;
 
 public class CANSparkMaxMotorManager {
-    private HashMap<Integer, CANSparkMax> motors;
     private static CANSparkMaxMotorManager instance;
+    private final HashMap<Integer, CANSparkMax> motors;
+
     public CANSparkMaxMotorManager() {
         motors = new HashMap<>();
-
-    }
-    public CANSparkMax getMotor(int port) {
-        if (motors.containsKey(port))
-            return motors.get(port);
-        else {
-            CANSparkMax sparkMax = new CANSparkMax(port, MotorType.kBrushless); // Every motor is brushless
-            motors.put(port, sparkMax);
-            return sparkMax;
-        }
     }
 
     public static CANSparkMaxMotorManager getInstance() {
@@ -28,6 +19,16 @@ public class CANSparkMaxMotorManager {
         }
 
         return instance;
+    }
+
+    public CANSparkMax getMotor(int port) {
+        if (motors.containsKey(port))
+            return motors.get(port);
+        else {
+            CANSparkMax sparkMax = new CANSparkMax(port, MotorType.kBrushless); // Every motor is brushless
+            motors.put(port, sparkMax);
+            return sparkMax;
+        }
     }
 }
 

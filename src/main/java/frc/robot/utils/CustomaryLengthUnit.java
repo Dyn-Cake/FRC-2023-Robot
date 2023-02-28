@@ -7,6 +7,7 @@ public enum CustomaryLengthUnit {
     MILES(63360);
 
     private final long multiplier;
+
     CustomaryLengthUnit(long multiplier) {
         this.multiplier = multiplier;
     }
