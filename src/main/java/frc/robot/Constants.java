@@ -17,11 +17,11 @@ import java.util.HashMap;
 public final class Constants {
 
     //the number is the pwm channel that the spark is attached to :)
-    public static final int clawMotorLeft = 7;
-    public static final int clawMotorRight = 6;
-    public static final int towerMotor = 1;
-    public static final int armMotor = 8;
-    public static final int armLimitSwitch = -666;
+    public static final int clawMotorLeft = 9;
+    public static final int clawMotorRight = 4;
+    public static final int towerMotor = 8;
+    public static final int armMotor = 5;
+    public static final int armLimitSwitch = 0;
 
     //the number is the CAN ID that the spark max is attached to :)
     //public static int towerMotor = 6;
