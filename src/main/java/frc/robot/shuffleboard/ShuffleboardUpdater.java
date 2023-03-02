@@ -1,10 +1,10 @@
 package frc.robot.shuffleboard;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -21,7 +21,7 @@ public class ShuffleboardUpdater {
     private final ShuffleboardTab tab;
     private final AHRS gyro;
     private long lastTriggered;
-    private HashMap<Integer, ShuffleboardElement<Spark>> motors;
+    private HashMap<Integer, ShuffleboardElement<CANSparkMax>> motors;
     private GenericEntry gyroPitch;
     private NetworkTable limeLight;
     private NetworkTableEntry tx;
@@ -52,9 +52,9 @@ public class ShuffleboardUpdater {
     private void init(HashMap<Integer, String> motors) {
 
         // motors
-        SparkMotorManager motorManager = SparkMotorManager.getInstance();
+        CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
 
-        HashMap<Integer, ShuffleboardElement<Spark>> sparkMotors = new HashMap<>();
+        HashMap<Integer, ShuffleboardElement<CANSparkMax>> sparkMotors = new HashMap<>();
         for (Integer port : motors.keySet()) {
 
             GenericEntry extraMotor =
@@ -66,7 +66,7 @@ public class ShuffleboardUpdater {
                             .withProperties(Map.of("min", -12, "max", 12))
                             .getEntry();
 
-            sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
+//            sparkMotors.put(port, new ShuffleboardElement<>(motorManager.getMotor(1), motors.get(port), extraMotor));
         }
         this.motors = sparkMotors;
 
@@ -117,12 +117,10 @@ public class ShuffleboardUpdater {
     }
 
     private void updateMotors() {
-
         for (Integer port : motors.keySet()) {
-            ShuffleboardElement<Spark> motor = motors.get(port);
+            ShuffleboardElement<CANSparkMax> motor = motors.get(port);
             motor.getGenericEntry().setDouble(motor.getElement().get());
         }
-
     }
 
     private void updateGyro() {
