@@ -1,33 +1,30 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.shuffleboard.SparkMotorManager;
+import frc.robot.shuffleboard.CANSparkMaxMotorManager;
 
 
 public class ClawSub extends SubsystemBase {
-    private final Spark clawMotorLeft;
-    private final Spark clawMotorRight;
+    private final CANSparkMax clawMotor;
 
     public ClawSub() {
-        SparkMotorManager sparkMotorManager = SparkMotorManager.getInstance();
-        clawMotorLeft = sparkMotorManager.getMotor(Constants.clawMotorLeft);
-        clawMotorRight = sparkMotorManager.getMotor(Constants.clawMotorRight);
+        CANSparkMaxMotorManager sparkMaxMotorManager = CANSparkMaxMotorManager.getInstance();
+        clawMotor = sparkMaxMotorManager.getMotor(Constants.clawMotorRight, MotorType.kBrushed);
     }
 
     public void open() {
-        clawMotorLeft.setVoltage(Constants.clawMotorLeftVolt);
-        clawMotorRight.setVoltage(-Constants.clawMotorRightVolt);
+        clawMotor.setVoltage(-Constants.clawMotorRightVolt);
     }
 
     public void close() {
-        clawMotorLeft.setVoltage(-Constants.clawMotorLeftVolt);
-        clawMotorRight.setVoltage(Constants.clawMotorRightVolt);
+        clawMotor.setVoltage(Constants.clawMotorRightVolt);
     }
 
     public void stop() {
-        clawMotorLeft.setVoltage(0);
-        clawMotorRight.setVoltage(0);
+        clawMotor.setVoltage(0);
     }
 }

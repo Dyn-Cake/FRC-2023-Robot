@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 //imports for the Spark Maxs
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -30,14 +31,14 @@ public class DriveTrainSub extends SubsystemBase {
 
         CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
 
-        frontRight = motorManager.getMotor(Constants.frontRightDrive);
+        frontRight = motorManager.getMotor(Constants.frontRightDrive, MotorType.kBrushless);
         frontRight.setInverted(true);
 
-        backRight = motorManager.getMotor(Constants.backRightDrive);
+        backRight = motorManager.getMotor(Constants.backRightDrive, MotorType.kBrushless);
         backRight.setInverted(true);
 
-        frontLeft = motorManager.getMotor(Constants.frontLeftDrive);
-        backLeft = motorManager.getMotor(Constants.backLeftDrive);
+        frontLeft = motorManager.getMotor(Constants.frontLeftDrive, MotorType.kBrushless);
+        backLeft = motorManager.getMotor(Constants.backLeftDrive, MotorType.kBrushless);
 
         frontRightEncoder.setDistancePerPulse(100); //subject to change
         frontLeftEncoder.setDistancePerPulse(100); //subject to change
