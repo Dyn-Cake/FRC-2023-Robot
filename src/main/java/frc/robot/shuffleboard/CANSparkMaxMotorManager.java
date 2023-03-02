@@ -21,11 +21,11 @@ public class CANSparkMaxMotorManager {
         return instance;
     }
 
-    public CANSparkMax getMotor(int port) {
+    public CANSparkMax getMotor(int port, MotorType type) {
         if (motors.containsKey(port))
             return motors.get(port);
         else {
-            CANSparkMax sparkMax = new CANSparkMax(port, MotorType.kBrushless); // Every motor is brushless
+            CANSparkMax sparkMax = new CANSparkMax(port, type); // Every motor is brushless
             motors.put(port, sparkMax);
             return sparkMax;
         }
