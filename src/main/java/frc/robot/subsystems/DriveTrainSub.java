@@ -31,14 +31,14 @@ public class DriveTrainSub extends SubsystemBase {
 
         CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
 
-        frontRight = motorManager.getMotor(Constants.frontRightDrive, MotorType.kBrushless);
+        frontRight = motorManager.retrieveMotor(Constants.frontRightDrive, MotorType.kBrushless);
         frontRight.setInverted(true);
 
-        backRight = motorManager.getMotor(Constants.backRightDrive, MotorType.kBrushless);
+        backRight = motorManager.retrieveMotor(Constants.backRightDrive, MotorType.kBrushless);
         backRight.setInverted(true);
 
-        frontLeft = motorManager.getMotor(Constants.frontLeftDrive, MotorType.kBrushless);
-        backLeft = motorManager.getMotor(Constants.backLeftDrive, MotorType.kBrushless);
+        frontLeft = motorManager.retrieveMotor(Constants.frontLeftDrive, MotorType.kBrushless);
+        backLeft = motorManager.retrieveMotor(Constants.backLeftDrive, MotorType.kBrushless);
 
         frontRightEncoder.setDistancePerPulse(100); //subject to change
         frontLeftEncoder.setDistancePerPulse(100); //subject to change
