@@ -1,8 +1,6 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.shuffleboard.CANSparkMaxMotorManager;
@@ -12,7 +10,8 @@ public class ArmSub extends SubsystemBase {
 
     public ArmSub() {
         CANSparkMaxMotorManager sparkMaxMotorManager = CANSparkMaxMotorManager.getInstance();
-        armMotor = sparkMaxMotorManager.getMotor(Constants.armMotor, MotorType.kBrushed);
+        armMotor = sparkMaxMotorManager.retrieveMotor(Constants.armMotor, CANSparkMaxLowLevel.MotorType.kBrushed);
+
     }
 
     public void extend() {

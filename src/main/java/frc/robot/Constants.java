@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+
 import java.util.HashMap;
 
 /**
@@ -17,6 +18,10 @@ import java.util.HashMap;
 public final class Constants {
 
     //the number is the pwm channel that the spark is attached to :)
+    public static final int backLeftDrive = 2; //9
+    public static final int frontLeftDrive = 4; //6
+    public static final int frontRightDrive = 3; //7
+    public static final int backRightDrive = 5; //8
     public static final int clawMotorLeft = 9;
     public static final int clawMotorRight = 4;
     public static final int towerMotor = 8;
@@ -65,6 +70,8 @@ public final class Constants {
         //put(towerMotor, "tower motor");
         //put(armMotor, "arm motor");
     }};
+
+
 
 }
 
