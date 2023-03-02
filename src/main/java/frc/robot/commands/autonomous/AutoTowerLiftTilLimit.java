@@ -22,7 +22,8 @@ public class AutoTowerLiftTilLimit extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return tower.getLimitSwitch().get();
+        // return tower.getLimitSwitch().get();
+        return false;
     }
 
 }

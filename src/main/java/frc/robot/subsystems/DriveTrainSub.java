@@ -1,25 +1,24 @@
 package frc.robot.subsystems;
 
 //imports for the Spark Maxs
-/*import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;*/
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.StrafeDirection;
-import frc.robot.shuffleboard.SparkMotorManager;
+import frc.robot.shuffleboard.CANSparkMaxMotorManager;
 import frc.robot.utils.CustomaryLength;
 import frc.robot.utils.CustomaryLengthUnit;
 
 public class DriveTrainSub extends SubsystemBase {
 
-    private final Spark frontRight;
-    private final Spark backRight;
-    private final Spark frontLeft;
-    private final Spark backLeft;
+    private final CANSparkMax frontRight;
+    private final CANSparkMax backRight;
+    private final CANSparkMax frontLeft;
+    private final CANSparkMax backLeft;
 
     //encoders for drive
     private final Encoder frontRightEncoder = new Encoder(Constants.frontRightEncoder1, Constants.frontRightEncoder2);
@@ -30,16 +29,16 @@ public class DriveTrainSub extends SubsystemBase {
 
     public DriveTrainSub() {
 
-        SparkMotorManager motorManager = SparkMotorManager.getInstance();
+        CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
 
-        frontRight = motorManager.getMotor(Constants.frontRightDrive);
+        frontRight = motorManager.getMotor(Constants.frontRightDrive, MotorType.kBrushless);
         frontRight.setInverted(true);
 
-        backRight = motorManager.getMotor(Constants.backRightDrive);
+        backRight = motorManager.getMotor(Constants.backRightDrive, MotorType.kBrushless);
         backRight.setInverted(true);
 
-        frontLeft = motorManager.getMotor(Constants.frontLeftDrive);
-        backLeft = motorManager.getMotor(Constants.backLeftDrive);
+        frontLeft = motorManager.getMotor(Constants.frontLeftDrive, MotorType.kBrushless);
+        backLeft = motorManager.getMotor(Constants.backLeftDrive, MotorType.kBrushless);
 
         frontRightEncoder.setDistancePerPulse(100); //subject to change
         frontLeftEncoder.setDistancePerPulse(100); //subject to change
