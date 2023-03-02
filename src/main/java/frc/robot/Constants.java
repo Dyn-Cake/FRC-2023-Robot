@@ -17,8 +17,7 @@ import java.util.HashMap;
 public final class Constants {
 
     //the number is the pwm channel that the spark is attached to :)
-    public static final int clawMotorLeft = 9;
-    public static final int clawMotorRight = 4;
+    public static final int clawMotor = 4;
     public static final int towerMotor = 8;
     public static final int armMotor = 5;
     public static final int armLimitSwitch = 0;
@@ -43,9 +42,7 @@ public final class Constants {
     //out of 12
     //change this later when figuring out the voltage for the robot
     //claw volt
-
-    public static double clawMotorLeftVolt = 0;
-    public static double clawMotorRightVolt = 7;
+    public static double clawMotorVolt = 7;
     //drive volt
     public static double autoDrive = .3;
     //tower volt
@@ -60,8 +57,7 @@ public final class Constants {
 
     public static double deadband = 0.2;
     public static HashMap<Integer, String> extraMotors = new HashMap<>() {{
-        put(clawMotorLeft, "claw motor left");
-        put(clawMotorRight, "claw motor right");
+        put(clawMotor, "claw motor");
         //put(towerMotor, "tower motor");
         //put(armMotor, "arm motor");
     }};

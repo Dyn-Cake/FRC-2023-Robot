@@ -17,7 +17,7 @@ public class TowerSub extends SubsystemBase {
         // towerEncoder = towerMotor.getEncoder(Type.kHallSensor, 42);
         // towerEncoder.setPosition(0);
         CANSparkMaxMotorManager sparkMaxMotorManager = CANSparkMaxMotorManager.getInstance();
-        towerMotor = sparkMaxMotorManager.getMotor(Constants.clawMotorRight, MotorType.kBrushless);
+        towerMotor = sparkMaxMotorManager.getMotor(Constants.clawMotor, MotorType.kBrushless);
         towerMotor.setIdleMode(IdleMode.kBrake);
 
         limitSwitch = new DigitalInput(Constants.armLimitSwitch);
