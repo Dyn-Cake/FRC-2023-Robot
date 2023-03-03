@@ -29,16 +29,23 @@ public class DriveTrainSub extends SubsystemBase {
 
     public DriveTrainSub() {
 
-        CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
+        // CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
 
-        frontRight = motorManager.retrieveMotor(Constants.frontRightDrive, MotorType.kBrushless);
+        // frontRight = motorManager.retrieveMotor(Constants.frontRightDrive, MotorType.kBrushless);
+        // frontRight.setInverted(true);
+
+        // backRight = motorManager.retrieveMotor(Constants.backRightDrive, MotorType.kBrushless);
+        // backRight.setInverted(true);
+
+        // frontLeft = motorManager.retrieveMotor(Constants.frontLeftDrive, MotorType.kBrushless);
+        // backLeft = motorManager.retrieveMotor(Constants.backLeftDrive, MotorType.kBrushless);
+
+        frontRight = new CANSparkMax(Constants.frontRightDrive, MotorType.kBrushless);
         frontRight.setInverted(true);
-
-        backRight = motorManager.retrieveMotor(Constants.backRightDrive, MotorType.kBrushless);
+        backRight = new CANSparkMax(Constants.backRightDrive, MotorType.kBrushless);
         backRight.setInverted(true);
-
-        frontLeft = motorManager.retrieveMotor(Constants.frontLeftDrive, MotorType.kBrushless);
-        backLeft = motorManager.retrieveMotor(Constants.backLeftDrive, MotorType.kBrushless);
+        frontLeft = new CANSparkMax(Constants.frontLeftDrive, MotorType.kBrushless);
+        backLeft = new CANSparkMax(Constants.backLeftDrive, MotorType.kBrushless);
 
         frontRightEncoder.setDistancePerPulse(100); //subject to change
         frontLeftEncoder.setDistancePerPulse(100); //subject to change
@@ -107,6 +114,6 @@ public class DriveTrainSub extends SubsystemBase {
     }
 
     public void mecanumDrive(double ySpeed, double xSpeed, double zRotation) {
-        mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, zRotation / 1.7);
+        mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, zRotation / 1.5);
     }
 }

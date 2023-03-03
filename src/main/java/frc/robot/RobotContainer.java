@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCartesian;
 import frc.robot.commands.arm.ExtendArm;
@@ -55,13 +56,10 @@ public class RobotContainer {
         this.gyro = gyro;
 
         // Configure the button bindings
-        driveSub.setDefaultCommand(
-                new DriveCartesian(
-                        driveSub,
-                        () -> flightStick.getRawAxis(1), //y speed - forwards & backwards
-                        () -> flightStick.getRawAxis(0), //x speed - strafe
-                        () -> flightStick.getRawAxis(2)  //z rotation - turning
-                ));
+        System.out.println("Before works");
+                System.out.println("ySpeed: " + flightStick.getRawAxis(1));
+                System.out.println("xSpeed: " + flightStick.getRawAxis(0));
+                System.out.println("zRotation: " + flightStick.getRawAxis(2));
     }
 
     /**
@@ -89,6 +87,18 @@ public class RobotContainer {
         butt12.onFalse(new StopArm(armSub));
         butt11.onTrue(new RetractArm(armSub));
         butt11.onFalse(new StopArm(armSub));
+        driveSub.setDefaultCommand(
+            new RunCommand(
+                () -> driveSub.mecanumDrive(
+                    flightStick.getY(), flightStick.getX(), flightStick.getZ()), driveSub
+                )
+            );
+                // new DriveCartesian(
+                //         driveSub,
+                //         () -> flightStick.getRawAxis(1), //y speed - forwards & backwards
+                //         () -> flightStick.getRawAxis(0), //x speed - strafe
+                //         () -> flightStick.getRawAxis(2)  //z rotation - turning
+                // ));
     }
 
     /**
