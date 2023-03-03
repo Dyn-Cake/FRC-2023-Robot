@@ -60,9 +60,7 @@ public class DriveCartesian extends CommandBase {
     //condition for the command to end on its own
     @Override
     public boolean isFinished() {
-
         return false;
-
     }
 
 }

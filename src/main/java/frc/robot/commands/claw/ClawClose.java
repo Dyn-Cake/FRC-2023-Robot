@@ -12,6 +12,11 @@ public class ClawClose extends CommandBase {
     }
 
     @Override
+    public void execute(){
+        claw.close();
+    }
+
+    @Override
     public boolean isFinished() {
         return false;
     }
