@@ -9,9 +9,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DriveCartesian;
+import frc.robot.commands.DriveJoystickCartesian;
 import frc.robot.commands.arm.ExtendArm;
 import frc.robot.commands.arm.RetractArm;
 import frc.robot.commands.arm.StopArm;
@@ -88,17 +87,22 @@ public class RobotContainer {
         butt11.onTrue(new RetractArm(armSub));
         butt11.onFalse(new StopArm(armSub));
         driveSub.setDefaultCommand(
-            new RunCommand(
-                () -> driveSub.mecanumDrive(
-                    flightStick.getY(), flightStick.getX(), flightStick.getZ()), driveSub
+//            new RunCommand(
+//                () -> driveSub.mecanumDrive(
+//                    flightStick.getY(), flightStick.getX(), flightStick.getZ()), driveSub
+//                )
+//            );
+                 /*new DriveCartesian(
+                         driveSub,
+                         flightStick.getRawAxis(1), //y speed - forwards & backwards
+                         flightStick.getRawAxis(0), //x speed - strafe
+                         flightStick.getRawAxis(2)  //z rotation - turning
+                 )*/
+                new DriveJoystickCartesian(
+                        driveSub,
+                        flightStick
                 )
-            );
-                // new DriveCartesian(
-                //         driveSub,
-                //         () -> flightStick.getRawAxis(1), //y speed - forwards & backwards
-                //         () -> flightStick.getRawAxis(0), //x speed - strafe
-                //         () -> flightStick.getRawAxis(2)  //z rotation - turning
-                // ));
+        );
     }
 
     /**
@@ -107,6 +111,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand(AutonomousPhaseType chosen) {
+        if (chosen == null) return null;
         switch (chosen) {
             case CHARGE_STATION: {
                 return new AutonomousChargeStation(driveSub, gyro, robot);
