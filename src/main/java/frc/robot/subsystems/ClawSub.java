@@ -13,15 +13,15 @@ public class ClawSub extends SubsystemBase {
 
     public ClawSub() {
         CANSparkMaxMotorManager sparkMaxMotorManager = CANSparkMaxMotorManager.getInstance();
-        clawMotor = sparkMaxMotorManager.getMotor(Constants.clawMotorRight, MotorType.kBrushed);
+        clawMotor = sparkMaxMotorManager.retrieveMotor(Constants.clawMotor, MotorType.kBrushed);
     }
 
     public void open() {
-        clawMotor.setVoltage(-Constants.clawMotorRightVolt);
+        clawMotor.setVoltage(-Constants.clawMotorVolt);
     }
 
     public void close() {
-        clawMotor.setVoltage(Constants.clawMotorRightVolt);
+        clawMotor.setVoltage(Constants.clawMotorVolt);
     }
 
     public void stop() {
