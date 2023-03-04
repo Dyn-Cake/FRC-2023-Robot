@@ -3,8 +3,11 @@ package frc.robot.commands.autonomous.commandgroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.StrafeDirection;
 import frc.robot.commands.autonomous.AutoArmExtend;
+import frc.robot.commands.autonomous.AutoArmRetract;
+import frc.robot.commands.autonomous.AutoClawClose;
 import frc.robot.commands.autonomous.AutoClawOpen;
 import frc.robot.commands.autonomous.AutoDrive;
+import frc.robot.commands.autonomous.AutoTowerDrop;
 import frc.robot.commands.autonomous.AutoTowerLiftTilLimit;
 import frc.robot.subsystems.ArmSub;
 import frc.robot.subsystems.ClawSub;
@@ -20,9 +23,12 @@ public class AutonomousScore extends SequentialCommandGroup {
                 new AutoTowerLiftTilLimit(towerSub),
                 new AutoArmExtend(armSub),
                 new AutoClawOpen(clawSub),
+                new AutoClawClose(clawSub),
+                new AutoArmRetract(armSub),
+                new AutoTowerDrop(towerSub),
                 new AutoDrive(
                         driveTrainSub,
-                        new CustomaryLength(20, CustomaryLengthUnit.FEET),
+                        new CustomaryLength(16, CustomaryLengthUnit.FEET),
                         StrafeDirection.BACKWARDS
                 )
         );

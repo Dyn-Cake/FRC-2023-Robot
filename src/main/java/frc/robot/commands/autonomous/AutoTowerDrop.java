@@ -8,9 +8,13 @@ public class AutoTowerDrop extends CommandBase {
     private final double duration;
     private double startTime;
 
+    /**
+     * @param subsystem       The subsystem that the robot uses for tower
+     * @param duration        Time to travel for
+     */
     public AutoTowerDrop(TowerSub subsystem) {
         tower = subsystem;
-        duration = 1000;
+        duration = 750;
     }
 
     // only goes once at beginning when command is called
