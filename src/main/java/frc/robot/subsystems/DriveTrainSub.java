@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-//imports for the Spark Maxs
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -49,17 +48,20 @@ public class DriveTrainSub extends SubsystemBase {
 
         //initializing encoders
         frontRightEncoder = frontRight.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(0);
+        frontRightEncoder.setPositionConversionFactor(1); //To be changed
+
         backRightEncoder = backRight.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(0);
+        backRightEncoder.setPositionConversionFactor(1); //To be changed
+
         frontLeftEncoder = frontLeft.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(0);
+        frontRightEncoder.setPositionConversionFactor(1); //To be changed
+
         backLeftEncoder = backLeft.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(0);
+        frontRightEncoder.setPositionConversionFactor(1); //To be changed
 
         //initializing the mecanum drive
         mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-        mecanumDrive.setDeadband(0.2);
+        mecanumDrive.setDeadband(0.3);
     }
 
     //resets the encoders to 0
@@ -74,10 +76,10 @@ public class DriveTrainSub extends SubsystemBase {
     public double getDistance() {
         return Math.abs(
                 (
-                        backRightEncoder.getPosition() +
-                                backLeftEncoder.getPosition() +
-                                frontRightEncoder.getPosition() +
-                                frontLeftEncoder.getPosition()
+                        -backRightEncoder.getPosition() +
+                        backLeftEncoder.getPosition() +
+                        -frontRightEncoder.getPosition() +
+                        frontLeftEncoder.getPosition()
                 ) / 4
         );
     }

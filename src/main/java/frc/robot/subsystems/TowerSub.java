@@ -21,13 +21,14 @@ public class TowerSub extends SubsystemBase {
         towerEncoder = towerMotor.getEncoder(Type.kHallSensor, 42);
         towerEncoder.setPosition(0);
         towerMotor.setIdleMode(IdleMode.kBrake);
+        towerMotor.burnFlash();
 
         limitSwitch = new DigitalInput(Constants.armLimitSwitch);
     }
 
 
     public void lift() {
-        if (!limitSwitch.get())
+        if (!limitSwitch.get() && towerEncoder.getPosition() < 0.25)
             towerMotor.setVoltage(-Constants.towerMotorVolt);
         else
             towerMotor.setVoltage(0);

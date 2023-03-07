@@ -21,8 +21,8 @@ public class DriveJoystickCartesian extends CommandBase {
     @Override
     public void execute() {
         drive.mecanumDrive(
-            joystick.getRawAxis(0),
             joystick.getRawAxis(1),
+            joystick.getRawAxis(0),
             joystick.getRawAxis(2)
         );
     }
