@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-//imports for the Spark Maxs
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -62,7 +61,7 @@ public class DriveTrainSub extends SubsystemBase {
 
         //initializing the mecanum drive
         mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-        mecanumDrive.setDeadband(0.25);
+        mecanumDrive.setDeadband(0.3);
     }
 
     //resets the encoders to 0

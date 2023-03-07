@@ -94,19 +94,17 @@ public class ShuffleboardUpdater {
         // ta = limeLight.getEntry("ta");
         // tx = limeLight.getEntry("tx");
         // ty = limeLight.getEntry("ty");
-        // txEntry = tab.add("tx", tx.getDouble(0.0))
+        // txEntry = tab.add("Horizontal Offset", tx.getDouble(0.0))
         // .withWidget(BuiltInWidgets.kTextView)
         // .getEntry();
-        // tyEntry = tab.add("tx", ty.getDouble(0.0))
+        // tyEntry = tab.add("Vertical Offset", ty.getDouble(0.0))
         // .withWidget(BuiltInWidgets.kTextView)
         // .getEntry();
-        // taEntry = tab.add("tx", ta.getDouble(0.0))
+        // taEntry = tab.add("Target Area", ta.getDouble(0.0))
         // .withWidget(BuiltInWidgets.kTextView)
         // .getEntry();
 
-
-        //ledMode = limelight.setEntry(2);
-
+        //limeLight.getEntry("camMode").setInteger(1);
     }
 
     public void update() {
@@ -119,7 +117,7 @@ public class ShuffleboardUpdater {
     private void updateMotors() {
         for (Integer port : motors.keySet()) {
             ShuffleboardElement<CANSparkMax> motor = motors.get(port);
-            motor.getGenericEntry().setDouble(motor.getElement().get());
+            motor.getGenericEntry().setDouble(motor.getElement().getBusVoltage());
         }
     }
 

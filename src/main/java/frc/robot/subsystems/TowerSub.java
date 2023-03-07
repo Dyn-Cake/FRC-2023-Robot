@@ -28,7 +28,7 @@ public class TowerSub extends SubsystemBase {
 
 
     public void lift() {
-        if (!limitSwitch.get())
+        if (!limitSwitch.get() && towerEncoder.getPosition() < 0.25)
             towerMotor.setVoltage(-Constants.towerMotorVolt);
         else
             towerMotor.setVoltage(0);
