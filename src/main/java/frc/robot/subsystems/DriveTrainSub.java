@@ -48,16 +48,16 @@ public class DriveTrainSub extends SubsystemBase {
 
         //initializing encoders
         frontRightEncoder = frontRight.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(1); //To be changed
+        frontRightEncoder.setPositionConversionFactor(10.71); //To be changed
 
         backRightEncoder = backRight.getEncoder(Type.kHallSensor, 42);
-        backRightEncoder.setPositionConversionFactor(1); //To be changed
+        backRightEncoder.setPositionConversionFactor(10.71); //To be changed
 
         frontLeftEncoder = frontLeft.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(1); //To be changed
+        frontRightEncoder.setPositionConversionFactor(10.71); //To be changed
 
         backLeftEncoder = backLeft.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(1); //To be changed
+        frontRightEncoder.setPositionConversionFactor(10.71); //To be changed
 
         //initializing the mecanum drive
         mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
@@ -122,6 +122,9 @@ public class DriveTrainSub extends SubsystemBase {
     }
 
     public void mecanumDrive(double ySpeed, double xSpeed, double zRotation) {
-        mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, zRotation / 1.5);
+        if(zRotation > .25 || zRotation < -.25)
+            mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, zRotation / 1.5);
+        else
+            mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, 0);
     }
 }
