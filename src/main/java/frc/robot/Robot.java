@@ -5,8 +5,11 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
@@ -38,7 +41,7 @@ public class Robot extends TimedRobot {
         AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
         gyro.reset();
         smartDashboardUpdater = new ShuffleboardUpdater(Constants.extraMotors, gyro);
-        //HttpCamera limeHttpCamera = new HttpCamera("limelight", getLimelightURLString());
+        // Shuffleboard.getTab("Robot").addCamera("limelight", "limelight camera", "10.24.41.54");
     }
 
     /**
