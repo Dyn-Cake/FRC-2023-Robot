@@ -12,10 +12,9 @@ public class AutonomousLeaveCommunity extends SequentialCommandGroup {
         addCommands(
                 new AutoDrive(
                         driveTrainSub,
-                        new CustomaryLength(94, CustomaryLengthUnit.INCHES),
+                        new CustomaryLength(24, CustomaryLengthUnit.FEET),
                         StrafeDirection.FORWARD
                 )
-
         );
 
     }

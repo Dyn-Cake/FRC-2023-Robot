@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
 import frc.robot.shuffleboard.ShuffleboardUpdater;
+import frc.robot.subsystems.DriveTrainSub;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -41,7 +42,6 @@ public class Robot extends TimedRobot {
         AHRS gyro = new AHRS(SPI.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
         gyro.reset();
         smartDashboardUpdater = new ShuffleboardUpdater(Constants.extraMotors, gyro);
-        // Shuffleboard.getTab("Robot").addCamera("limelight", "limelight camera", "10.24.41.54");
     }
 
     /**

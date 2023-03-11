@@ -48,20 +48,26 @@ public class DriveTrainSub extends SubsystemBase {
 
         //initializing encoders
         frontRightEncoder = frontRight.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(10.71); //To be changed
+        frontRightEncoder.setPositionConversionFactor(.5697); //To be changed
 
         backRightEncoder = backRight.getEncoder(Type.kHallSensor, 42);
-        backRightEncoder.setPositionConversionFactor(10.71); //To be changed
+        backRightEncoder.setPositionConversionFactor(.5697); //To be changed
 
         frontLeftEncoder = frontLeft.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(10.71); //To be changed
+        frontLeftEncoder.setPositionConversionFactor(.5697); //To be changed
 
         backLeftEncoder = backLeft.getEncoder(Type.kHallSensor, 42);
-        frontRightEncoder.setPositionConversionFactor(10.71); //To be changed
+        backLeftEncoder.setPositionConversionFactor(.5697); //To be changed
 
         //initializing the mecanum drive
         mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
         mecanumDrive.setDeadband(0.3);
+
+        //resetting encoders
+        frontRightEncoder.setPosition(0);
+        frontLeftEncoder.setPosition(0);
+        backRightEncoder.setPosition(0);
+        backLeftEncoder.setPosition(0);
     }
 
     //resets the encoders to 0
@@ -76,9 +82,9 @@ public class DriveTrainSub extends SubsystemBase {
     public double getDistance() {
         return Math.abs(
                 (
-                        -backRightEncoder.getPosition() +
+                        backRightEncoder.getPosition() +
                         backLeftEncoder.getPosition() +
-                        -frontRightEncoder.getPosition() +
+                        frontRightEncoder.getPosition() +
                         frontLeftEncoder.getPosition()
                 ) / 4
         );
@@ -94,6 +100,7 @@ public class DriveTrainSub extends SubsystemBase {
             case FORWARD: {
                 while (getDistance() < feet) {
                     mecanumDrive(-Constants.autoDrive * brake, 0, 0);
+                    System.out.println(getDistance());
                 }
                 break;
             }
@@ -122,6 +129,9 @@ public class DriveTrainSub extends SubsystemBase {
     }
 
     public void mecanumDrive(double ySpeed, double xSpeed, double zRotation) {
+        // System.out.println("backRight: " + backRightEncoder.getPosition() + "backLeft: " + backLeftEncoder.getPosition() + "frontRight: " +
+        // frontRightEncoder.getPosition() + "frontLeft: " +
+        // frontLeftEncoder.getPosition());
         if(zRotation > .25 || zRotation < -.25)
             mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, zRotation / 1.5);
         else
