@@ -46,7 +46,7 @@ public final class Constants {
     //claw volt
     public static double clawMotorVolt = 4.5;
     //drive SPEED -1.0 to 1.0
-    public static double autoDrive = .5;
+    public static double autoDrive = .6;
     //tower volt
     public static double towerMotorVolt = 2;
     //arm volt

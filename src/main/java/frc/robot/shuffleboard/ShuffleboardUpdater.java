@@ -72,7 +72,7 @@ public class ShuffleboardUpdater {
         this.motors = sparkMotors;
 
         //adding widgets to shuffleboard
-        gyroPitch = tab.add("gyroPitch", gyro.getPitch())
+        gyroPitch = tab.add("gyroPitch", gyro.getYaw())
                 .withWidget(BuiltInWidgets.kTextView)
                 .getEntry();
         tab.add(gyro)
@@ -127,7 +127,7 @@ public class ShuffleboardUpdater {
     }
 
     private void updateGyro() {
-        gyroPitch.setFloat(gyro.getPitch());
+        gyroPitch.setFloat(gyro.getYaw());
     }
 
     private void updateDebug() {

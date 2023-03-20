@@ -71,16 +71,22 @@ public class RobotContainer {
         final JoystickButton butt12 = new JoystickButton(flightStickControl, 12);
         butt8.onTrue(new ClawOpen(clawSub));
         butt8.onFalse(new ClawStop(clawSub));
+
         butt7.onTrue(new ClawClose(clawSub));
         butt7.onFalse(new ClawStop(clawSub));
-        butt10.onTrue(new LiftTower(towerSub));
-        butt10.onFalse(new StopTower(towerSub));
-        butt9.onTrue(new DropTower(towerSub));
-        butt9.onFalse(new StopTower(towerSub));
-        butt12.onTrue(new ExtendArm(armSub));
-        butt12.onFalse(new StopArm(armSub));
-        butt11.onTrue(new RetractArm(armSub));
-        butt11.onFalse(new StopArm(armSub));
+
+        butt10.onTrue(new ExtendArm(armSub));
+        butt10.onFalse(new StopArm(armSub));
+
+        butt9.onTrue(new RetractArm(armSub));
+        butt9.onFalse(new StopArm(armSub));
+
+        butt12.onTrue(new LiftTower(towerSub));
+        butt12.onFalse(new StopTower(towerSub));
+
+        butt11.onTrue(new DropTower(towerSub));
+        butt11.onFalse(new StopTower(towerSub));
+
         driveSub.setDefaultCommand(
 //            new RunCommand(
 //                () -> driveSub.mecanumDrive(
@@ -106,7 +112,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand(AutonomousPhaseType chosen) {
-        return new AutonomousLeaveCommunity(driveSub);
+        return new AutonomousChargeStation(driveSub, gyro, robot);
         // if (chosen == null) return null;
         // switch (chosen) {
         //     case CHARGE_STATION: {

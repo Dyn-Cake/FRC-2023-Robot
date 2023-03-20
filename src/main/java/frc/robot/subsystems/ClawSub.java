@@ -25,6 +25,6 @@ public class ClawSub extends SubsystemBase {
     }
 
     public void stop() {
-        clawMotor.setVoltage(0);
+        clawMotor.setVoltage(0.1);
     }
 }
