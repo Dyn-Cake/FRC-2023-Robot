@@ -138,8 +138,9 @@ public class DriveTrainSub extends SubsystemBase {
             mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, (zRotation-.25)/1.2);
         else if(zRotation < -.25)
             mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, (zRotation+.25)/1.2);
-        else
+        else{
             mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, 0);
+        }
     }
     public void cripMecanumDrive(double ySpeed, double xSpeed, double zRotation) {
         if(zRotation > .25)

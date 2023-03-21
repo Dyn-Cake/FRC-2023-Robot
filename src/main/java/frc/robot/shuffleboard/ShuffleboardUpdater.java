@@ -127,7 +127,7 @@ public class ShuffleboardUpdater {
     }
 
     private void updateGyro() {
-        gyroPitch.setFloat(gyro.getYaw());
+        gyroPitch.setFloat(gyro.getPitch());
     }
 
     private void updateDebug() {

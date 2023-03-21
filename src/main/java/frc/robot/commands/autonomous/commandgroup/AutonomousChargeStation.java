@@ -19,7 +19,7 @@ public class AutonomousChargeStation extends SequentialCommandGroup {
                 //         new CustomaryLength(13.7, CustomaryLengthUnit.FEET),
                 //         StrafeDirection.FORWARD
                 // ),
-                new WaitCommand(0.1),
+                // new WaitCommand(0.1),
                 // new AutoDrive(
                 //         driveTrainSub,
                 //         new CustomaryLength(2.5, CustomaryLengthUnit.FEET),

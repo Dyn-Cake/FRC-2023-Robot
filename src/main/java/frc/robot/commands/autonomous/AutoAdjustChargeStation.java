@@ -13,6 +13,7 @@ public class AutoAdjustChargeStation extends CommandBase {
 
     public AutoAdjustChargeStation(DriveTrainSub subsystem, AHRS gyro, Robot robot) {
         driveTrainSub = subsystem;
+        addRequirements(driveTrainSub);
         this.gyro = new AHRS();
         // this.gyro = gyro;
         this.robot = robot;
@@ -25,13 +26,15 @@ public class AutoAdjustChargeStation extends CommandBase {
 
     @Override
     public void execute() {
-        double degrees = gyro.getYaw();
-        System.out.println(degrees);
-        if (degrees > stopThreshold) {
+        double degrees = gyro.getPitch();
+        if (degrees > stopThreshold){
             driveTrainSub.mecanumDrive(.6, 0, 0);
-            System.out.println("bitch");
+        } else if(degrees < -16){
+            driveTrainSub.mecanumDrive(0, 0, 0);
         } else if (degrees < -stopThreshold) {
-            driveTrainSub.mecanumDrive(-.6, 0, 0);
+            driveTrainSub.mecanumDrive(-0.6, 0, 0);
+        } else{
+            driveTrainSub.mecanumDrive(0, 0, 0);
         }
     }
 
