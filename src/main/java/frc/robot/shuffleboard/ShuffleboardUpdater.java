@@ -5,13 +5,14 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutonomousPhaseType;
-// import frc.robot.utils.LimelightHelpers;
+import frc.robot.utils.LimelightHelpers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class ShuffleboardUpdater {
         this.gyro = gyro;
 
 
-        //limelight = NetworkTableInstance.getDefault().getTable("limelight");
+        limeLight = NetworkTableInstance.getDefault().getTable("limelight");
 
         //logic
         init(motors);
@@ -71,7 +72,7 @@ public class ShuffleboardUpdater {
         this.motors = sparkMotors;
 
         //adding widgets to shuffleboard
-        gyroPitch = tab.add("gyroPitch", gyro.getPitch())
+        gyroPitch = tab.add("gyroPitch", gyro.getYaw())
                 .withWidget(BuiltInWidgets.kTextView)
                 .getEntry();
         tab.add(gyro)
@@ -91,40 +92,42 @@ public class ShuffleboardUpdater {
         // LimelightHelpers.setLEDMode_ForceBlink("");
         // LimelightHelpers.getLimelightURLString("limelight", "");
 
-        // ta = limeLight.getEntry("ta");
-        // tx = limeLight.getEntry("tx");
-        // ty = limeLight.getEntry("ty");
-        // txEntry = tab.add("tx", tx.getDouble(0.0))
-        // .withWidget(BuiltInWidgets.kTextView)
-        // .getEntry();
-        // tyEntry = tab.add("tx", ty.getDouble(0.0))
-        // .withWidget(BuiltInWidgets.kTextView)
-        // .getEntry();
-        // taEntry = tab.add("tx", ta.getDouble(0.0))
-        // .withWidget(BuiltInWidgets.kTextView)
-        // .getEntry();
+        ta = limeLight.getEntry("ta");
+        tx = limeLight.getEntry("tx");
+        ty = limeLight.getEntry("ty");
+        txEntry = tab.add("Horizontal Offset", tx.getDouble(0.0))
+        .withWidget(BuiltInWidgets.kTextView)
+        .getEntry();
+        tyEntry = tab.add("Vertical Offset", ty.getDouble(0.0))
+        .withWidget(BuiltInWidgets.kTextView)
+        .getEntry();
+        taEntry = tab.add("Target Area", ta.getDouble(0.0))
+        .withWidget(BuiltInWidgets.kTextView)
+        .getEntry();
 
+        limeLight.getEntry("camMode").setInteger(1);
 
-        //ledMode = limelight.setEntry(2);
-
+        LimelightHelpers.getLimelightURLString("limeLight", "");
+        // tab.addCamera("limelight", "limelightcam", LimelightHelpers.getLimelightNTString("limeLight", ""));
+        tab.addCamera("limelight", "limeLight", "http://10.24.41.54:5800");
     }
 
     public void update() {
         updateMotors();
         updateDebug();
         updateGyro();
-        //updateLimelight();
+        updateLimelight();
     }
 
     private void updateMotors() {
         for (Integer port : motors.keySet()) {
             ShuffleboardElement<CANSparkMax> motor = motors.get(port);
-            motor.getGenericEntry().setDouble(motor.getElement().get());
+            motor.getGenericEntry().setDouble(motor.getElement().getBusVoltage());
         }
     }
 
     private void updateGyro() {
-        gyroPitch.setFloat(gyro.getPitch());
+        gyroPitch.setFloat(gyro.getYaw());
     }
 
     private void updateDebug() {
@@ -133,11 +136,11 @@ public class ShuffleboardUpdater {
         lastTriggered = System.currentTimeMillis();
     }
 
-    // private void updateLimelight(){
-    //     txEntry.setDouble(tx.getDouble(0.0));
-    //     tyEntry.setDouble(ta.getDouble(0.0));
-    //     taEntry.setDouble(ty.getDouble(0.0));
-    // }
+    private void updateLimelight(){
+        txEntry.setDouble(tx.getDouble(0.0));
+        tyEntry.setDouble(ta.getDouble(0.0));
+        taEntry.setDouble(ty.getDouble(0.0));
+    }
 
     public AutonomousPhaseType getChosen() {
         return chooser.getSelected();

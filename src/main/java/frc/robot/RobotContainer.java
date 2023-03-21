@@ -44,7 +44,8 @@ public class RobotContainer {
     private final TowerSub towerSub = new TowerSub();
     private final Robot robot;
     private final AHRS gyro;
-    Joystick flightStick = new Joystick(0);
+    Joystick flightStickControl = new Joystick(1);
+    Joystick flightStickDrive = new Joystick(0);
 
 
     /**
@@ -53,12 +54,6 @@ public class RobotContainer {
     public RobotContainer(Robot robot, AHRS gyro) {
         this.robot = robot;
         this.gyro = gyro;
-
-        // Configure the button bindings
-        System.out.println("Before works");
-                System.out.println("ySpeed: " + flightStick.getRawAxis(1));
-                System.out.println("xSpeed: " + flightStick.getRawAxis(0));
-                System.out.println("zRotation: " + flightStick.getRawAxis(2));
     }
 
     /**
@@ -68,24 +63,30 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     public void configureButtonBindings() {
-        final JoystickButton butt7 = new JoystickButton(flightStick, 7);
-        final JoystickButton butt8 = new JoystickButton(flightStick, 8);
-        final JoystickButton butt9 = new JoystickButton(flightStick, 9);
-        final JoystickButton butt10 = new JoystickButton(flightStick, 10);
-        final JoystickButton butt11 = new JoystickButton(flightStick, 11);
-        final JoystickButton butt12 = new JoystickButton(flightStick, 12);
+        final JoystickButton butt7 = new JoystickButton(flightStickControl, 7);
+        final JoystickButton butt8 = new JoystickButton(flightStickControl, 8);
+        final JoystickButton butt9 = new JoystickButton(flightStickControl, 9);
+        final JoystickButton butt10 = new JoystickButton(flightStickControl, 10);
+        final JoystickButton butt11 = new JoystickButton(flightStickControl, 11);
+        final JoystickButton butt12 = new JoystickButton(flightStickControl, 12);
         butt8.onTrue(new ClawOpen(clawSub));
         butt8.onFalse(new ClawStop(clawSub));
+
         butt7.onTrue(new ClawClose(clawSub));
         butt7.onFalse(new ClawStop(clawSub));
-        butt10.onTrue(new LiftTower(towerSub));
-        butt10.onFalse(new StopTower(towerSub));
-        butt9.onTrue(new DropTower(towerSub));
-        butt9.onFalse(new StopTower(towerSub));
-        butt12.onTrue(new ExtendArm(armSub));
-        butt12.onFalse(new StopArm(armSub));
-        butt11.onTrue(new RetractArm(armSub));
-        butt11.onFalse(new StopArm(armSub));
+
+        butt10.onTrue(new ExtendArm(armSub));
+        butt10.onFalse(new StopArm(armSub));
+
+        butt9.onTrue(new RetractArm(armSub));
+        butt9.onFalse(new StopArm(armSub));
+
+        butt12.onTrue(new LiftTower(towerSub));
+        butt12.onFalse(new StopTower(towerSub));
+
+        butt11.onTrue(new DropTower(towerSub));
+        butt11.onFalse(new StopTower(towerSub));
+
         driveSub.setDefaultCommand(
 //            new RunCommand(
 //                () -> driveSub.mecanumDrive(
@@ -100,7 +101,7 @@ public class RobotContainer {
                  )*/
                 new DriveJoystickCartesian(
                         driveSub,
-                        flightStick
+                        flightStickDrive
                 )
         );
     }
@@ -111,22 +112,23 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand(AutonomousPhaseType chosen) {
-        if (chosen == null) return null;
-        switch (chosen) {
-            case CHARGE_STATION: {
-                return new AutonomousChargeStation(driveSub, gyro, robot);
-            }
-            case LEAVE_COMMUNITY: {
-                return new AutonomousLeaveCommunity(driveSub);
-            }
-            case SCORE: {
-                return new AutonomousScore(towerSub, armSub, clawSub, driveSub);
-            }
-            default: {
-                System.out.println("Bruh, none");
-                return null;
-            }
-        }
+        return new AutonomousChargeStation(driveSub, gyro, robot);
+        // if (chosen == null) return null;
+        // switch (chosen) {
+        //     case CHARGE_STATION: {
+        //         return new AutonomousChargeStation(driveSub, gyro, robot);
+        //     }
+        //     case LEAVE_COMMUNITY: {
+        //         return new AutonomousLeaveCommunity(driveSub);
+        //     }
+        //     case SCORE: {
+        //         return new AutonomousScore(towerSub, armSub, clawSub, driveSub);
+        //     }
+        //     default: {
+        //         System.out.println("Bruh, none");
+        //         return null;
+        //     }
+        // }
 
     }
 }

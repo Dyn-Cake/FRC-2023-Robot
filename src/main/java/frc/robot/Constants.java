@@ -44,9 +44,9 @@ public final class Constants {
     //out of 12
     //change this later when figuring out the voltage for the robot
     //claw volt
-    public static double clawMotorVolt = 7;
-    //drive volt
-    public static double autoDrive = 2;
+    public static double clawMotorVolt = 4.5;
+    //drive SPEED -1.0 to 1.0
+    public static double autoDrive = .6;
     //tower volt
     public static double towerMotorVolt = 2;
     //arm volt

@@ -1,10 +1,9 @@
 package frc.robot.subsystems;
 
-//imports for the Spark Maxs
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.Encoder;
+import com.revrobotics.SparkMaxRelativeEncoder.Type;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,57 +20,74 @@ public class DriveTrainSub extends SubsystemBase {
     private final CANSparkMax backLeft;
 
     //encoders for drive
-    private final Encoder frontRightEncoder = new Encoder(Constants.frontRightEncoder1, Constants.frontRightEncoder2);
-    private final Encoder frontLeftEncoder = new Encoder(Constants.frontLeftEncoder1, Constants.frontLeftEncoder2);
-    private final Encoder backRightEncoder = new Encoder(Constants.backRightEncoder1, Constants.backRightEncoder2);
-    private final Encoder backLeftEncoder = new Encoder(Constants.backLeftEncoder1, Constants.backLeftEncoder2);
+    private final RelativeEncoder frontRightEncoder;
+    private final RelativeEncoder frontLeftEncoder;
+    private final RelativeEncoder backRightEncoder;
+    private final RelativeEncoder backLeftEncoder;
     private final MecanumDrive mecanumDrive;
 
     public DriveTrainSub() {
 
-        // CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
+        CANSparkMaxMotorManager motorManager = CANSparkMaxMotorManager.getInstance();
 
-        // frontRight = motorManager.retrieveMotor(Constants.frontRightDrive, MotorType.kBrushless);
-        // frontRight.setInverted(true);
-
-        // backRight = motorManager.retrieveMotor(Constants.backRightDrive, MotorType.kBrushless);
-        // backRight.setInverted(true);
-
-        // frontLeft = motorManager.retrieveMotor(Constants.frontLeftDrive, MotorType.kBrushless);
-        // backLeft = motorManager.retrieveMotor(Constants.backLeftDrive, MotorType.kBrushless);
-
-        frontRight = new CANSparkMax(Constants.frontRightDrive, MotorType.kBrushless);
+        frontRight = motorManager.retrieveMotor(Constants.frontRightDrive, MotorType.kBrushless);
         frontRight.setInverted(true);
-        backRight = new CANSparkMax(Constants.backRightDrive, MotorType.kBrushless);
+
+        backRight = motorManager.retrieveMotor(Constants.backRightDrive, MotorType.kBrushless);
         backRight.setInverted(true);
-        frontLeft = new CANSparkMax(Constants.frontLeftDrive, MotorType.kBrushless);
-        backLeft = new CANSparkMax(Constants.backLeftDrive, MotorType.kBrushless);
 
-        frontRightEncoder.setDistancePerPulse(100); //subject to change
-        frontLeftEncoder.setDistancePerPulse(100); //subject to change
-        backRightEncoder.setDistancePerPulse(100); //subject to change
-        backLeftEncoder.setDistancePerPulse(100); //subject to change
+        frontLeft = motorManager.retrieveMotor(Constants.frontLeftDrive, MotorType.kBrushless);
+        backLeft = motorManager.retrieveMotor(Constants.backLeftDrive, MotorType.kBrushless);
 
+        // frontRight = new CANSparkMax(Constants.frontRightDrive, MotorType.kBrushless);
+        // frontRight.setInverted(true);
+        // backRight = new CANSparkMax(Constants.backRightDrive, MotorType.kBrushless);
+        // backRight.setInverted(true);
+        // frontLeft = new CANSparkMax(Constants.frontLeftDrive, MotorType.kBrushless);
+        // backLeft = new CANSparkMax(Constants.backLeftDrive, MotorType.kBrushless);
+
+        //initializing encoders
+        frontRightEncoder = frontRight.getEncoder(Type.kHallSensor, 42);
+        frontRightEncoder.setPositionConversionFactor(.37180417/1.2); //1.0169
+
+        backRightEncoder = backRight.getEncoder(Type.kHallSensor, 42);
+        backRightEncoder.setPositionConversionFactor(.380041671/1.2); //1.04
+
+        frontLeftEncoder = frontLeft.getEncoder(Type.kHallSensor, 42);
+        frontLeftEncoder.setPositionConversionFactor(.365625/1.2); //1
+
+        backLeftEncoder = backLeft.getEncoder(Type.kHallSensor, 42);
+        backLeftEncoder.setPositionConversionFactor(.35465625/1.2); //.97
+
+        //initializing the mecanum drive
         mecanumDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-        mecanumDrive.setDeadband(0.2);
+        mecanumDrive.setDeadband(0.3);
+
+        //resetting encoders
+        frontRightEncoder.setPosition(0);
+        frontLeftEncoder.setPosition(0);
+        backRightEncoder.setPosition(0);
+        backLeftEncoder.setPosition(0);
     }
 
     //resets the encoders to 0
     public void resetEncoder() {
-        frontRightEncoder.reset();
-        frontLeftEncoder.reset();
-        backRightEncoder.reset();
-        backLeftEncoder.reset();
+        frontRightEncoder.setPosition(0);
+        frontLeftEncoder.setPosition(0);
+        backRightEncoder.setPosition(0);
+        backLeftEncoder.setPosition(0);
     }
 
     //tells the distance of how far you've traveled
     public double getDistance() {
+        // if(backRightEncoder.getPosition() > 156.6666666 && backLeftEncoder.getPosition() > 156.6666666 && 
+        // frontRightEncoder.getPosition() > 156.6666666 && frontLeftEncoder.getPosition() > 156.6666666)
         return Math.abs(
                 (
-                        backRightEncoder.getDistance() +
-                                backLeftEncoder.getDistance() +
-                                frontRightEncoder.getDistance() +
-                                frontLeftEncoder.getDistance()
+                        backRightEncoder.getPosition() +
+                        backLeftEncoder.getPosition() +
+                        frontRightEncoder.getPosition() +
+                        frontLeftEncoder.getPosition()
                 ) / 4
         );
     }
@@ -87,6 +103,10 @@ public class DriveTrainSub extends SubsystemBase {
                 while (getDistance() < feet) {
                     mecanumDrive(-Constants.autoDrive * brake, 0, 0);
                 }
+                System.out.println(backRightEncoder.getPosition());
+                System.out.println(backLeftEncoder.getPosition());
+                System.out.println(frontRightEncoder.getPosition());
+                System.out.println(frontLeftEncoder.getPosition());
                 break;
             }
             case LEFT: {
@@ -114,6 +134,19 @@ public class DriveTrainSub extends SubsystemBase {
     }
 
     public void mecanumDrive(double ySpeed, double xSpeed, double zRotation) {
-        mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, zRotation / 1.5);
+        if(zRotation > .25)
+            mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, (zRotation-.25)/1.2);
+        else if(zRotation < -.25)
+            mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, (zRotation+.25)/1.2);
+        else
+            mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, 0);
+    }
+    public void cripMecanumDrive(double ySpeed, double xSpeed, double zRotation) {
+        if(zRotation > .25)
+            mecanumDrive.driveCartesian(-ySpeed / 2, xSpeed/2, (zRotation-.25)/2);
+        else if(zRotation < -.25)
+            mecanumDrive.driveCartesian(-ySpeed / 2, xSpeed/2, (zRotation+.25)/2);
+        else
+            mecanumDrive.driveCartesian(-ySpeed / 2, xSpeed/2, 0);
     }
 }
