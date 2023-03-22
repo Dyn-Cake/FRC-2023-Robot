@@ -112,23 +112,23 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand(AutonomousPhaseType chosen) {
-        return new AutonomousChargeStation(driveSub, gyro, robot);
-        // if (chosen == null) return null;
-        // switch (chosen) {
-        //     case CHARGE_STATION: {
-        //         return new AutonomousChargeStation(driveSub, gyro, robot);
-        //     }
-        //     case LEAVE_COMMUNITY: {
-        //         return new AutonomousLeaveCommunity(driveSub);
-        //     }
-        //     case SCORE: {
-        //         return new AutonomousScore(towerSub, armSub, clawSub, driveSub);
-        //     }
-        //     default: {
-        //         System.out.println("Bruh, none");
-        //         return null;
-        //     }
-        // }
+        // return new AutonomousChargeStation(driveSub, gyro, robot);
+        if (chosen == null) return null;
+        switch (chosen) {
+            case CHARGE_STATION: {
+                return new AutonomousChargeStation(driveSub, gyro, robot);
+            }
+            case LEAVE_COMMUNITY: {
+                return new AutonomousLeaveCommunity(driveSub);
+            }
+            case SCORE: {
+                return new AutonomousScore(towerSub, armSub, clawSub, driveSub);
+            }
+            default: {
+                System.out.println("Bruh, none");
+                return null;
+            }
+        }
 
     }
 }
