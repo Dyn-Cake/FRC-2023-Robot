@@ -10,7 +10,8 @@ public class AutoClawOpen extends CommandBase {
 
     public AutoClawOpen(ClawSub subsystem) {
         claw = subsystem;
-        duration = 500;
+        addRequirements(claw);
+        duration = 550;
     }
 
     // only goes once at beginning when command is called

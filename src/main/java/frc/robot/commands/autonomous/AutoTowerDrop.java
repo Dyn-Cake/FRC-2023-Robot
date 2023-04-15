@@ -14,6 +14,7 @@ public class AutoTowerDrop extends CommandBase {
      */
     public AutoTowerDrop(TowerSub subsystem) {
         tower = subsystem;
+        addRequirements(tower);
         duration = 750;
     }
 

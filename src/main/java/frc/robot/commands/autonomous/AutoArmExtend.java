@@ -10,7 +10,8 @@ public class AutoArmExtend extends CommandBase {
 
     public AutoArmExtend(ArmSub subsystem) {
         arm = subsystem;
-        duration = 1000;
+        addRequirements(arm);
+        duration = 100;
     }
 
     // only goes once at beginning when command is called

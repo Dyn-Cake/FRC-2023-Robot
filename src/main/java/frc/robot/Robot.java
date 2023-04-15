@@ -73,6 +73,8 @@ public class Robot extends TimedRobot {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) {
             autonomousCommand.schedule();
+        } else {
+            System.out.println("Could not find auto type!");
         }
     }
 

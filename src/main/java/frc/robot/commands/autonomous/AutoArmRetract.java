@@ -10,6 +10,7 @@ public class AutoArmRetract extends CommandBase {
 
     public AutoArmRetract(ArmSub subsystem) {
         arm = subsystem;
+        addRequirements(arm);
         duration = 1000;
     }
 
@@ -35,8 +36,7 @@ public class AutoArmRetract extends CommandBase {
     @Override
     public boolean isFinished() {
         return !(
-                System.currentTimeMillis()
-                        - startTime < duration
+                System.currentTimeMillis() - startTime < duration
         );
     }
 }

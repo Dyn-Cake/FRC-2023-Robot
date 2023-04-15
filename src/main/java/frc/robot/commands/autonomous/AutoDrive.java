@@ -20,6 +20,7 @@ public class AutoDrive extends CommandBase {
      */
     public AutoDrive(DriveTrainSub subsystem, CustomaryLength distance, StrafeDirection strafeDirection) {
         drive = subsystem;
+        addRequirements(drive);
         this.distance = distance;
         this.strafeDirection = strafeDirection;
         //this.duration = duration*1000;
