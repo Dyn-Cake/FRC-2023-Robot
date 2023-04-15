@@ -81,6 +81,7 @@ public class ShuffleboardUpdater {
         // Selections
         for (AutonomousPhaseType phaseType : AutonomousPhaseType.values()) {
             phaseType.register(chooser);
+            System.out.println("Registered " + phaseType.getName());
         }
 
         tab.add("autonomous", chooser)

@@ -10,9 +10,15 @@ public class AutoTowerLift extends CommandBase {
 
     public AutoTowerLift(TowerSub subsystem) {
         tower = subsystem;
-        duration = 1000;
+        addRequirements(tower);
+        duration = 900;
     }
 
+    public AutoTowerLift(TowerSub subsystem, double duration) {
+        tower = subsystem;
+        addRequirements(tower);
+        this.duration = duration;
+    }
     // only goes once at beginning when command is called
     @Override
     public void initialize() {

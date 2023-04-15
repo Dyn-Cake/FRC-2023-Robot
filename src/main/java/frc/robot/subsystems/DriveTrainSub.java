@@ -79,9 +79,7 @@ public class DriveTrainSub extends SubsystemBase {
     }
 
     //tells the distance of how far you've traveled
-    public double getDistance() {
-        // if(backRightEncoder.getPosition() > 156.6666666 && backLeftEncoder.getPosition() > 156.6666666 && 
-        // frontRightEncoder.getPosition() > 156.6666666 && frontLeftEncoder.getPosition() > 156.6666666)
+    public double getDistance(){
         return Math.abs(
                 (
                         backRightEncoder.getPosition() +
@@ -101,31 +99,27 @@ public class DriveTrainSub extends SubsystemBase {
         switch (strafeDirection) {
             case FORWARD: {
                 while (getDistance() < feet) {
-                    mecanumDrive(-Constants.autoDrive * brake, 0, 0);
+                    turboMecanumDrive(-Constants.autoDrive * brake, 0, 0);
                 }
-                System.out.println(backRightEncoder.getPosition());
-                System.out.println(backLeftEncoder.getPosition());
-                System.out.println(frontRightEncoder.getPosition());
-                System.out.println(frontLeftEncoder.getPosition());
                 break;
             }
             case LEFT: {
                 while (getDistance() < feet) {
-                    mecanumDrive(0, -Constants.autoDrive * brake, 0);
+                    turboMecanumDrive(0, -Constants.autoDrive * brake, 0);
                 }
                 break;
             }
 
             case RIGHT: {
                 while (getDistance() < feet) {
-                    mecanumDrive(0, Constants.autoDrive * brake, 0);
+                    turboMecanumDrive(0, Constants.autoDrive * brake, 0);
                 }
                 break;
             }
 
             case BACKWARDS: {
                 while (getDistance() < feet) {
-                    mecanumDrive(Constants.autoDrive * brake, 0, 0);
+                    turboMecanumDrive(Constants.autoDrive * brake, 0, 0);
                 }
                 break;
             }
@@ -133,16 +127,16 @@ public class DriveTrainSub extends SubsystemBase {
         }
     }
 
-    public void mecanumDrive(double ySpeed, double xSpeed, double zRotation) {
+    public void turboMecanumDrive(double ySpeed, double xSpeed, double zRotation) {
         if(zRotation > .25)
-            mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, (zRotation-.25)/1.2);
+            mecanumDrive.driveCartesian(-ySpeed / 1.4, xSpeed, (zRotation-.25)/1.3);
         else if(zRotation < -.25)
-            mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, (zRotation+.25)/1.2);
+            mecanumDrive.driveCartesian(-ySpeed / 1.4, xSpeed, (zRotation+.25)/1.3);
         else{
-            mecanumDrive.driveCartesian(-ySpeed / 1.3, xSpeed, 0);
+            mecanumDrive.driveCartesian(-ySpeed / 1.4, xSpeed, 0);
         }
     }
-    public void cripMecanumDrive(double ySpeed, double xSpeed, double zRotation) {
+    public void mecanumDrive(double ySpeed, double xSpeed, double zRotation) {
         if(zRotation > .25)
             mecanumDrive.driveCartesian(-ySpeed / 2, xSpeed/2, (zRotation-.25)/2);
         else if(zRotation < -.25)

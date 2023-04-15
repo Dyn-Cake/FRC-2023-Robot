@@ -24,7 +24,7 @@ public class DriveJoystickCartesian extends CommandBase {
     @Override
     public void execute() {
         if(butt11.getAsBoolean()){
-            drive.cripMecanumDrive(
+            drive.turboMecanumDrive(
                 joystick.getRawAxis(1),
                 joystick.getRawAxis(0),
                 joystick.getRawAxis(2)

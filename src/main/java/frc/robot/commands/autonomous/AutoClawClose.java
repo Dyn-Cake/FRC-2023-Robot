@@ -10,6 +10,7 @@ public class AutoClawClose extends CommandBase {
 
     public AutoClawClose(ClawSub subsystem) {
         claw = subsystem;
+        addRequirements(claw);
         duration = 500;
     }
 

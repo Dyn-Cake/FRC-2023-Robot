@@ -8,6 +8,7 @@ public class AutoTowerLiftTilLimit extends CommandBase {
 
     public AutoTowerLiftTilLimit(TowerSub subsystem) {
         tower = subsystem;
+        addRequirements(tower);
     }
 
     @Override
